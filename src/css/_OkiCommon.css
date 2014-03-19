@@ -1,0 +1,57 @@
+.clear { clear: both; height: 0px; width: 0px; overflow: hidden; font-size: 1px; line-height: 1px; }
+
+/**
+ *  OkiScrollBar
+ */
+
+.scrollbar-vertical { width: 100%; height: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 0 4px 0; background-color: #e6e7e8; }
+.scrollbar-vertical .sb-int { width: 100%; height: 100%; background-color: #e6e7e8 }
+.scrollbar-vertical .sb-int .sb-handler { display: block; text-decoration: none; font-size: 1px; height: 1px; overflow: hidden; position: relative; top: 0px; left: 0px; width: 5px; height: 0px; background-color: #c45d00; background-size: 100% 100%; /*-webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;*/ }
+
+.scrollbar-horizontal { width: 100%; height: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 10px 0 0; background-color: #e6e7e8; }
+.scrollbar-horizontal .sb-int { width: 100%; height: 100%; background-color: #e6e7e8; }
+.scrollbar-horizontal .sb-int .sb-handler { display: block; text-decoration: none; font-size: 1px; height: 1px; overflow: hidden; position: relative; top: 0px; left: 0px; width: 0px; height: 5px; background-color: #c45d00; background-size: 100% 100%; /*-webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;*/ }
+
+
+/**
+ *  OkiScrollArea
+ */
+ 
+.scrollarea { position: relative; top: 0px; left: 0px; overflow: hidden; }
+.scrollarea > .sa-cont { position: absolute; top: 0px; left: 0px; width: auto; height: auto; }
+.scrollarea > .sa-scrollbar-horizontal { position: absolute; left: 0px; bottom: 0px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%; display: none; }
+.scrollarea > .sa-scrollbar-vertical { position: absolute; top: 0px; right: 0px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; height: 100%; display: none; }
+.scrollarea.sa-horizontal-scrollbar-active > .sa-scrollbar-horizontal { display: block; }
+.scrollarea.sa-vertical-scrollbar-active > .sa-scrollbar-vertical { display: block; }
+.scrollarea.sa-horizontal-scrollbar-active > .sa-cont > .sa-padd { padding-bottom: 5px; }
+.scrollarea.sa-vertical-scrollbar-active > .sa-cont > .sa-padd { padding-right: 5px; }
+
+/**
+ *  OkiCloud
+ */
+
+.s-cloud { display: block; opacity: 0.0; height: 0px; overflow: hidden; z-index: 1; }
+.s-cloud.s-cloud-showed { opacity: 1.0; height: auto; }
+
+
+/**
+ *  OkiSelect
+ */
+
+.select-filter { cursor: pointer; height: 34px; margin: 0; padding: 0; display: block; position: relative; background-color: #f4f4f4; }
+.select-filter > span { display: block; background: url('../images/oki-select-right.png') no-repeat right top; margin: 0; padding: 0 16px 0 0; height: 34px; }
+.select-filter > span > span { display: block; padding: 0 0 0 16px; height: 34px; }
+.select-filter > span > span > span { display: block; height: auto; padding: 8px 0 0 0; white-space: nowrap; overflow: hidden; background-image: none; color: #f5851f; font-weight: bold; font-size: 14px; line-height: 14px; font-family: "Arial"; }
+.select-filter .s-cloud { position: absolute; top: 34px; left: 0px; background-color: #e6e7e8; }
+.select-filter .s-cloud .s-padd { padding: 0; }
+.select-filter .sa-padd a { display: block; color: #6e6e71; font-weight: bold; min-height: 33px; font-size: 14px; line-height: 16px; border-top: 1px solid #d4d5d6; text-decoration: none; }
+.select-filter .sa-padd a span { display: block; padding: 8px 5px 8px 10px; }
+.select-filter .sa-padd a:first-child { border-top-width: 0px; }
+.select-filter .sa-padd a:hover { color: #fff; background-color: #f0a35d; }
+.select-filter .sa-padd a.active { color: #fff; background-color: #f5851f; }
+.select-filter .s-cloud  {  }
+.select-filter .s-cloud { transition: all 200ms ease; }
+.select-filter.s-multiple .sa-padd a { background: url('../images/oki-select-checked.png') no-repeat 12px 9px; }
+.select-filter.s-multiple .sa-padd a span { padding-left: 42px; }
+.select-filter.s-multiple .sa-padd a:hover { background-image: url('../images/oki-select-checked-act.png'); background-color: #f0a35d; }
+.select-filter.s-multiple .sa-padd a.active { background-image: url('../images/oki-select-checked-act.png'); background-color: #f5851f; } 

@@ -1,0 +1,2 @@
+.oki-crop { width: 200px; height: 160px; overflow: hidden; position: relative; top: 0px; left: 0px; outline: 1px solid #ddd; }
+.oki-crop img { display: block; position: absolute; top: 0px; left: 0px; width: 1000px; height: 300px; overflow: hidden; }
