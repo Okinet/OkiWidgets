@@ -47,7 +47,7 @@
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     <br/><br/><br/>
-                    <a href="build.php" target="_blank">Build</a><br/>
+                    <a href="build.php">Build</a><br/>
                     <a href="build/OkiWidgets.js" target="_blank">Download JS</a><br/>
                     <a href="build/OkiWidgets.css" target="_blank">Download CSS</a>
                     <br/><br/><br/>

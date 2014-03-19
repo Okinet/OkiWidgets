@@ -37,3 +37,6 @@
     }
     
     file_put_contents(dirname(__FILE__).'/build/OkiWidgets.css', $cssFull);
+    
+    
+    echo 'Builded! Go back to <a href="/">index page</a> and use "Download JS" and "Download CSS" links get fresh build.';
