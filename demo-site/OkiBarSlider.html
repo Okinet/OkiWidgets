@@ -2,7 +2,7 @@
 
 <div class="text-formated">
     <p>
-        With OkiBarSlider you can build horizontal sliders with any html that you want.
+        With OkiBarSlider you can build horizontal slider with any html that you want.
         You use ul/li structure or divs with complex content from editor like TinyMCE.
     </p>
 </div>
@@ -27,10 +27,15 @@
 </div>
 
 <script class="demo-bar-slider-01-js">
-    $(document).ready(function() {
+    $(window).load(function() {
         $('.demo-bar-slider-01').OkiBarSlider({
             barObjSelector    : '> div.bar',
-            slideObjSelector  : '> div.bar > img.slide'
+            slideObjSelector  : '> div.bar > img.slide',
+            
+            prevObjSelector   : '> a.prev',                // or null
+            nextObjSelector   : '> a.next',                // or null
+            
+            naviObjSelector   : '> div.navi'               // or null
         });
     });
 </script>
@@ -42,7 +47,11 @@
         <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
         <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
     </div>
+    <a href="javascript:void(0)" class="prev">prev button</a>
+    <a href="javascript:void(0)" class="next">next button</a>
+    <div class="navi"></div>
 </div>
+
 
 
 
@@ -51,8 +60,14 @@
 
 <div class="text-formated">
     <p>
-        When your container has not fixes dimensions you can run resize() method from API:
+        When your container has not fixes dimensions you can run resize() method from API. Below example
     </p>
+</div>
+
+Width: <input type="text" id="demo-bar-slider-02-width" value="100%" /><br/>
+Height: <input type="text" id="demo-bar-slider-02-height" value="120px" /><br/>
+
+<div>
     <div class="code code-html">
         
     </div>
@@ -67,7 +82,7 @@
     </p>
 </div>
 
-<div class="demo-bar-slider-01-">
+<div class="demo-bar-slider-02">
     <div class="bar">
         <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
         <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />

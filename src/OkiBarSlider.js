@@ -30,10 +30,18 @@
             var $this = null;
             var $bar = null;
             var $slides = null;
+            var $slideZeroWidthBegin = null;
+            var $slideZeroWidthEnd = null;
+            var $buttonPrev = null;
+            var $buttonNext = null;
+            var $navi = null;
             var baseCss = {
                 cssBase           : 'oki-bar-slider-base',
                 cssBar            : 'obs-bar',
-                cssSlide          : 'obs-slide'
+                cssSlide          : 'obs-slide',
+                cssSlideZeroWidth : 'obs-slide-zero-width',
+                cssNavi           : 'obs-navi',
+                cssNaviLink       : 'obs-navi-link'
             };
             var settings = {
                 barObjSelector    : '> div.bar',
@@ -41,21 +49,221 @@
                 prevObjSelector   : null,
                 nextObjSelector   : null,
                 naviObjSelector   : null,
-                naviStep          : 1,
+                step              : 1,
                 naviLinkCssClass  : '',
                 naviLinkAlreadyTag: null,
-                autoChangeTimeout : 0,
-                transitionTimeout : 0
+                autoChangeTimeout : 4000,
+                transitionDuration: 250,
+                cloneAtFrontAndEnd: 2
             };
+            var timerId = null;
+            var slidesSize = null;
+            var direction = 1;          // 0 - left, 1 - right
+            var pos = 0;
+            var isAnimating = false;
+            var stopped = false;
+            var firstRun = true;
             
             function init()
-            {    
+            {
                 $bar = $this.find(settings.barObjSelector);
                 $slides = $this.find(settings.slideObjSelector);
+                $navi = ($this.find(settings.naviObjSelector).size()!=1) ? null : $this.find(settings.naviObjSelector);
                 
+                if (settings.prevObjSelector) {
+                    $buttonPrev = $this.find(settings.prevObjSelector);
+                }
+                if (settings.nextObjSelector) {
+                    $buttonNext = $this.find(settings.nextObjSelector);
+                }
                 $this.addClass(baseCss.cssBase);
                 $bar.addClass(baseCss.cssBar);
                 $slides.addClass(baseCss.cssSlide);
+                
+                slidesSize = $slides.size();
+                $slideZeroWidthBegin = $('<span class="'+baseCss.cssSlideZeroWidth+'">&nbsp;</span>');
+                $slideZeroWidthEnd = $('<span class="'+baseCss.cssSlideZeroWidth+'">&nbsp;</span>');
+                $slides.first().before($slideZeroWidthBegin);
+                $slides.last().after($slideZeroWidthEnd);
+                
+                if (settings.cloneAtFrontAndEnd>0) {
+                    cloneAtFrontAndEnd();
+                }
+                
+                buildNaviLinks();
+                setupEvents();
+                resetTimeout();
+                
+                moveTo(pos);
+            }
+            
+            function buildNaviLinks()
+            {
+                var i;
+
+                if ($navi) {
+                    if (settings.naviLinkAlreadyTag) {
+                        for (i=0; i<slidesSize; i++) {
+                            $navi.find("> "+settings.naviLinkAlreadyTag+":nth-child("+(i+1)+")").attr("pos", i);
+                        }
+                    } else {
+                        for (i=0; i<slidesSize; i++) {
+                            $navi.append('<a href="javascript:void(0)" class="'+settings.naviLinkCssClass+'" pos="'+i+'">&nbsp;</a>');
+                        }
+                    }
+                    
+                    $navi.find('> a').click(function() {
+                        moveTo(parseInt($(this).attr('pos')));
+                    });
+                }
+            }
+            
+            function getNextPos(p)
+            {
+                var step = settings.step % slidesSize;
+                
+                return (p + step) % slidesSize;
+            }
+            
+            function getPrevPos(p)
+            {
+                var step = settings.step % slidesSize;
+                var newPos;
+                
+                newPos = p - step;
+                
+                return newPos<0 ? newPos + slidesSize : newPos;
+            }
+            
+            function cloneAtFrontAndEnd()
+            {
+                var slidesArr = new Array();
+                var i, j;
+                
+                // copy
+                $slides.each(function() {
+                    slidesArr.push($(this).clone());
+                });
+                
+                // put 
+                for (i=0; i<settings.cloneAtFrontAndEnd; i++) {
+                    for (j=slidesArr.length-1; j>=0; j--) {
+                        $bar.prepend( slidesArr[j].clone() );
+                    }
+                    for (j=0; j<slidesArr.length; j++) {
+                        $bar.append( slidesArr[j].clone() );
+                    }
+                }
+            }
+            
+            function stop()
+            {
+                stopped = true;
+            }
+            
+            function start()
+            {
+                stopped = false;
+                resetTimeout();
+            }
+            
+            function setupEvents()
+            {
+                var newPos;
+                
+                if ($buttonPrev) {
+                    $buttonPrev.click(function() {                        
+                        newPos = getPrevPos(pos);
+                        direction = 0;
+                        moveTo(newPos);
+                    });
+                }
+                if ($buttonNext) {
+                    $buttonNext.click(function() {
+                        newPos = getNextPos(pos);
+                        direction = 1;
+                        moveTo(newPos);
+                    });
+                }
+            }
+            
+            function timeout()
+            {
+                var newPos;
+                
+                if (stopped)
+                    return;
+                
+                newPos = getNextPos(pos);
+                direction = 1;
+                moveTo(newPos);
+            }
+            
+            function resetTimeout()
+            {
+                clearTimeout(timerId);
+                if (settings.autoChangeTimeout>0) {
+                    timerId = setTimeout(function() {
+                        timeout();
+                    }, settings.autoChangeTimeout);
+                }
+            }
+            
+            function moveTo(newPos)
+            {
+                var slidesWidth;
+                var currentSlideLeft;
+                var position;
+                
+                resetTimeout();
+                
+                if (!firstRun) {
+                    if (isAnimating)
+                        return;
+
+                    if (pos==newPos)
+                        return;
+
+                    $bar.stop(true, false);
+                    if (direction==1 && newPos<pos) {
+                        slidesWidth = $slideZeroWidthEnd.position().left - $slideZeroWidthBegin.position().left;
+                        currentSlideLeft = $slides.eq( pos ).position();
+                        $bar.css('left', (-(currentSlideLeft.left - slidesWidth))+'px');
+                    }
+                    if (direction==0 && newPos>pos) {
+                        slidesWidth = $slideZeroWidthEnd.position().left - $slideZeroWidthBegin.position().left;
+                        currentSlideLeft = $slides.eq( pos ).position();
+                        $bar.css('left', (-(currentSlideLeft.left + slidesWidth))+'px');
+                    }
+                }
+                
+                pos = newPos;
+                position = $slides.eq(pos).position();
+                isAnimating = true;
+                $bar.animate({left: (-1*(position.left))+'px'}, firstRun ? 0 : settings.transitionDuration, function() {
+                    isAnimating = false;
+                });
+                
+                firstRun = false;
+                
+                resetTimeout();
+                
+                // update dots
+                if ($navi!==null) {
+                    if (slidesSize<=1) {
+                        $navi.hide();
+                    } else {
+                        $navi.show();
+                        
+                        if (settings.naviLinkAlreadyTag) {
+                            $navi.find('> '+settings.dotsAlreadyTag).removeClass('active');
+                            $navi.find('> '+settings.dotsAlreadyTag+'[pos='+pos+']').addClass('active');                            
+                        } else {
+                            $navi.find('> a').removeClass('active');
+                            $navi.find('> a[pos='+pos+']').addClass('active');
+                        }   
+                    }
+                }
             }
             
         }
