@@ -1,11 +1,12 @@
-
-
 <div class="text-formated">
     <p>
         With OkiBarSlider you can build horizontal slider with any html that you want.
         You use ul/li structure or divs with complex content from editor like TinyMCE.
     </p>
 </div>
+
+
+<!-- ----------------------------------------------------------------------- -->
 
 
 <h3>Basic usage</h3>
@@ -39,55 +40,117 @@
         });
     });
 </script>
-<div class="demo-bar-slider-01">
-    <div class="bar">
-        <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+
+<div class="section">
+
+    <div class="demo-bar-slider-01">
+        <div class="bar">
+            <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+        </div>
+        <a href="javascript:void(0)" class="prev">prev button</a>
+        <a href="javascript:void(0)" class="next">next button</a>
+        <div class="navi"></div>
     </div>
-    <a href="javascript:void(0)" class="prev">prev button</a>
-    <a href="javascript:void(0)" class="next">next button</a>
-    <div class="navi"></div>
+    
 </div>
 
 
-
+<!-- ----------------------------------------------------------------------- -->
 
 
 <h3>Container resize</h3>
 
 <div class="text-formated">
     <p>
-        When your container has not fixes dimensions you can run resize() method from API. Below example
+        When your container has not fixes dimensions you can run resize() method from API. This recalculates position
+        of current slide. Below simple example (outline indicates container size):
     </p>
 </div>
 
-Width: <input type="text" id="demo-bar-slider-02-width" value="100%" /><br/>
-Height: <input type="text" id="demo-bar-slider-02-height" value="120px" /><br/>
+<label>Width:</label> <input type="text" id="demo-bar-slider-02-width" value="100%" /><br/>
+<label>Height:</label> <input type="text" id="demo-bar-slider-02-height" value="120px" /><br/>
+<label>&nbsp;</label> <button onClick="demoOkiBarSlider02ContainerResize();">Resize container</button><br/>
+<label>&nbsp;</label> <button onClick="demoOkiBarSlider02ApiResize();">Call resize() in widget's API</button><br/>
 
-<div>
-    <div class="code code-html">
+<script class="demo-bar-slider-02-js">
+    function demoOkiBarSlider02ContainerResize()
+    {
+        $('.demo-bar-slider-02').width($('#demo-bar-slider-02-width').val());
+        $('.demo-bar-slider-02').height($('#demo-bar-slider-02-height').val());
+    }
+    
+    function demoOkiBarSlider02ApiResize()
+    {
+        $('.demo-bar-slider-02').OkiBarSlider('api').resize();
+    }
+    
+    $(window).load(function() {
+        $('.demo-bar-slider-02').OkiBarSlider({
+            barObjSelector    : '> div.bar',
+            slideObjSelector  : '> div.bar > img.slide'
+        });
+    });
+</script>
+
+<div class="section">
+    
+    <div class="demo-bar-slider-02">
+        <div class="bar">
+            <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
+            <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="text-formated">
+    <p>
+        Code frm above example:
+    </p>
+    <div class="code code-js code-copy" from=".demo-bar-slider-02-js">
         
     </div>
-    <p>
-        You can run widget by using:
-    </p>
-    <div class="code code-html">
-        
-    </div>
-    <p>
-        Here is the result:
-    </p>
 </div>
 
-<div class="demo-bar-slider-02">
-    <div class="bar">
-        <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+
+<!-- ----------------------------------------------------------------------- -->
+
+
+<h3>Settings reference</h3>
+
+<div class="text-formated">
+    <p>
+        Below list of all possible configuration options of the widget. Values are
+        default is not specified.
+    </p>
+    <div class="code code-js code-copy" from=".demo-bar-slider-03-js">
+        
     </div>
 </div>
+
+<script class="demo-bar-slider-03-js">
+    $('.my-class-selector').OkiBarSlider({
+        barObjSelector    : '> div.bar',                  // selector to bar - bar is big horizontal container for slides
+        slideObjSelector  : '> div.bar > div.slide',      // selector to slides
+        prevObjSelector   : null,                         // null or selector to prev button
+        nextObjSelector   : null,                         // null or selector to next button
+        naviObjSelector   : null,                         // null or selector to navigation container
+        step              : 1,                            // how much slides do next/prev move
+        naviLinkCssClass  : '',                           // you can put here class of autogenerated navi links (links will be 
+                                                          //     created in naviObjSelector)
+        naviLinkAlreadyTag: null,                         // in you already have links in naviObjSelector please put html tag 
+                                                          //     here for example: 'a.slide-thumb'
+        autoChangeTimeout : 4000,                         // time between auto move
+        transitionDuration: 250,                          // animation duration
+        cloneAtFrontAndEnd: 2                             // plugin generates circular bar with slides, if you have 2 slides 
+                                                          //     and very long bar put higher value here
+    });
+</script>

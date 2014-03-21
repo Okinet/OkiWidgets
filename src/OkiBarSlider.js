@@ -97,6 +97,12 @@
                 moveTo(pos);
             }
             
+            function resize()
+            {
+                firstRun = true;
+                moveTo(pos);
+            }
+            
             function buildNaviLinks()
             {
                 var i;
@@ -240,6 +246,7 @@
                 pos = newPos;
                 position = $slides.eq(pos).position();
                 isAnimating = true;
+                $bar.stop(true, false);
                 $bar.animate({left: (-1*(position.left))+'px'}, firstRun ? 0 : settings.transitionDuration, function() {
                     isAnimating = false;
                 });

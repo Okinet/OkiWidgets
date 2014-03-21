@@ -7,3 +7,6 @@
 .demo-bar-slider-01 .navi a { display: block; border-radius: 8px; margin-right: 2px; background-color: yellow; opacity: 0.8; width: 16px; height: 16px; text-align: center; overflow: hidden; float: left; }
 .demo-bar-slider-01 .navi a.active { background-color: green; opacity: 1.0; }
 .demo-bar-slider-01 .navi a:hover { opacity: 1.0; }
+
+.demo-bar-slider-02 { height: 140px; outline: 3px dotted #ee7777; }
+.demo-bar-slider-02 img { margin-right: 10px; }
