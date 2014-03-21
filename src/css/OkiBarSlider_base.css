@@ -1,0 +1,11 @@
+/* -------------------------------------------------------------------------- */
+/**
+ *  OkiBarSlider
+ */
+
+/* OkiBarSlider - base (don't touch it') */
+.oki-bar-slider-base { display: block; position: relative; overflow: hidden; }
+.oki-bar-slider-base > .obs-bar { display: block; position: absolute; top: 0px; left: 0px; height: 100%; width: 9999px; }
+.oki-bar-slider-base > .obs-bar > .obs-slide { display: block; /*position: absolute; top: 0px; left: 0px;*/ width: auto; height: 100%; float: left; }
+
+/* OkiBarSlider - themes (put you code below) */

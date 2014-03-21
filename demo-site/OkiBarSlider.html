@@ -1,0 +1,78 @@
+
+
+<div class="text-formated">
+    <p>
+        With OkiBarSlider you can build horizontal sliders with any html that you want.
+        You use ul/li structure or divs with complex content from editor like TinyMCE.
+    </p>
+</div>
+
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <p>
+        If you have html structure as below:
+    </p>
+    <div class="code code-html code-copy" from=".demo-bar-slider-01">
+    </div>
+    <p>
+        You can run widget by using:
+    </p>
+    <div class="code code-js code-copy" from=".demo-bar-slider-01-js">
+    </div>
+    <p>
+        Here is the result:
+    </p>
+</div>
+
+<script class="demo-bar-slider-01-js">
+    $(document).ready(function() {
+        $('.demo-bar-slider-01').OkiBarSlider({
+            barObjSelector    : '> div.bar',
+            slideObjSelector  : '> div.bar > img.slide'
+        });
+    });
+</script>
+<div class="demo-bar-slider-01">
+    <div class="bar">
+        <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+    </div>
+</div>
+
+
+
+
+<h3>Container resize</h3>
+
+<div class="text-formated">
+    <p>
+        When your container has not fixes dimensions you can run resize() method from API:
+    </p>
+    <div class="code code-html">
+        
+    </div>
+    <p>
+        You can run widget by using:
+    </p>
+    <div class="code code-html">
+        
+    </div>
+    <p>
+        Here is the result:
+    </p>
+</div>
+
+<div class="demo-bar-slider-01-">
+    <div class="bar">
+        <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
+        <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
+    </div>
+</div>
