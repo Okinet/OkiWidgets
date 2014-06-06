@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
     <head>
         <meta charset="UTF-8" />
         <title>OkiWidgets v2.0 alpha</title>
@@ -41,7 +38,7 @@
                 <div class="main-container">
 
                     <div style="background-color: #d8dadb; font-size: 34px; line-height: 34px; color: #777; padding: 10px;">
-                        OkiWidgets v2.0 alpha
+                        OkiWidgets v2.0 alpha - PULL TEST
                     </div>
 
                     <div class="main-container-padd">
