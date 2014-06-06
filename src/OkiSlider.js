@@ -67,19 +67,35 @@
                 slidesObj = $this.find(settings.slidesObjSelector);
                 count = slidesObj.size();
                 
-                if (settings.dotsObjSelector!="") {
+                if (typeof settings.dotsObjSelector === "string") {
                     dotsObj = $this.find(settings.dotsObjSelector);
                     if (dotsObj.size()!=1)
                         dotsObj = null;
+                } else {
+                    if (settings.dotsObjSelector && settings.dotsObjSelector.size()==1) {
+                        dotsObj = settings.dotsObjSelector;
+                    }
                 }
                 
-                if (settings.nextObjSelector) {
+                if (typeof settings.nextObjSelector === "string") {
                     nextObj = $this.find(settings.nextObjSelector);
-                }
-                if (settings.prevObjSelector) {
-                    prevObj = $this.find(settings.prevObjSelector);
+                    if (nextObj.size()!=1)
+                        nextObj = null;
+                } else {
+                    if (settings.nextObjSelector && settings.nextObjSelector.size()==1) {
+                        nextObj = settings.nextObjSelector;
+                    }
                 }
                 
+                if (typeof settings.prevObjSelector === "string") {
+                    prevObj = $this.find(settings.prevObjSelector);
+                    if (prevObj.size()!=1) 
+                        prevObj = null;
+                } else {
+                    if (settings.prevObjSelector && settings.prevObjSelector.size()==1) {
+                        prevObj = settings.prevObjSelector;
+                    }
+                }
                 
                 if (dotsObj!==null) {
                     if (settings.dotsAlreadyTag!==null) {

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="UTF-8" />
         <title>OkiWidgets v2.0 alpha</title>
@@ -53,8 +56,8 @@
                         <a href="build/OkiWidgets.js" target="_blank">Download JS</a><br/>
                         <a href="build/OkiWidgets.css" target="_blank">Download CSS</a>
                         <br/><br/><br/>
-
-
+                        
+                        
                         <?php foreach (readDirAndFiles('demo-site', 'Oki', '.html') as $v): ?>
                             <?php $title = str_replace('.html', '', $v) ?>
 

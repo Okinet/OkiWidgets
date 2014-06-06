@@ -114,11 +114,11 @@
             
             function fieldClick()
             {                
-                if ($this.is(':checked')) {
-                    $this.prop('checked', false);
-                } else {
+                //if ($this.is(':checked')) {
+                //    $this.prop('checked', false);
+                //} else {
                     $this.prop('checked', true);
-                }
+                //}
                 
                 sync(true);
                 

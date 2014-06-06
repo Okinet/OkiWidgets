@@ -10,6 +10,9 @@
                 setPositionX : function(newPosition) { setPositionX(newPosition); return this.api; },
                 setPositionY : function(newPosition) { setPositionY(newPosition); return this.api; },
                 addOffset : function(offset) { addOffset(offset); return this.api; },
+                setHeight : function(h) { setHeight(h); return this.api; },                            // deprecated
+                setScrollSizeHeight : function(h) { setScrollSizeHeight(h); return this.api; },
+                setScrollSizeWidth : function(h) { setScrollSizeWidth(h); return this.api; },
                 resize : function() { resize(); return this.api; }
             }
 
@@ -33,11 +36,13 @@
                 scrollSizeHorizontal      : '100%',         // percent / px / auto
                 contentSizeVertical       : 'auto',         // percent / px / auto
                 contentSizeHorizontal     : '100%',         // percent / px / auto
+                shortenWhenSmallerWidth   : false,
+                shortenWhenSmallerHeight  : false,
                 autoUpdateInterval        : 0,              // in ms
                 scrollHorizontal          : 'auto',         // auto / hidden / scroll
                 scrollVertical            : 'auto',         // auto / hidden / scroll
-                scrollHorizontalSize      : 5,
-                scrollVerticalSize        : 5,
+                scrollHorizontalSize      : 17,
+                scrollVerticalSize        : 17,
                 scrollStep                : 20
             };
             
@@ -61,7 +66,7 @@
             var scrollNeededY;
             var scrollNeededXPrevious = null;         // for scrollBar widget resize
             var scrollNeededYPrevious = null;         // for scrollBar widget resize
-            
+            var autoUpdateInternalId = null;
             
             function setPositionX(newPosition)
             {
@@ -83,12 +88,46 @@
                 update();
             }
             
+            function strpos(haystack, needle, offset) 
+            {
+                var i = (haystack + '').indexOf(needle, (offset || 0));
+                return i === -1 ? false : i;
+            }
+            
             function update()
             {
+                var scrollSizeVerticalInteger;
+                var scrollSizeHorizontalInteger;
+                
                 contentSizeX = $content.width();
                 contentSizeY = $content.height();
                 viewportSizeX = $this.width();
                 viewportSizeY = $this.height();
+                
+                // check if content is smaller than viewport - if true shorten viewport
+                if (settings.shortenWhenSmallerHeight && strpos(settings.scrollSizeVertical, 'px')!==false) {
+                    scrollSizeVerticalInteger = parseInt( settings.scrollSizeVertical.replace('px', '') );
+                    if (contentSizeY<scrollSizeVerticalInteger) {
+                        viewportSizeY = contentSizeY;
+                        $this.height(viewportSizeY);
+                    } else {
+                        viewportSizeY = scrollSizeVerticalInteger;
+                        $this.height(scrollSizeVerticalInteger);
+                    }
+                }
+                
+                // check if content is smaller than viewport - if true shorten viewport
+                if (settings.shortenWhenSmallerWidth && strpos(settings.scrollSizeHorizontal, 'px')!==false) {
+                    scrollSizeHorizontalInteger = parseInt( settings.scrollSizeHorizontal.replace('px', '') );
+                    if (contentSizeX<scrollSizeHorizontalInteger) {
+                        viewportSizeX = contentSizeX;
+                        $this.width(viewportSizeX);
+                    } else {
+                        viewportSizeX = scrollSizeHorizontalInteger;
+                        $this.width(scrollSizeHorizontalInteger);
+                    }
+                }
+
                 scrollNeededX = (contentSizeX>viewportSizeX) ? true : false;
                 scrollNeededY = (contentSizeY>viewportSizeY) ? true : false;
                 
@@ -130,7 +169,6 @@
                     contentOffsetY = (contentOffsetMaxY>0) ? contentPositionYSaved*contentOffsetMaxY : 0;
                     contentPositionXSaved = null;
                     contentPositionYSaved = null;
-                    
                 }
                 
                 contentPositionX = (contentOffsetMaxX>0) ? (contentOffsetX/contentOffsetMaxX) : 0;
@@ -189,6 +227,9 @@
         
             function resize()
             {
+                if (!$this.is(':visible'))
+                    return;
+                
                 contentPositionXSaved = contentPositionX;
                 contentPositionYSaved = contentPositionY;
                 
@@ -278,6 +319,34 @@
                     }
                 )*/;
             }
+            
+            function setScrollSizeHeight(h)
+            {
+                if (h!=settings.scrollSizeVertical) {
+                    settings.scrollSizeVertical = h;
+                    $this.height(settings.scrollSizeVertical);
+
+                    update();
+                }
+            }
+            
+            function setScrollSizeWidth(w)
+            {
+                if (w!=settings.scrollSizeHorizontal) {
+                    settings.scrollSizeHorizontal = w;
+                    $this.width(settings.scrollSizeHorizontal);
+
+                    update();
+                }
+            }
+            
+            function setHeight(h)
+            {
+                settings.scrollSizeVertical = h;
+                $this.height(settings.scrollSizeVertical);
+                
+                update();
+            }
 
             function init()
             {
@@ -320,6 +389,11 @@
 //                $handler = $this.find(settings.handlerSelector);
                 resize();
                 setupEvents();
+                
+                
+                if (settings.autoUpdateInterval>0) {
+                    autoUpdateInternalId = setInterval(resize, settings.autoUpdateInterval);
+                }
             }
 
         }

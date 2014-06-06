@@ -50,7 +50,7 @@
             var $handlerTooltipSecond = null;
             var $rangeBar = null;
             var handlerFirstPos = 0.0;
-            var handlerSecondPos = 0.0;
+            var handlerSecondPos = 1.0;
             var $scale = null;
             var $rangeArea = null;
             var width = 0;
@@ -224,6 +224,8 @@
                         case 2: val = $inputSecond.val(); break;
                     }
                     
+                    val = val.replace(',', '.');
+                                        
                     posUnit = 0.0;
                     
                     if (mode=='array') {
@@ -233,12 +235,13 @@
                                 break;
                             }
                         }
-                    } else 
+                    } else  {
                         if (mode=='range') {
                             val = parseFloat(val) ? parseFloat(val) : 0.0;
                             posUnit = (val - settings.dataRange[0]) / (settings.dataRange[1] - settings.dataRange[0]);
                         }
-                    
+                    }
+                                        
                     switch (handle) {
                         case 1: setFirstValPos(posUnit); break;
                         case 2: setSecondValPos(posUnit); break;
@@ -271,47 +274,53 @@
             
             function findAndSetValueForPos(pos, handle)
             {
-                var i, val, onChangeData;
+                var i, val, onChangeData, valForInput;
                 
                 val = null;
                 onChangeData = null;
                 if (mode=='array') {
                     i = Math.round( pos * (settings.dataArray.length-1) );
                     val = settings.dataArray[i];
-                } else 
+                } else {
                     if (mode=='range') {
                         val = settings.dataRange[0] + Math.round( (pos * (settings.dataRange[1] - settings.dataRange[0])) / settings.dataRange[2] ) * settings.dataRange[2];
                     }
-            
+                }
+                
                 if (val!==null) {
                     if (typeof settings.scaleFormatCallback === 'function') {
                         val = settings.scaleFormatCallback(val);
+                        valForInput = settings.scaleFormatCallback(val, true);
+                    } else {
+                        valForInput = val;
                     }
-                    
+                        
                     if (handle==1) {
-                        $inputFirst.val(val);
+                        $inputFirst.val(valForInput);
                         $handlerTooltipFirst.html(val);
                         $handlerTooltipFirst.attr('title', val);
                         $inputFirst.trigger("change");
                         
                         if (typeof settings.onChange === 'function' && inputFirstPreviousVal!=val) {
                             onChangeData = {
-                                val   : val,
-                                handle: 1
+                                val        : val,
+                                valForInput: valForInput,
+                                handle     : 1
                             }
                             inputFirstPreviousVal = val;
                         }
                     }
                     if (handle==2 && secondHandle) {
-                        $inputSecond.val(val);
+                        $inputSecond.val(valForInput);
                         $handlerTooltipSecond.html(val);
                         $handlerTooltipSecond.attr('title', val);
                         $inputSecond.trigger("change");
                         
                         if (typeof settings.onChange === 'function' && inputSecondPreviousVal!=val) {
                             onChangeData = {
-                                val   : val,
-                                handle: 2
+                                val        : val,
+                                valForInput: valForInput,
+                                handle     : 2
                             }
                             inputSecondPreviousVal = val;
                         }

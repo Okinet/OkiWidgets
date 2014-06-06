@@ -8,7 +8,6 @@ $(document).ready(function() {
                     api.hide();
                 }
             } catch(e) {
-                console.log('catch some shit: ' + e.message);
             }
         });
     });

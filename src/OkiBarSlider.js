@@ -221,6 +221,9 @@
                 var currentSlideLeft;
                 var position;
                 
+                if (slidesSize==0)
+                    return;
+                
                 resetTimeout();
                 
                 if (!firstRun) {

@@ -356,7 +356,7 @@ function OkiTool()
 
     this.cookieErase = function(name) 
     {
-        cookieCreate(name, "", -1);
+        this.cookieCreate(name, "", -1);
     }
 
     this.getRandomInt = function(min, max)
@@ -464,7 +464,7 @@ function OkiTool()
         return s.join(dec);
     } 
     
-    this.str_replace = function(search, replace, subject, count) 
+    this.str_replace = function(search, replace, subject, count)
     {
         var i = 0,
         j = 0,
@@ -497,6 +497,12 @@ function OkiTool()
         }
         return sa ? s : s[0];
     }
+    
+    this.getRandomInt = function(min, max)
+    {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }   
+    
 }
 
 
