@@ -48,7 +48,8 @@ p { display: block; padding: 10px 0 10px 0; }
 .main-container { min-height: 700px; background-color: white; }
 .main-container-padd { padding: 20px; }
 .section { display: block; padding: 10px 0 10px 0; }
-.ajax-log-box { height: 100px; overflow: auto; border: 1px solid #666; background-color: lightgray; padding: 5px; color: #666; }
+.ajax-log-box { height: 100px; overflow: auto; border: 1px solid #666; background-color: lightgray; padding: 5px; color: #444; }
+.ajax-log-box pre { display: block; margin: 0; padding: 0px; }
 
 
 /**
