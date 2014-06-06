@@ -2,6 +2,17 @@
 
     include_once dirname(__FILE__).'/functions.php';
     
+    $copyrightTest = 
+"/*"."\n".
+" *   OkiWidgets 2.0"."\n".
+" *"."\n".
+" *   Complete solution for UI on your website!"."\n".
+" *"."\n".
+" *                                                                Robert Rypula"."\n".
+" *                                                   robert.rypula{at}okinet.pl"."\n".
+" *                                                         http://www.okinet.pl"."\n".
+" * -----------------------------------------------------------------------------"."\n".
+" */"."\n\n\n";
     
     // build JS
     $jsFull = '';
@@ -15,6 +26,7 @@
         $jsFull .= "\n\n";
     }
     
+    $jsFull = $copyrightTest.$jsFull;
     file_put_contents(dirname(__FILE__).'/build/OkiWidgets-v2.0.js', $jsFull);
     echo '/build/OkiWidgets-v2.0.js - build OK!<br/><br/><br/>';
     
@@ -40,6 +52,7 @@
         $cssFull .= "\n\n";
     }
     
+    $cssFull = $copyrightTest.$cssFull;
     file_put_contents(dirname(__FILE__).'/build/OkiWidgets-v2.0.css', $cssFull);
     echo '/build/OkiWidgets-v2.0.css - build OK!<br/><br/><br/>';
     
