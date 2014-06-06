@@ -1,0 +1,211 @@
+<div class="text-formated">
+    <p>
+        With OkiCheckbox you can customize browser's checkbox widget. OkiCheckbox by
+        default looks <b>after</b> real checkbox for two tags: A and SPAN<br/>
+        - A tag is custom checkbox icon<br/>
+        - SPAN tag is custom checkbox label<br/>
+        <br/>
+        <b>NOTE:</b> All classe names and css code can be changed! All is up to you!
+    </p>
+</div>
+
+
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-checkbox-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-checkbox-01-js">
+    </div>
+    <p>
+        In this example checkboxes was wrapped by <b>div.basic-checkbox-row</b> with fixed height.
+        Instead of this you can of course add div with <b>clear: both</b>. Checkboxes
+        have build in default image (inside css's data:image/png;base64) so they are just ready to use!
+    </p>
+</div>
+
+<script class="demo-checkbox-01-js">
+$(document).ready(function() {
+    $('.basic-checkbox-row input[type=checkbox]').each(function() {
+        $(this).OkiCheckbox();
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-checkbox-01-html">
+<style>
+    .basic-checkbox-row { height: 20px; }
+</style>
+
+<div class="basic-checkbox-row">
+    <input type="checkbox" name="basic-checkbox-01" />
+    <a href="javascript:void(0)">&nbsp;</a>
+    <span>My checkbox #1</span>
+</div>
+<div class="basic-checkbox-row">
+    <input type="checkbox" name="basic-checkbox-02" checked="checked" />
+    <a href="javascript:void(0)">&nbsp;</a>
+    <span>My checkbox #2</span>
+</div>
+<div class="basic-checkbox-row">
+    <input type="checkbox" name="basic-checkbox-03" />
+    <a href="javascript:void(0)">&nbsp;</a>
+    <span>My checkbox #3</span>
+</div>
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Synchronizing with real browser's widget</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-checkbox-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-checkbox-02-js">
+    </div>
+    <p>
+        This example shows how to synchronize OkiCheckbox with real browsers widgets.
+        Note that option <b>hideReal</b> was set to <b>false</b> to show real widgets.
+        If you click to OkiCheckbox it automatically changes real widget. But opposite
+        thing may happen - real widget can be changed by some JavaScript code.
+        OkiCheckbox, for performance reasons, doesn't check for that. You shoud 
+        manually invoke <b>sync()</b> method on checkboxes that your're sure that was changed.
+    </p>
+</div>
+
+<script class="demo-checkbox-02-js">
+function syncOkiCheckbox()
+{
+    $('.sync-checkbox-row input[type=checkbox]').each(function() {
+        $(this).OkiCheckbox('api').sync();
+    });
+}
+    
+$(document).ready(function() {
+    $('.sync-checkbox-row input[type=checkbox]').each(function() {
+        $(this).OkiCheckbox({
+            hideReal  : false
+        });
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-checkbox-02-html">
+<style>
+    .sync-checkbox-container { height: 70px; position: relative; }
+    .sync-checkbox-container .col2 { height: 70px; position: absolute; top: 0px; left: 200px; width: 350px; }
+    .sync-checkbox-row { height: 20px; }
+</style>
+
+<div class="sync-checkbox-container">
+    <div class="sync-checkbox-row">
+        <input type="checkbox" name="sync-checkbox-01" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #1</span>
+    </div>
+    <div class="sync-checkbox-row">
+        <input type="checkbox" name="sync-checkbox-02" checked="checked" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #2</span>
+    </div>
+    <div class="sync-checkbox-row">
+        <input type="checkbox" name="sync-checkbox-03" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #3</span>
+    </div>
+    
+    <div class="col2">
+        <button onClick="syncOkiCheckbox()">Sync OkiCheckboxes with browser's checkboxes</button>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Api and events</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-checkbox-03-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-checkbox-03-js">
+    </div>
+    <p>
+        OkiCheckbox can run callback functions. Also they trigger change event
+        to real browser's widget so you can put attribute onChange in real checkbox.
+    </p>
+</div>
+
+<script class="demo-checkbox-03-js">
+function apiCheckboxChanged($obj)
+{
+    var entry = $('<div>'+($obj.attr('name'))+'. changed to '+($obj.is(':checked') ? 'on' : 'off')+'!</div>');
+    $('#api-checkbox-events').prepend(entry);
+}
+
+$(document).ready(function() {
+    $('.api-checkbox-row input[type=checkbox]').each(function() {
+        $(this).OkiCheckbox();
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-checkbox-03-html">
+<style>
+    .api-checkbox-container { height: 70px; position: relative; }
+    .api-checkbox-container .col2 { height: 70px; position: absolute; top: 0px; left: 200px; width: 350px; }
+    .api-checkbox-container .col2 #api-checkbox-events { width: 300px; height: 70px; overflow: auto; }
+    .api-checkbox-row { height: 20px; }
+</style>
+
+<div class="api-checkbox-container">
+    <div class="api-checkbox-row">
+        <input type="checkbox" name="api-checkbox-01" onChange="apiCheckboxChanged($(this))" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #1</span>
+    </div>
+    <div class="api-checkbox-row">
+        <input type="checkbox" name="api-checkbox-02" onChange="apiCheckboxChanged($(this))" checked="checked" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #2</span>
+    </div>
+    <div class="api-checkbox-row">
+        <input type="checkbox" name="api-checkbox-03" onChange="apiCheckboxChanged($(this))" />
+        <a href="javascript:void(0)">&nbsp;</a>
+        <span>My checkbox #3</span>
+    </div>
+    
+    <div class="col2">
+        <b>Events:</b>
+        <div id="api-checkbox-events"></div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-checkbox-04-js">
+    </div>
+</div>
+
+<script class="demo-checkbox-04-js">
+$(document).ready(function() {
+    $('.some-checkbox').OkiCheckbox({
+        iconSelector      : 'a',
+        labelSelector     : 'span',
+        onChange          : null,
+        hideReal          : true
+    });
+});
+</script>
+
+<!-- ----------------------------------------------------------------------- -->

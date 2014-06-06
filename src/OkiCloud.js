@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $(document).on('click touchstart', function() {
-        $('.oki-cloud-inited').each(function() {
+        $('.oc-inited').each(function() {
             try {
                 var api = $(this).OkiCloud('api');
 
-                if (api && !$(this).hasClass('oki-cloud-mouseover')) {
+                if (api && !$(this).find('> .oc-hidden-content').hasClass('oc-mouseover')) {
                     api.hide();
                 }
             } catch(e) {
@@ -42,45 +42,74 @@ $(document).ready(function() {
             // private:
             var $this = null;
             var settings = {
-                cloudSelector : '> div:last',
-                onShow        : null
+                cloudSelector : '> *:last',
+                onShow        : null,
+                onHide        : null,
+                realHide      : true
             };
-            
+            var cloudTimerId;
+            var hideBlockFlag = false;
             var $cloud;
 
             function init()
             {
+                $this.addClass('oki-cloud-base');
                 $cloud = $this.find(settings.cloudSelector);
+                $cloud.addClass('oc-hidden-content');
                 
-                $this.mouseover(function() {
-                    $(this).addClass('oki-cloud-mouseover');
+                $cloud.mouseover(function() {
+                    $(this).addClass('oc-mouseover');
                 });
-                $this.mouseleave(function() {
-                    $(this).removeClass('oki-cloud-mouseover');
+                $cloud.mouseleave(function() {
+                    $(this).removeClass('oc-mouseover');
                 });
                 $this.click(function() {
                     show();
                 });
                 
-                $this.addClass('oki-cloud-inited');
+                $this.addClass('oc-inited');
             }
             
             function show()
             {
-                //$cloud.show();
-                $cloud.addClass('s-cloud-showed');
+                if ($cloud.hasClass('oc-showed')) {
+                    return;
+                }
+
+                $cloud.addClass('oc-showed');
+                if (settings.realHide) {
+                    $cloud.show();
+                }
+                
+                clearTimeout(cloudTimerId);
+                cloudTimerId = setTimeout(function() {
+                    hideBlockFlag = false;
+                }, 10);
+                hideBlockFlag = true;
                 if (typeof settings.onShow === 'function') {
-                    settings.onShow();
+                    settings.onShow($this);
                 }
             }
             
             function hide()
             {
-                // hide on next iteration of JS event loop
+                if (!$cloud.hasClass('oc-showed')) {
+                    return;
+                }
+                
+                if (hideBlockFlag) {
+                    return;
+                }
+                // hide on next iteration of JS event loop - this code should run AFTER any bubbled show event!
                 setTimeout(function() {
-                    //$cloud.hide();
-                    $cloud.removeClass('s-cloud-showed');
-                }, 1)
+                    $cloud.removeClass('oc-showed');
+                    if (settings.realHide) {
+                        $cloud.hide();
+                    }
+                    if (typeof settings.onHide === 'function') {
+                        settings.onHide($this);
+                    }
+                }, 1);
             }
         }
         

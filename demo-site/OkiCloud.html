@@ -1,0 +1,225 @@
+<div class="text-formated">
+    <p>
+        With OkiCloud you can create box that works as could. Only <b>one</b> cloud can be
+        displayed at once. If you click <b>outside</b> cloud it will dissapear. Clicking
+        <b>inside</b> cloud has no effect.<br/>
+        <br/>
+        <b>NOTE:</b> All classe names and css code can be changed! All is up to you!
+    </p>
+</div>
+
+
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <p>
+        If you have html structure as below:
+    </p>
+    <div class="code code-html code-copy" from=".demo-cloud-01-html">
+    </div>
+    <p>
+        You can run widget by using:
+    </p>
+    <div class="code code-js code-copy" from=".demo-cloud-01-js">
+    </div>
+    <p>
+        By the default <b>last div</b> inside base selector is treated as could. Cloud is hidden at the beggining. Here is the result:
+    </p>
+</div>
+
+<script class="demo-cloud-01-js">
+$(document).ready(function() {
+    $('.my-basic-cloud').OkiCloud();
+});
+</script>
+
+<div class="section">
+<div class="demo-cloud-01-html">
+<style>
+    .my-basic-cloud { width: 250px; outline: 1px solid gray; }
+    .my-basic-cloud .cloud-header-div { padding: 5px; background-color: lightblue; color: black; }
+    .my-basic-cloud .cloud-padd { border: 1px solid red; padding: 10px; }
+    
+</style>
+
+<div class="my-basic-cloud">
+    Cloud label - you can put any content in parent div
+    <div class="cloud-header-div">
+        Other content
+    </div>
+    <div>   <!-- Last div is treated as cloud. You can put any content to this div -->
+        <div class="cloud-padd">
+            I'm cloud content! By default I'm the last div
+            and my content is hidden.
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+
+<h3>Multiple clouds</h3>
+
+<div class="text-formated">
+    <p>
+        You can of course run multiple instances of the cloud and add some css to have
+        really cloud that don't pull rest of the page content. All is up to you.
+    </p>
+    <div class="code code-html code-copy" from=".demo-cloud-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-cloud-02-js">
+    </div>
+    <p>
+        Note that <b>cloud parent div</b> has "position: relative" and <b>cloud div</b> has "position: absolute" with "top: Xpx"
+        value equal to <b>parent cloud div</b> height. Because of that cloud will appear under gray box.
+    </p>
+</div>
+
+<script class="demo-cloud-02-js">
+$(document).ready(function() {
+    $('.my-cloud-01').OkiCloud();
+    $('.my-cloud-02').OkiCloud();
+    $('.my-cloud-03').OkiCloud();
+});
+</script>
+
+<div class="section">
+<div class="demo-cloud-02-html">    
+<style>
+    .my-cloud-container { height: 50px; }
+    .my-cloud-01, .my-cloud-02, .my-cloud-03 { width: 25px; height: 25px; outline: 1px solid gray; color: black; background-color: lightgray; position: relative; top: 0px; left: 0px; float: left; margin-right: 30px; }
+    .my-cloud-01 .cloud-div, .my-cloud-02 .cloud-div, .my-cloud-03 .cloud-div { position: absolute; top: 25px; left: 0px; width: 400px; background-color: white; -webkit-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); -moz-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); }
+    .my-cloud-01 .cloud-div > div, .my-cloud-02 .cloud-div > div, .my-cloud-03 .cloud-div > div { border: 1px solid gray; padding: 10px; }
+</style>
+
+<div class="my-cloud-container">
+
+    <div class="my-cloud-01">
+        #1
+        <div class="cloud-div">
+            <div >
+                I'm cloud #1 content!
+            </div>
+        </div>
+    </div>
+
+    <div class="my-cloud-02">
+        #2
+        <div class="cloud-div">
+            <div>
+                I'm cloud #2 content!
+            </div>
+        </div>
+    </div>
+
+    <div class="my-cloud-03">
+        #3
+        <div class="cloud-div">
+            <div>
+                I'm cloud #3 content!
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+</div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+
+<h3>Api call and callbacks</h3>
+
+<div class="text-formated">
+    <p>
+        Each cloud instance is accesible by the API. It can also run callback functions.
+    </p>
+    <div class="code code-html code-copy" from=".demo-cloud-03-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-cloud-03-js">
+    </div>
+</div>
+
+<script class="demo-cloud-03-js">
+$(document).ready(function() {
+    var eventNumber = 0;
+
+    $('.my-api-cloud').OkiCloud({
+        onShow: function() {
+                    var entry = $('<div>'+(eventNumber++)+'. show event!</div>');
+                    $('#demo-cloud-03-log').prepend(entry);
+                },
+        onHide: function() {
+                    var entry = $('<div>'+(eventNumber++)+'. hide event!</div>');
+                    $('#demo-cloud-03-log').prepend(entry);
+                }
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-cloud-03-html">        
+<style>
+    .cloud-api-container { height: 100px; position: relative; }
+    .cloud-api-container .col2 { position: absolute; top: 0px; left: 100px; width: 200px; }
+    .cloud-api-container .col3 { position: absolute; top: 0px; left: 250px; width: 160px; }
+    .cloud-api-container .col3 #demo-cloud-03-log { width: 160px; height: 70px; overflow: auto; }
+    .my-api-cloud { width: 45px; height: 45px; outline: 1px solid gray; color: black; background-color: lightgray; position: relative; top: 0px; left: 0px; float: left; margin-right: 30px; }
+    .my-api-cloud .my-api-cloud-content { position: absolute; top: 35px; left: 35px; width: 400px; background-color: white; -webkit-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); -moz-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.7); }
+    .my-api-cloud .my-api-cloud-content > div { border: 1px solid gray; padding: 10px; }
+</style>
+
+<div class="cloud-api-container">
+
+    <div class="my-api-cloud">
+        Click me!
+        <div class="my-api-cloud-content">
+            <div>
+                I'm API cloud content!
+                <br/><br/>
+                <button onClick="$('.my-api-cloud').OkiCloud('api').hide()">Hide via API</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col2">
+        <button onClick="$('.my-api-cloud').OkiCloud('api').show()">Show via API</button><br/>
+    </div>
+
+    <div class="col3">
+        <b>Events log:</b>
+        <div id="demo-cloud-03-log"></div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-cloud-04-js">
+    </div>
+</div>
+
+<script class="demo-cloud-04-js">
+$(document).ready(function() {
+    $('.my-great-cloud').OkiCloud({
+        cloudSelector : '> *:last',      // selector to cloud inside parent
+        onShow        : null,            // show event callback
+        onHide        : null,            // hide event callback
+        realHide      : true             // set to false if you want your cloud div to be "display: block" - then content is hidden only by overflow: hidden
+    });
+});
+</script>
+
+<!-- ----------------------------------------------------------------------- -->

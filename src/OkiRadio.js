@@ -27,7 +27,7 @@
             var $this = null;
             var settings = {
                 radioSelector     : 'a',
-                textSelector      : 'span',
+                labelSelector     : 'span',
                 onChange          : null
             };
             var $radio = null;
@@ -40,8 +40,8 @@
                     if ($radio.size()!=1)
                         $radio = null;
                 }
-                if (settings.textSelector) {
-                    $text = $this.nextUntil('input[type=radio]').filter(settings.textSelector).eq(0);
+                if (settings.labelSelector) {
+                    $text = $this.nextUntil('input[type=radio]').filter(settings.labelSelector).eq(0);
                     if ($text.size()!=1)
                         $text = null;
                 }

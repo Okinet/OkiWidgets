@@ -26,13 +26,6 @@
 .scrollarea.sa-horizontal-scrollbar-active > .sa-cont > .sa-padd { padding-bottom: 5px; }
 .scrollarea.sa-vertical-scrollbar-active > .sa-cont > .sa-padd { padding-right: 5px; }
 
-/**
- *  OkiCloud
- */
-
-.s-cloud { display: block; opacity: 0.0; height: 0px; overflow: hidden; z-index: 1; }
-.s-cloud.s-cloud-showed { opacity: 1.0; height: auto; }
-
 
 /**
  *  OkiSelect

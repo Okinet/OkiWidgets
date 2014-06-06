@@ -45,16 +45,54 @@
                     </div>
 
                     <div class="main-container-padd">
-                        Demo page of new OkiWidgets that should be ready in near time. Demo page of new OkiWidgets that 
-                        should be ready in near time. Demo page of new OkiWidgets that should be ready in near time. Demo 
-                        page of new OkiWidgets that should be ready in near time. Demo page of new OkiWidgets that should 
-                        be ready in near time. Demo page of new OkiWidgets that should be ready in near time. Demo page of 
-                        new OkiWidgets that should be ready in near time. Demo page of new OkiWidgets that should be ready 
-                        in near time. 
-                        <br/><br/><br/>
-                        <a href="build.php">Build</a><br/>
-                        <a href="build/OkiWidgets.js" target="_blank">Download JS</a><br/>
-                        <a href="build/OkiWidgets.css" target="_blank">Download CSS</a>
+                        
+                        <div class="text-formated">
+                            <p>
+                                This page contains new version of OkiWidgets. Library was fully rewritten and has many improvements.
+                                Each widget if separate jQuery plugin and can be use standalone. To use OkiWidget on you website
+                                please follow the four steps below:
+                            </p>
+                        </div>
+                        
+                        <h3>1. Pull fresh code from repo</h3>
+                        <div class="text-formated">
+                            <p>
+                                OkiWidget is still under development so at the begginig you should pull fresh code from git repository
+                            </p>
+                            <a class="button" href="javascript:void(0)" onClick="ajaxRun($(this), 'gitPull.php', $(this).next('div.ajax-log-box'))">git pull origin master</a>
+                            <div class="ajax-log-box"></div>
+                        </div>
+                        
+                        <h3>2. Build fresh JS and CSS</h3>
+                        <div class="text-formated">
+                            <p>
+                                As you can see in source of this demo page all widgets was included <b>as separate files</b>.
+                                For production environment please use link below to <b>join all files</b> to only two:
+                            </p>
+                            <a class="button" href="javascript:void(0)" onClick="ajaxRun($(this), 'build.php', $(this).next('div.ajax-log-box'))">Build</a>
+                            <div class="ajax-log-box"></div>
+                        </div>
+                        
+                        <h3>3. Download files</h3>
+                        <div class="text-formated">
+                            <p>
+                                After building you can use link below to download JS and CSS
+                            </p>
+                            <a class="button" href="build/OkiWidgets-v2.0.js" target="_blank">Download OkiWidgets-v2.0.js</a><br/>
+                            <a class="button" href="build/OkiWidgets-v2.0.css" target="_blank">Download OkiWidgets-v2.0.css</a>
+                        </div>
+                        
+                        <h3>4. Use OkiWidgets on you website!</h3>
+                        <div class="text-formated">
+                            <p>
+                                Put CSS and JS to proper places and just include them in head
+                            </p>
+                            <div class="code code-html"><?php 
+                                echo htmlspecialchars('<script src="js/OkiWidgets-v2.0.js"></script>').'<br/>';
+                                echo htmlspecialchars('<link rel="stylesheet" href="css/OkiWidgets-v2.0.css" />');
+                            ?></div>
+                        </div>
+                        
                         <br/><br/><br/>
                         
                         

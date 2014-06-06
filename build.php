@@ -7,6 +7,7 @@
     $jsFull = '';
     foreach (readDirAndFiles('src', 'Oki', '.js') as $v) {
         $js = file_get_contents(dirname(__FILE__).'/src/'.$v);
+        echo '/src/'.$v.' - load OK!<br/>';
         $jsFull .= $js;
         $jsFull .= "\n\n";
         $jsFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -14,13 +15,15 @@
         $jsFull .= "\n\n";
     }
     
-    file_put_contents(dirname(__FILE__).'/build/OkiWidgets.js', $jsFull);
+    file_put_contents(dirname(__FILE__).'/build/OkiWidgets-v2.0.js', $jsFull);
+    echo '/build/OkiWidgets-v2.0.js - build OK!<br/><br/><br/>';
     
     
     // build CSS
     $cssFull = file_get_contents(dirname(__FILE__).'/src/css/_OkiCommon.css');
     foreach (readDirAndFiles('src/css', 'Oki', '_base.css') as $v) {
         $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
+        echo '/src/css/'.$v.' - load OK!<br/>';
         $cssFull .= $css;
         $cssFull .= "\n\n";
         $cssFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -29,6 +32,7 @@
     }
     foreach (readDirAndFiles('src/css', 'Oki', '_theme.css') as $v) {
         $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
+        echo '/src/css/'.$v.' - load OK!<br/>';
         $cssFull .= $css;
         $cssFull .= "\n\n";
         $cssFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -36,7 +40,8 @@
         $cssFull .= "\n\n";
     }
     
-    file_put_contents(dirname(__FILE__).'/build/OkiWidgets.css', $cssFull);
+    file_put_contents(dirname(__FILE__).'/build/OkiWidgets-v2.0.css', $cssFull);
+    echo '/build/OkiWidgets-v2.0.css - build OK!<br/><br/><br/>';
     
     
-    echo 'Builded! Go back to <a href="/">index page</a> and use "Download JS" and "Download CSS" links get fresh build.';
+    echo 'Scripts and styles joined successfully!';

@@ -26,29 +26,40 @@
             // private:
             var $this = null;
             var settings = {
-                checkboxSelector  : 'a',
-                textSelector      : 'span',
-                onChange          : null
+                iconSelector      : 'a',
+                labelSelector     : 'span',
+                onChange          : null,
+                hideReal          : true
             };
             var $checkbox = null;
             var $text = null;
 
             function init()
             {
-                if (settings.checkboxSelector) {
-                    $checkbox = $this.next(settings.checkboxSelector);
-                    if ($checkbox.size()!=1)
+                $this.addClass('oki-checkbox-base');
+                
+                if (settings.iconSelector) {
+                    $checkbox = $this.next(settings.iconSelector);
+                    if ($checkbox.size()!=1) {
                         $checkbox = null;
+                    } else {
+                        $checkbox.addClass('oki-checkbox-icon-base');
+                    }
                 }
-                if (settings.textSelector) {
-                    $text = $this.nextUntil('input[type=checkbox]').filter(settings.textSelector).eq(0);
-                    if ($text.size()!=1)
+                if (settings.labelSelector) {
+                    $text = $this.nextUntil('input[type=checkbox]').filter(settings.labelSelector).eq(0);
+                    if ($text.size()!=1) {
                         $text = null;
+                    } else {
+                        $text.addClass('oki-checkbox-label-base');
+                    }
                 }
 
                 sync();
                 connectEvents();
-                $this.hide();      // hide real select
+                if (settings.hideReal) {
+                    $this.hide();      // hide real
+                }
             }
             
             function connectEvents()

@@ -1,3 +1,26 @@
+function ajaxRun($obj, url, $log)
+{
+    if ($obj.hasClass('ajax-running')) {
+        return;
+    }
+    
+    $obj.addClass('ajax-running');
+    $log.html('Please wait...');
+    
+    $.ajax({
+        url:    url,
+        type:   'GET',
+        success:function(data) {
+                    $log.html(data);
+                    $obj.removeClass('ajax-running');
+                },
+        error:  function(jqXHR, textStatus, errorThrown) {
+                    alert('Error at Ajax request!');
+                    $obj.removeClass('ajax-running');
+                }
+    });
+}
+
 function htmlspecialchars(string, quote_style, charset, double_encode) 
 {
     var optTemp = 0,
@@ -60,11 +83,14 @@ function findCodeCopy()
             if (cloned.is('script')) {
                 cloned.removeAttr('class');
             }
-            outerHTML = $("<div />").append(cloned).html();
             
-            outerHTML = htmlspecialchars(outerHTML);
-            
-            $(this).html(outerHTML);
+            if ($(this).hasClass('code-copy-outer-too')) {
+                outerHTML = $("<div />").append(cloned).html();
+                outerHTML = htmlspecialchars(outerHTML);
+                $(this).html(outerHTML);
+            } else {
+                $(this).html(htmlspecialchars($.trim(cloned.html())));
+            }
         }
     });
 }
