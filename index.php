@@ -38,7 +38,7 @@
                 <div class="main-container">
 
                     <div style="background-color: #d8dadb; font-size: 34px; line-height: 34px; color: #777; padding: 10px;">
-                        OkiWidgets v2.0 alpha - PULL TEST
+                        OkiWidgets v2.0 beta
                     </div>
 
                     <div class="main-container-padd">

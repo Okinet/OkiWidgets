@@ -2,6 +2,8 @@
 
     include_once dirname(__FILE__).'/functions.php';
     
+    echo '<pre>';
+    
     $copyrightTest = 
 "/*"."\n".
 " *   OkiWidgets 2.0"."\n".
@@ -18,7 +20,7 @@
     $jsFull = '';
     foreach (readDirAndFiles('src', 'Oki', '.js') as $v) {
         $js = file_get_contents(dirname(__FILE__).'/src/'.$v);
-        echo '/src/'.$v.' - load OK!<br/>';
+        echo 'Load OK - /src/'.$v.'<br/>';
         $jsFull .= $js;
         $jsFull .= "\n\n";
         $jsFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -35,7 +37,7 @@
     $cssFull = file_get_contents(dirname(__FILE__).'/src/css/_OkiCommon.css');
     foreach (readDirAndFiles('src/css', 'Oki', '_base.css') as $v) {
         $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
-        echo '/src/css/'.$v.' - load OK!<br/>';
+        echo 'Load OK - /src/css/'.$v.'<br/>';
         $cssFull .= $css;
         $cssFull .= "\n\n";
         $cssFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -44,7 +46,7 @@
     }
     foreach (readDirAndFiles('src/css', 'Oki', '_theme.css') as $v) {
         $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
-        echo '/src/css/'.$v.' - load OK!<br/>';
+        echo 'Load OK - /src/css/'.$v.'<br/>';
         $cssFull .= $css;
         $cssFull .= "\n\n";
         $cssFull .= "/* -------------------------------------------------------------------------- */\n";
@@ -57,4 +59,6 @@
     echo '/build/OkiWidgets-v2.0.css - build OK!<br/><br/><br/>';
     
     
-    echo 'Scripts and styles joined successfully!';
+    echo 'Scripts and styles files joined successfully!';
+    
+    echo '</pre>';
