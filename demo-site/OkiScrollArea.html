@@ -1,0 +1,70 @@
+<div class="text-formated">
+    <p>
+        OkiScrollArea is solution for scrolling any kind of content
+        without using browser's scroll bars. This OkiWidget can be also 
+        controlled by touch so you can use it on mobile devices.
+    </p>
+</div>
+
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <p>
+        Important - OkiScrollArea <b>ommits</b> css width and height. Widget works
+        on dimension passed <b>during initialization</b>.<br/>
+        If you really need to set dimension <b>using only css</b> you should wrap OkiScrollArea 
+        div by <b>another div</b> and set dimension to wrapper (by default viewport is 
+        set to 100% so scroll area gets wraper sizes)<br/>
+        
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollarea-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollarea-01-js">
+    </div>
+</div>
+
+<script class="demo-scrollarea-01-js">
+$(document).ready(function() {
+    $('.scrollarea-01').OkiScrollArea({
+        viewportHeight            : '190px'
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollarea-01-html">
+<style>
+    .scrollarea-01 { outline: 1px solid #aaa; }
+</style>
+
+<div class="scrollarea-01">
+    <div>                                   <!-- don't forget about one clean div (your content should go inside that div) -->
+        Put you content here!!<br/>
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+        officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        <img src="../src/images/cool-photo-04.jpg" style="width: 300px;" />
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+        officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        The end
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->

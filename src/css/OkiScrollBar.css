@@ -1,0 +1,11 @@
+/**
+ *  OkiScrollBar
+ */
+ 
+.oki-scroll-bar-base {  }
+.oki-scroll-bar-base .osb-vertical { width: 100%; height: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 0 4px 0; background-color: #e6e7e8; }
+.oki-scroll-bar-base .osb-vertical .osb-int { width: 100%; height: 100%; background-color: #e6e7e8 }
+.oki-scroll-bar-base .osb-vertical .osb-int .osb-handler { display: block; text-decoration: none; font-size: 1px; height: 1px; overflow: hidden; position: relative; top: 0px; left: 0px; width: auto; height: 0px; background-color: #c45d00; background-size: 100% 100%; }
+.oki-scroll-bar-base .osb-horizontal { width: 100%; height: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 10px 0 0; background-color: #e6e7e8; }
+.oki-scroll-bar-base .osb-horizontal .osb-int { width: 100%; height: 100%; background-color: #e6e7e8; }
+.oki-scroll-bar-base .osb-horizontal .osb-int .osb-handler { display: block; text-decoration: none; font-size: 1px; height: 1px; overflow: hidden; position: relative; top: 0px; left: 0px; width: 0px; height: 10px; background-color: #c45d00; background-size: 100% 100%; }

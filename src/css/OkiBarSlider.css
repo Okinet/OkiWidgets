@@ -1,3 +1,15 @@
+/* -------------------------------------------------------------------------- */
+/**
+ *  OkiBarSlider
+ */
+
+/* OkiBarSlider - base (don't touch it') */
+.oki-bar-slider-base { display: block; position: relative; overflow: hidden; }
+.oki-bar-slider-base > .obs-bar { display: block; position: absolute; top: 0px; left: 0px; height: 100%; width: 999999px; }
+.oki-bar-slider-base > .obs-bar > .obs-slide { display: block; width: auto; height: 100%; float: left; }
+.oki-bar-slider-base > .obs-bar > .obs-slide-zero-width { display: block; width: 0px; height: 100%; overflow: hidden; font-size: 1px; line-height: 1px; float: left; }
+
+/* OkiBarSlider - themes (put you code below) */
 .demo-bar-slider-01 { height: 140px; }
 .demo-bar-slider-01 img { margin-right: 10px; }
 .demo-bar-slider-01 .prev, .demo-bar-slider-01 .next { display: block; position: absolute; border-radius: 9px; background-color: yellow; opacity: 0.8; width: 100px; text-align: center; font-size: 12px; line-height: 12px; padding: 3px 0; }

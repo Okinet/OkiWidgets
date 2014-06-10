@@ -21,11 +21,7 @@
         
         <!-- OkiWidgets css -->
         <link rel="stylesheet" href="src/css/_OkiCommon.css" />
-        <?php foreach (readDirAndFiles('src/css', 'Oki', '_base.css', array('_OkiCommon.css')) as $v): ?>
-            <link rel="stylesheet" href="src/css/<?php echo $v ?>" />
-        <?php endforeach ?>
-            
-        <?php foreach (readDirAndFiles('src/css', 'Oki', '_theme.css') as $v): ?>
+        <?php foreach (readDirAndFiles('src/css', 'Oki', '.css', array('_OkiCommon.css')) as $v): ?>
             <link rel="stylesheet" href="src/css/<?php echo $v ?>" />
         <?php endforeach ?>
         <!-- OkiWidgets css END -->

@@ -32,15 +32,11 @@
             var settings = {
                 orientation       : 'vertical',
                 minHandleSize     : 10,
-                marginFirst       : 8,
-                marginLast        : 8,
-                position          : 0.0,
-                size              : 1.0,
-                onChange          : null,
-                htmlVertical      : '<div class="scrollbar-vertical"><div class="sb-int"><a href="javascript:void(0)" class="sb-handler">&nbsp;</a></div></div>',
-                htmlHorizontal    : '<div class="scrollbar-horizontal"><div class="sb-int"><a href="javascript:void(0)" class="sb-handler">&nbsp;</a></div></div>',
-                handlerSelector   : 'a.sb-handler'
-                
+                marginFirst       : 0,
+                marginLast        : 0,
+                position          : 0.3,
+                size              : 0.5,
+                onChange          : null
             };
             var $handler;
             var size = null;
@@ -52,6 +48,9 @@
             var handlerSize = null;
             var mouseSavedX = null;
             var mouseSavedY = null;
+            var htmlVertical = '<div class="osb-vertical"><div class="osb-int"><a href="javascript:void(0)" class="osb-handler">&nbsp;</a></div></div>';
+            var htmlHorizontal = '<div class="osb-horizontal"><div class="osb-int"><a href="javascript:void(0)" class="osb-handler">&nbsp;</a></div></div>';
+            var handlerSelector = 'a.osb-handler';
             
             function getSize()
             {
@@ -177,14 +176,16 @@
             function init()
             {
                 if (settings.orientation=="vertical") {
-                    $this.append(settings.htmlVertical);
+                    $this.append(htmlVertical);
                 } else {
-                    $this.append(settings.htmlHorizontal);
+                    $this.append(htmlHorizontal);
                 }
+                
+                $this.addClass('oki-scroll-bar-base');
                 
                 size = settings.size;
                 position = settings.position;
-                $handler = $this.find(settings.handlerSelector);
+                $handler = $this.find(handlerSelector);
                 resize();
                 
                 setupEvents();

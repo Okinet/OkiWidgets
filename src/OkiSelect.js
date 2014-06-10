@@ -76,8 +76,8 @@
                            '                <div>' +
                            '                    <div class="s-padd">' +
                            '                        <div class="scrollarea">' +
-                           '                            <div class="sa-cont">' +
-                           '                                <div class="sa-padd"></div>' +
+                           '                            <div class="osa-cont">' +
+                           '                                <div class="osa-padd"></div>' +
                            '                            </div>' + 
                            '                        </div>' + 
                            '                    </div>' +
@@ -93,8 +93,8 @@
                            '    <div class="s-cloud">' +
                            '        <div class="s-padd">' + 
                            '            <div class="scrollarea">' +
-                           '                <div class="sa-cont">' +
-                           '                    <div class="sa-padd"></div>' +
+                           '                <div class="osa-cont">' +
+                           '                    <div class="osa-padd"></div>' +
                            '                </div>' + 
                            '            </div>' + 
                            '        </div>' +
@@ -104,7 +104,7 @@
                 
                 $select = $(html);
                 $selectCloud = $select.find("> .s-cloud");
-                $selectOption = $select.find('.sa-padd');
+                $selectOption = $select.find('.osa-padd');
                 $selectText = $select.find('> span > span > span');
                 $selectScroll = $select.find('.scrollarea');
                 if ($this.prop("multiple")) {
@@ -179,8 +179,8 @@
                                 var api = getScrollApi();
                                 
                                 if (api) {
-                                    api.setScrollSizeWidth(getCloundWidth());
-                                    api.setScrollSizeHeight(getCloundHeight());
+                                    api.setViewportWidth(getCloundWidth());
+                                    api.setViewportHeight(getCloundHeight());
                                     api.resize();
                                     $this.focus();
                                     
@@ -189,8 +189,8 @@
                             }
                 });
                 $selectScroll.OkiScrollArea({
-                    scrollSizeHorizontal      : '100px',
-                    scrollSizeVertical        : '250px',
+                    viewportWidth             : '100px',
+                    viewportHeight            : '250px',
                     shortenWhenSmallerHeight  : true
                 });
                 

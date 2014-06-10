@@ -9,10 +9,10 @@
             this.api = {
                 setPositionX : function(newPosition) { setPositionX(newPosition); return this.api; },
                 setPositionY : function(newPosition) { setPositionY(newPosition); return this.api; },
-                addOffset : function(offset) { addOffset(offset); return this.api; },
-                setHeight : function(h) { setHeight(h); return this.api; },                            // deprecated
-                setScrollSizeHeight : function(h) { setScrollSizeHeight(h); return this.api; },
-                setScrollSizeWidth : function(h) { setScrollSizeWidth(h); return this.api; },
+                addOffsetX : function(offset) { addOffsetX(offset); return this.api; },
+                addOffsetY : function(offset) { addOffsetY(offset); return this.api; },
+                setViewportHeight : function(h) { setViewportHeight(h); return this.api; },
+                setViewportWidth : function(h) { setViewportWidth(h); return this.api; },
                 resize : function() { resize(); return this.api; }
             }
 
@@ -32,8 +32,8 @@
             // private:
             var $this = null;
             var settings = {
-                scrollSizeVertical        : '100%',         // percent / px / auto
-                scrollSizeHorizontal      : '100%',         // percent / px / auto
+                viewportHeight            : '100%',         // percent / px / auto
+                viewportWidth             : '100%',         // percent / px / auto
                 contentSizeVertical       : 'auto',         // percent / px / auto
                 contentSizeHorizontal     : '100%',         // percent / px / auto
                 shortenWhenSmallerWidth   : false,
@@ -96,8 +96,8 @@
             
             function update()
             {
-                var scrollSizeVerticalInteger;
-                var scrollSizeHorizontalInteger;
+                var viewportHeightInteger;
+                var viewportWidthInteger;
                 
                 contentSizeX = $content.width();
                 contentSizeY = $content.height();
@@ -105,26 +105,26 @@
                 viewportSizeY = $this.height();
                 
                 // check if content is smaller than viewport - if true shorten viewport
-                if (settings.shortenWhenSmallerHeight && strpos(settings.scrollSizeVertical, 'px')!==false) {
-                    scrollSizeVerticalInteger = parseInt( settings.scrollSizeVertical.replace('px', '') );
-                    if (contentSizeY<scrollSizeVerticalInteger) {
+                if (settings.shortenWhenSmallerHeight && strpos(settings.viewportHeight, 'px')!==false) {
+                    viewportHeightInteger = parseInt( settings.viewportHeight.replace('px', '') );
+                    if (contentSizeY<viewportHeightInteger) {
                         viewportSizeY = contentSizeY;
                         $this.height(viewportSizeY);
                     } else {
-                        viewportSizeY = scrollSizeVerticalInteger;
-                        $this.height(scrollSizeVerticalInteger);
+                        viewportSizeY = viewportHeightInteger;
+                        $this.height(viewportHeightInteger);
                     }
                 }
                 
                 // check if content is smaller than viewport - if true shorten viewport
-                if (settings.shortenWhenSmallerWidth && strpos(settings.scrollSizeHorizontal, 'px')!==false) {
-                    scrollSizeHorizontalInteger = parseInt( settings.scrollSizeHorizontal.replace('px', '') );
-                    if (contentSizeX<scrollSizeHorizontalInteger) {
+                if (settings.shortenWhenSmallerWidth && strpos(settings.viewportWidth, 'px')!==false) {
+                    viewportWidthInteger = parseInt( settings.viewportWidth.replace('px', '') );
+                    if (contentSizeX<viewportWidthInteger) {
                         viewportSizeX = contentSizeX;
                         $this.width(viewportSizeX);
                     } else {
-                        viewportSizeX = scrollSizeHorizontalInteger;
-                        $this.width(scrollSizeHorizontalInteger);
+                        viewportSizeX = viewportWidthInteger;
+                        $this.width(viewportWidthInteger);
                     }
                 }
 
@@ -132,26 +132,26 @@
                 scrollNeededY = (contentSizeY>viewportSizeY) ? true : false;
                 
                 if (scrollNeededX) {
-                    $this.addClass('sa-horizontal-scrollbar-active');
+                    $this.addClass('osa-horizontal-scrollbar-active');
                     $sY.css('padding-bottom', settings.scrollHorizontalSize+'px');
                     if ($sY && scrollNeededYPrevious!==scrollNeededY) {
                         $sY.OkiScrollBar('api').resize();
                     }
                 } else {
-                    $this.removeClass('sa-horizontal-scrollbar-active');
+                    $this.removeClass('osa-horizontal-scrollbar-active');
                     $sY.css('padding-bottom', '0px');
                     if ($sY && scrollNeededYPrevious!==scrollNeededY) {
                         $sY.OkiScrollBar('api').resize();
                     }
                 }
                 if (scrollNeededY) {
-                    $this.addClass('sa-vertical-scrollbar-active');
+                    $this.addClass('osa-vertical-scrollbar-active');
                     $sX.css('padding-right', settings.scrollVerticalSize+'px');
                     if ($sX && scrollNeededXPrevious!==scrollNeededX) {
                         $sX.OkiScrollBar('api').resize();
                     }
                 } else {
-                    $this.removeClass('sa-vertical-scrollbar-active');
+                    $this.removeClass('osa-vertical-scrollbar-active');
                     $sX.css('padding-right', '0px');
                     if ($sX && scrollNeededXPrevious!==scrollNeededX) {
                         $sX.OkiScrollBar('api').resize();
@@ -195,12 +195,6 @@
                     $sX.OkiScrollBar('api').changePosition(contentPositionX);
                 
                 $content.css('left', '-'+contentOffsetX+'px');
-                
-                /*
-                if (typeof settings.onChange === 'function') {
-                    settings.onChange(position);
-                }
-                */
             }
             
             function addOffsetY(offset)
@@ -217,12 +211,6 @@
                     $sY.OkiScrollBar('api').changePosition(contentPositionY);
                 
                 $content.css('top', '-'+contentOffsetY+'px');
-                
-                /*
-                if (typeof settings.onChange === 'function') {
-                    settings.onChange(position);
-                }
-                */
             }
         
             function resize()
@@ -308,51 +296,36 @@
                     function (ev) {
                         moving = false;
                     }
-                )/*.bind(
-                    'click',
-                    function (ev) {
-                        if (moved) {
-                            moved = false;
-                            return false;
-                        }
-                        return true;
-                    }
-                )*/;
+                );
             }
             
-            function setScrollSizeHeight(h)
+            function setViewportHeight(h)
             {
-                if (h!=settings.scrollSizeVertical) {
-                    settings.scrollSizeVertical = h;
-                    $this.height(settings.scrollSizeVertical);
+                if (h!=settings.viewportHeight) {
+                    settings.viewportHeight = h;
+                    $this.height(settings.viewportHeight);
 
                     update();
                 }
             }
             
-            function setScrollSizeWidth(w)
+            function setViewportWidth(w)
             {
-                if (w!=settings.scrollSizeHorizontal) {
-                    settings.scrollSizeHorizontal = w;
-                    $this.width(settings.scrollSizeHorizontal);
+                if (w!=settings.viewportWidth) {
+                    settings.viewportWidth = w;
+                    $this.width(settings.viewportWidth);
 
                     update();
                 }
-            }
-            
-            function setHeight(h)
-            {
-                settings.scrollSizeVertical = h;
-                $this.height(settings.scrollSizeVertical);
-                
-                update();
             }
 
             function init()
             {
+                $this.addClass('oki-scroll-area-base');
+                
                 if (settings.scrollHorizontal=="auto" || settings.scrollHorizontal=="scroll") {
-                    $this.append('<div class="sa-scrollbar-horizontal"></div>');
-                    $sX = $this.find('div.sa-scrollbar-horizontal');
+                    $this.append('<div class="osa-scrollbar-horizontal"></div>');
+                    $sX = $this.find('div.osa-scrollbar-horizontal');
                     $sX.height(settings.scrollHorizontalSize+'px');
                     $sX.OkiScrollBar({
                         orientation   : 'horizontal',
@@ -362,8 +335,8 @@
                     });
                 }
                 if (settings.scrollVertical=="auto" || settings.scrollVertical=="scroll") {
-                    $this.append('<div class="sa-scrollbar-vertical"></div>');
-                    $sY = $this.find('div.sa-scrollbar-vertical');
+                    $this.append('<div class="osa-scrollbar-vertical"></div>');
+                    $sY = $this.find('div.osa-scrollbar-vertical');
                     $sY.width(settings.scrollVerticalSize+'px');
                     $sY.OkiScrollBar({
                         onChange      : function(position) {
@@ -372,10 +345,10 @@
                     });
                 }
                 
-                $this.width(settings.scrollSizeHorizontal);
-                $this.height(settings.scrollSizeVertical);
+                $this.width(settings.viewportWidth);
+                $this.height(settings.viewportHeight);
                 
-                $content = $this.find('div.sa-cont');
+                $content = $this.find('div.osa-cont');
                 $content.width(settings.contentSizeHorizontal);
                 $content.height(settings.contentSizeVertical);
                 
@@ -384,9 +357,6 @@
                 contentOffsetX = 0;
                 contentOffsetY = 0;
 
-//                size = settings.size;
-//                position = settings.position;
-//                $handler = $this.find(settings.handlerSelector);
                 resize();
                 setupEvents();
                 

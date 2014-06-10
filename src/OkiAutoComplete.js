@@ -70,8 +70,8 @@
                            '                    <div class="s-padd">' +
                            '                        <div class="s-input-status"></div>' +
                            '                        <div class="scrollarea">' +
-                           '                            <div class="sa-cont">' +
-                           '                                <div class="sa-padd"></div>' +
+                           '                            <div class="osa-cont">' +
+                           '                                <div class="osa-padd"></div>' +
                            '                            </div>' + 
                            '                        </div>' + 
                            '                    </div>' +
@@ -87,8 +87,8 @@
                            '        <div class="s-padd">' + 
                            '            <div class="s-input-status"></div>' +
                            '            <div class="scrollarea">' +
-                           '                <div class="sa-cont">' +
-                           '                    <div class="sa-padd"></div>' +
+                           '                <div class="osa-cont">' +
+                           '                    <div class="osa-padd"></div>' +
                            '                </div>' + 
                            '            </div>' + 
                            '        </div>' +
@@ -98,7 +98,7 @@
                 
                 $autocomplete = $(html);
                 $autocompleteCloud = $autocomplete.find("> .s-cloud");
-                $autocompleteOption = $autocomplete.find('.sa-padd');
+                $autocompleteOption = $autocomplete.find('.osa-padd');
                 $autocompleteStatus = $autocomplete.find('.s-input-status');
                 $autocompleteScroll = $autocomplete.find('.scrollarea');
                 
@@ -117,8 +117,8 @@
             function connectDependencies()
             {
                 $autocompleteScroll.OkiScrollArea({
-                    scrollSizeHorizontal      : '100px',
-                    scrollSizeVertical        : '250px',
+                    viewportWidth             : '100px',
+                    viewportHeight            : '250px',
                     shortenWhenSmallerHeight  : true
                 });
                 
@@ -126,8 +126,8 @@
                     onShow: function() {
                                 var api = $autocompleteScroll.OkiScrollArea('api');
 
-                                api.setScrollSizeWidth(getCloundWidth());
-                                api.setScrollSizeHeight(getCloundHeight());
+                                api.setViewportWidth(getCloundWidth());
+                                api.setViewportHeight(getCloundHeight());
                                 api.resize();
                                 updateOptionContent();
                             }

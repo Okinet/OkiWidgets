@@ -1,0 +1,306 @@
+<div class="text-formated">
+    <p>
+        OkiScrollBar displays bar with handle that can be used to control
+        other widgets. Position is normalized to <0.0, 1.0> range.
+    </p>
+</div>
+
+
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-scrollbar-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollbar-01-js">
+    </div>
+    <p>
+        In example below you can see basic usage of the widget. Depending on
+        initialization you can get vertical bar (default) or horizontal bar.
+        Dimension of the bar is controlled via css width and height property.
+    </p>
+</div>
+
+<script class="demo-scrollbar-01-js">
+$(document).ready(function() {
+    $('.basic-scroll-bar-vertical').OkiScrollBar();
+    $('.basic-scroll-bar-horizontal').OkiScrollBar({
+        orientation       : 'horizontal'
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollbar-01-html">
+<style>
+    .basic-scroll-bar-cont { height: 110px; }
+    .basic-scroll-bar-cont .col1 { float: left; width: 49%; }
+    .basic-scroll-bar-cont .col2 { float: right; width: 49%; }
+    
+    .basic-scroll-bar-vertical { width: 10px; height: 100px; }
+    .basic-scroll-bar-horizontal { width: 400px; height: 10px; }
+</style>
+
+<div class="basic-scroll-bar-cont">
+    <div class="col1">
+        <div class="basic-scroll-bar-vertical"></div>
+        Vertical OkiScrollBar
+    </div>
+    <div class="col2">
+        <div class="basic-scroll-bar-horizontal"></div>
+        Horizontal OkiScrollBar
+    </div>
+</div>
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Configuration examples</h3>
+
+<div class="text-formated">
+    <p>
+        Next examples are showed on horizontal orientation. You can of course do the
+        same in vertical orientation.
+    </p>
+    <p>
+        You can set starting position and size using 'position' and 'size' settings field.
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollbar-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollbar-02-js">
+    </div>
+</div>
+
+<script class="demo-scrollbar-02-js">
+$(document).ready(function() {
+    $('.adv-scrollbar-01').OkiScrollBar({
+        orientation       : 'horizontal',
+        position          : 0.6,                   // in range <0.0, 1.0>
+        size              : 0.2                    // in range <0.0, 1.0>
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollbar-02-html">
+<style>
+    .adv-scrollbar-01 { width: 500px; height: 10px; }
+</style>
+
+<div class="adv-scrollbar-01"></div>
+</div>
+</div>
+
+
+<div class="text-formated">
+    <p>
+        If you want to bigger handle you can do it in css. Handle has class 'osb-handler'
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollbar-03-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollbar-03-js">
+    </div>
+</div>
+
+<script class="demo-scrollbar-03-js">
+$(document).ready(function() {
+    $('.adv-scrollbar-02').OkiScrollBar({
+        orientation       : 'horizontal',
+        position          : 0.1,
+        size              : 0.7
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollbar-03-html">
+<style>
+    .adv-scrollbar-02 { width: 700px; height: 30px; }
+    .adv-scrollbar-02 .osb-horizontal .osb-int .osb-handler { height: 30px; background-color: lightgreen; }
+</style>
+
+<div class="adv-scrollbar-02"></div>
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Events</h3>
+
+<div class="text-formated">
+    <p>
+        Widget after bar position change call onChange callback if defined.
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollbar-04-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollbar-04-js">
+    </div>
+</div>
+
+<script class="demo-scrollbar-04-js">
+$(document).ready(function() {
+    $('.eventapi-scrollbar-01').OkiScrollBar({
+        orientation       : 'horizontal',
+        onChange          : function(pos) {
+                                $('.eventapi-scrollbar-01-pos').html('Current position: <b>'+pos+'</b>');
+                            }
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollbar-04-html">
+<style>
+    .eventapi-scrollbar-01 { width: 500px; height: 10px; }
+    .eventapi-scrollbar-01-pos { padding: 10px 0; font-size: 15px; color: black; }
+</style>
+
+Move bar with mouse!<br/><br/>
+<div class="eventapi-scrollbar-01"></div>
+<div class="eventapi-scrollbar-01-pos"></div>
+</div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>API</h3>
+
+<div class="text-formated">
+    <p>
+        You can fetch API object after init like in any other OkiWidget by calling
+        OkiScrollBar('api')
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollbar-05-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollbar-05-js">
+    </div>
+</div>
+
+<script class="demo-scrollbar-05-js">
+var eventapiScrollbar02_API;
+
+function scrollbar02Resize(width)
+{
+    $('.eventapi-scrollbar-02').width(width);
+    eventapiScrollbar02_API.resize();
+}
+    
+$(document).ready(function() {
+    $('.eventapi-scrollbar-02').OkiScrollBar({
+        orientation       : 'horizontal',
+        onChange          : function(pos) {
+                                $('.eventapi-scrollbar-02-pos').html('Current position: <b>'+pos+'</b>');
+                            }
+    });
+    eventapiScrollbar02_API = $('.eventapi-scrollbar-02').OkiScrollBar('api');
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollbar-05-html">
+<style>
+    .eventapi-row { padding: 10px 0 10px 0; border-bottom: 1px dashed #ddd; }
+    .eventapi-row .col1 { float: left; width: 40%; }
+    .eventapi-row .col2 { float: right; width: 59%; }
+    .clear { clear: both; width: 0px; height: 0px; overflow: hidden; }
+    
+    .eventapi-scrollbar-02 { width: 500px; height: 10px; }
+    .eventapi-scrollbar-02-pos { padding: 10px 0; font-size: 15px; color: black; }
+</style>
+
+<div class="eventapi-scrollbar-02"></div>
+<div class="eventapi-scrollbar-02-pos"></div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.changePosition
+    </div>
+    <div class="col2">
+        <input type="input" value="0.1" /><button onClick="eventapiScrollbar02_API.changePosition($(this).parent().find('input').val())">Change position in range <0.0, 1.0></button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.changeSize
+    </div>
+    <div class="col2">
+        <input type="input" value="0.9" /><button onClick="eventapiScrollbar02_API.changeSize($(this).parent().find('input').val())">Change size in range <0.0, 1.0></button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.addOffset
+    </div>
+    <div class="col2">
+        <input type="input" value="32" /><button onClick="eventapiScrollbar02_API.addOffset( parseInt($(this).parent().find('input').val()) )">Add offset in pixels</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.getPosition
+    </div>
+    <div class="col2">
+        <button onClick="$(this).parent().find('> span').html( 'Current position: ' + eventapiScrollbar02_API.getPosition() )">Get current position</button>
+        <span></span>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.getSize
+    </div>
+    <div class="col2">
+        <button onClick="$(this).parent().find('> span').html( 'Current size ' + eventapiScrollbar02_API.getSize() )">Get current size</button>
+        <span></span>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="eventapi-row">
+    <div class="col1">
+        api.resize
+    </div>
+    <div class="col2">
+        <input type="input" value="90%" /><button onClick="scrollbar02Resize($(this).parent().find('input').val())">Resize width</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-scrollbar-06-js">
+    </div>
+</div>
+
+<script class="demo-scrollbar-06-js">
+$(document).ready(function() {
+    $('.scrollbar-reference-01').OkiScrollBar({
+        orientation       : 'vertical', // orientation
+        minHandleSize     : 10,         // minimal handle size (this can block widget from displaying handle that is almost invisible)
+        marginFirst       : 0,          // you can add margin before handle starts [px]
+        marginLast        : 0,          // you can add margin after handle ends [px]
+        position          : 0.3,        // starting position in range <0.0, 1.0>
+        size              : 0.5,        // starting size in range <0.0, 1.0>
+        onChange          : null        // callback for change
+    });
+});
+</script>
+
+<!-- ----------------------------------------------------------------------- -->

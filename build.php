@@ -35,25 +35,12 @@
     
     // build CSS
     $cssFull = file_get_contents(dirname(__FILE__).'/src/css/_OkiCommon.css');
-    foreach (readDirAndFiles('src/css', 'Oki', '_base.css') as $v) {
+    foreach (readDirAndFiles('src/css', 'Oki', '.css') as $v) {
         $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
         echo 'Load OK - /src/css/'.$v.'<br/>';
         $cssFull .= $css;
         $cssFull .= "\n\n";
-        $cssFull .= "/* -------------------------------------------------------------------------- */\n";
-        $cssFull .= "/* -------------------------------------------------------------------------- */\n";
-        $cssFull .= "\n\n";
     }
-    foreach (readDirAndFiles('src/css', 'Oki', '_theme.css') as $v) {
-        $css = file_get_contents(dirname(__FILE__).'/src/css/'.$v);
-        echo 'Load OK - /src/css/'.$v.'<br/>';
-        $cssFull .= $css;
-        $cssFull .= "\n\n";
-        $cssFull .= "/* -------------------------------------------------------------------------- */\n";
-        $cssFull .= "/* -------------------------------------------------------------------------- */\n";
-        $cssFull .= "\n\n";
-    }
-    
     $cssFull = $copyrightTest.$cssFull;
     file_put_contents(dirname(__FILE__).'/build/OkiWidgets-v2.0.css', $cssFull);
     echo '/build/OkiWidgets-v2.0.css - build OK!<br/><br/><br/>';

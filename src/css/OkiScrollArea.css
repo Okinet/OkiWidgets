@@ -1,0 +1,12 @@
+/**
+ *  OkiScrollArea
+ */
+ 
+.oki-scroll-area-base { position: relative; top: 0px; left: 0px; overflow: hidden; }
+.oki-scroll-area-base > .osa-cont { position: absolute; top: 0px; left: 0px; width: auto; height: auto; }
+.oki-scroll-area-base > .osa-scrollbar-horizontal { position: absolute; left: 0px; bottom: 0px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%; display: none; }
+.oki-scroll-area-base > .osa-scrollbar-vertical { position: absolute; top: 0px; right: 0px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; height: 100%; display: none; }
+.oki-scroll-area-base.osa-horizontal-scrollbar-active > .osa-scrollbar-horizontal { display: block; }
+.oki-scroll-area-base.osa-vertical-scrollbar-active > .osa-scrollbar-vertical { display: block; }
+.oki-scroll-area-base.osa-horizontal-scrollbar-active > .osa-cont > .osa-padd { padding-bottom: 5px; }
+.oki-scroll-area-base.osa-vertical-scrollbar-active > .osa-cont > .osa-padd { padding-right: 5px; }
