@@ -67,3 +67,13 @@ label { display: inline-block; padding: 3px 10px 3px 0; font-size: 12px; line-he
 input { display: inline-block; padding: 3px 3px; border: #eee 1px solid; background-color: #fbfbfb; font-family: Arial; font-size: 12px; line-height: 12px; margin-bottom: 10px; }
 button, a.button { display: inline-block; padding: 5px 6px; border: #555 1px solid; background-color: #555; color: white; font-weight: bold; font-family: Arial; font-size: 12px; line-height: 12px; margin-bottom: 10px; }
 button:hover, a.button:hover { background-color: #cf7a00; }
+
+/**
+ *  Fixed menu
+ */
+ 
+.fixed-menu-container { position: fixed; top: 0px; left: 0px; width: 32px; height: 32px; border: 1px solid lightgray; border-width: 0px 1px 1px 0px; background-color: white; }
+.fixed-menu-container .hidden { position: absolute; top: 0px; left: 0px; width: 150px; padding: 10px; border: 1px solid lightgray; border-width: 0px 1px 1px 0px; background-color: white; display: none; }
+.fixed-menu-container .hidden a { color: black; font-size: 14px; line-height: 14px; padding: 5px 0; display: block; }
+.fixed-menu-container .hidden a:hover { color: orange; }
+.fixed-menu-container:hover .hidden { display: block; }

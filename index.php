@@ -108,11 +108,16 @@
                 </div>
             </div>
         </div>
+        
+        <div class="fixed-menu-container">
+            <div class="hidden">
+            </div>
+        </div>
+        
+        <!-- demo site -->
+        <script src="demo-site/js/script.js"></script>
+        <link rel="stylesheet" href="demo-site/css/style.css" />
+        <!-- demo site END -->
     
-    </body>    
-    
-    <!-- demo site -->
-    <script src="demo-site/js/script.js"></script>
-    <link rel="stylesheet" href="demo-site/css/style.css" />
-    <!-- demo site END -->
+    </body>
 </html>

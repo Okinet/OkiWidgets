@@ -15,7 +15,11 @@
         on dimension passed <b>during initialization</b>.<br/>
         If you really need to set dimension <b>using only css</b> you should wrap OkiScrollArea 
         div by <b>another div</b> and set dimension to wrapper (by default viewport is 
-        set to 100% so scroll area gets wraper sizes)<br/>
+        set to 100% so scroll area gets wraper size)<br/>
+        <b>NOTE:</b> Causion with images without fixed dimensions inside scroll area. If they
+        loads after widget initialization you will get wrong dimension. You can fix it 
+        by move initialization code to $(window).load(), add fixed dimensions or call resize 
+        method from OkiScrollArea API after $(window).load().
         
     </p>
     <div class="code code-html code-copy" from=".demo-scrollarea-01-html">
@@ -39,32 +43,328 @@ $(document).ready(function() {
 </style>
 
 <div class="scrollarea-01">
-    <div>                                   <!-- don't forget about one clean div (your content should go inside that div) -->
-        Put you content here!!<br/>
-        <br/>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-        officia deserunt mollit anim id est laborum.<br/>
-        <br/>
-        <img src="../src/images/cool-photo-04.jpg" style="width: 300px;" />
-        <br/>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-        officia deserunt mollit anim id est laborum.<br/>
-        <br/>
-        The end
-    </div>
+    Put you content here!!<br/>
+    <br/>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+    <br/>
+    <img src="../src/images/cool-photo-04.jpg" style="width: 300px; height: 187px;" />
+    <br/>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Excepteur sint occaecat cupidatat non 
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+    <br/>
+    The end
 </div>
 
 </div>
 </div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Viewport and content settings</h3>
+
+<div class="text-formated">
+    <p>
+        You can controll initial dimension of scroll area. Use viewportWidth/viewportHeight and
+        contentWidth/contentHeight variables.<br/>
+        <br/>
+        Note - if you set 'contentWidth' above 'viewportWidth' OkiScrollArea automatically
+        turn on horizontal scrollBar.
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollarea-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollarea-02-js">
+    </div>
+</div>
+
+<script class="demo-scrollarea-02-js">
+$(document).ready(function() {
+    $('.scrollarea-02').OkiScrollArea({
+        viewportWidth             : '350px',        // percent / px / auto
+        viewportHeight            : '200px'         // percent / px / auto
+    });
+    $('.scrollarea-03').OkiScrollArea({
+        viewportWidth             : '500px',        // percent / px / auto
+        viewportHeight            : '250px',        // percent / px / auto
+        contentHeight             : 'auto',         // percent / px / auto
+        contentWidth              : '700px'         // percent / px / auto
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollarea-02-html">
+<style>
+    .scrollarea-demo-cont { position: relative; height: 230px; }
+    .scrollarea-02 { outline: 1px solid #aaa; position: absolute; top: 0px; left: 0px; }
+    .scrollarea-03 { outline: 1px solid #aaa; position: absolute; top: 0px; left: 370px; }
+</style>
+
+<div class="scrollarea-demo-cont">
+
+    <div class="scrollarea-02">
+        I'm <b>div.scrollarea-02</b><br/>
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        <img src="../src/images/cool-photo-04.jpg" style="width: 300px; height: 187px;" />
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Excepteur sint occaecat cupidatat non 
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        The end
+    </div>
+    
+    <div class="scrollarea-03">
+        I'm <b>div.scrollarea-02</b><br/>
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        <img src="../src/images/cool-photo-04.jpg" style="width: 300px; height: 187px;" />
+        <br/>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Excepteur sint occaecat cupidatat non 
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
+        <br/>
+        The end
+    </div>
+    
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Scroll bar sizes and paddings</h3>
+
+<div class="text-formated">
+    <p>
+        ScrollBars dimension and content padding can be changed. Below example
+        explains how to do it.
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollarea-03-html">
+    </div>
+    <p>
+        Padding from above css are used to avoid overlaping OkiScrollArea's content
+        over OkiScrollBar widget.
+    </p>
+    <div class="code code-js code-copy" from=".demo-scrollarea-03-js">
+    </div>
+</div>
+
+<script class="demo-scrollarea-03-js">
+$(document).ready(function() {
+    var str, i;
+    
+    for (i=0; i<100; i++) {
+        str += 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. ';
+    }
+    $('.scrollarea-sp > div').html(str);
+    
+    $('.scrollarea-sp').OkiScrollArea({
+        viewportWidth             : '500px',        // percent / px / auto
+        viewportHeight            : '250px',        // percent / px / auto
+        contentHeight             : 'auto',         // percent / px / auto
+        contentWidth              : '1024px',       // percent / px / auto
+        scrollHorizontalHeight    : 30,
+        scrollVerticalWidth       : 30
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollarea-03-html">
+<style>
+    .scrollarea-sp { outline: 1px solid #aaa; }
+    .scrollarea-sp .padding-visualizer { outline: 1px solid darkgreen; }
+    .scrollarea-sp.osa-horizontal-scrollbar-active > .osa-cont > .osa-padd { padding-bottom: 45px; } /* bottom padding */
+    .scrollarea-sp.osa-vertical-scrollbar-active > .osa-cont > .osa-padd { padding-right: 45px; }    /* right padding */
+</style>
+
+<div class="scrollarea-sp">
+    <div class="padding-visualizer"></div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Api</h3>
+
+<div class="text-formated">
+    <p>
+        Below examples shows how to use api methods. Note that in this example OkiScrollArea
+        has 100% viewport. Dimension is obtained from parent div.
+    </p>
+    <div class="code code-html code-copy" from=".demo-scrollarea-04-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-scrollarea-04-js">
+    </div>
+</div>
+
+<script class="demo-scrollarea-04-js">
+var scrollareaEa_Api = null;
+
+function scrollAreaEaResizeParent(w, h)
+{
+    $('.scrollarea-parent').width(w);
+    $('.scrollarea-parent').height(h);
+}
+
+$(document).ready(function() {
+    var str, i;
+    
+    for (i=0; i<100; i++) {
+        str += 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. ';
+    }
+    $('.scrollarea-ea').html(str);
+    
+    $('.scrollarea-ea').OkiScrollArea({
+        viewportWidth             : '100%',         // percent / px / auto
+        viewportHeight            : '100%',         // percent / px / auto
+        contentHeight             : 'auto',         // percent / px / auto
+        contentWidth              : '1024px',       // percent / px / auto
+        scrollHorizontalHeight    : 8,
+        scrollVerticalWidth       : 8
+    });
+    scrollareaEa_Api = $('.scrollarea-ea').OkiScrollArea('api');
+});
+</script>
+
+<div class="section">
+<div class="demo-scrollarea-04-html">
+<style>
+    .scrollarea-parent { width: 700px; height: 150px; border: dashed 15px #dff; }
+    
+    .scrollarea-ea { outline: 1px solid #aaa; }
+    .scrollarea-ea .osb-vertical, .scrollarea-ea .osb-horizontal { background-color: transparent; }
+    .scrollarea-ea .osb-horizontal .osb-int .osb-handler, .scrollarea-ea .osb-vertical .osb-int .osb-handler { background-color: black; opacity: 0.4; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+    
+    .scrollarea-row { padding: 10px 0 10px 0; border-bottom: 1px dashed #ddd; }
+    .scrollarea-row .col1 { float: left; width: 33%; }
+    .scrollarea-row .col2 { float: right; width: 66%; }
+    .clear { clear: both; width: 0px; height: 0px; overflow: hidden; }
+</style>
+
+
+<div class="scrollarea-parent">
+    <div class="scrollarea-ea"></div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.setPositionX</div>
+    <div class="col2">
+        <input type="input" value="0.9" /><button onClick="scrollareaEa_Api.setPositionX($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Change position X in range <0.0, 1.0></button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.setPositionY</div>
+    <div class="col2">
+        <input type="input" value="0.9" /><button onClick="scrollareaEa_Api.setPositionY($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Change position Y in range <0.0, 1.0></button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.addOffsetX</div>
+    <div class="col2">
+        <input type="input" value="16" /><button onClick="scrollareaEa_Api.addOffsetX($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Add pixels at X axis</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.addOffsetY</div>
+    <div class="col2">
+        <input type="input" value="32" /><button onClick="scrollareaEa_Api.addOffsetY($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Add pixels at Y axis</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.setViewportWidth</div>
+    <div class="col2">
+        <input type="input" value="650" /><button onClick="scrollareaEa_Api.setViewportWidth($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Set viewport width</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.setViewportHeight</div>
+    <div class="col2">
+        <input type="input" value="100" /><button onClick="scrollareaEa_Api.setViewportHeight($(this).parent().find('input').val()); scrollareaEa_Api.resize();">Set viewport height</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.resize</div>
+    <div class="col2">
+        Parent width: <input type="input" value="600" />, 
+        parent height: <input type="input" value="200" />
+        <button onClick="scrollAreaEaResizeParent($(this).parent().find('> input').eq(0).val(), $(this).parent().find('> input').eq(1).val())">Resize parent</button><br/>
+        After parent resize you should call resize() method for API
+        <button onClick="scrollareaEa_Api.resize()">Resize OkiScrollArea</button><br/>
+        This works only if viewportWidth/viewportHeight is set to 100%.
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+</div>
+</div>
+
+<div class="text-formated">
+    <p>
+        Note that after all api call you should always call api.resize() at the end.
+        This comes from performance reasons (you can set many dimension settings and
+        after all call api.resize() to see changes).
+    </p>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-scrollarea-05-js">
+    </div>
+</div>
+
+<script class="demo-scrollarea-05-js">
+$(document).ready(function() {
+    $('.scrollarea-reference').OkiScrollArea({
+        viewportHeight            : '100%',         // percent / px / auto
+        viewportWidth             : '100%',         // percent / px / auto
+        contentHeight             : 'auto',         // percent / px / auto
+        contentWidth              : '100%',         // percent / px / auto
+        shortenWhenSmallerWidth   : false,          // when true if content is smaller all viewport try to fix content
+        shortenWhenSmallerHeight  : false,          // when true if content is smaller all viewport try to fix content
+        autoUpdateInterval        : 0,              // auto resize (if content changes frequently)
+        scrollHorizontal          : 'auto',         // auto / hidden / scroll
+        scrollVertical            : 'auto',         // auto / hidden / scroll
+        scrollHorizontalHeight    : 15,             // scroll bar size
+        scrollVerticalWidth       : 15,             // scroll bar size
+        scrollStep                : 20              // number of pixel for each mouse scroll event
+    });
+});
+</script>
+
 
 <!-- ----------------------------------------------------------------------- -->

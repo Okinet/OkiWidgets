@@ -95,9 +95,30 @@ function findCodeCopy()
     });
 }
 
+function animateToIn($selector, ms)
+{
+    if ($selector.size()==1)
+        $('html, body').animate({scrollTop: $selector.offset().top}, ms);
+}
+
+
+function createFixedMenu()
+{
+    var $link;
+    
+    $('h2').each(function(i) {
+        $(this).attr('fixed-menu-id', i);
+        $link = $('<a href="javascript:void(0)" fixed-menu-id="'+i+'">'+$(this).html()+'</a>');
+        $link.on("click", function() {
+            animateToIn($('h2[fixed-menu-id='+$(this).attr('fixed-menu-id')+']'), 300);
+        });
+        $('.fixed-menu-container > div.hidden').append($link);
+    });
+}
+
 
 findCodeCopy();
 
 $(document).ready(function() {
-    
+    createFixedMenu();
 });

@@ -34,15 +34,15 @@
             var settings = {
                 viewportHeight            : '100%',         // percent / px / auto
                 viewportWidth             : '100%',         // percent / px / auto
-                contentSizeVertical       : 'auto',         // percent / px / auto
-                contentSizeHorizontal     : '100%',         // percent / px / auto
+                contentHeight             : 'auto',         // percent / px / auto
+                contentWidth              : '100%',         // percent / px / auto
                 shortenWhenSmallerWidth   : false,
                 shortenWhenSmallerHeight  : false,
                 autoUpdateInterval        : 0,              // in ms
                 scrollHorizontal          : 'auto',         // auto / hidden / scroll
                 scrollVertical            : 'auto',         // auto / hidden / scroll
-                scrollHorizontalSize      : 17,
-                scrollVerticalSize        : 17,
+                scrollHorizontalHeight    : 15,
+                scrollVerticalWidth       : 15,
                 scrollStep                : 20
             };
             
@@ -66,7 +66,6 @@
             var scrollNeededY;
             var scrollNeededXPrevious = null;         // for scrollBar widget resize
             var scrollNeededYPrevious = null;         // for scrollBar widget resize
-            var autoUpdateInternalId = null;
             
             function setPositionX(newPosition)
             {
@@ -133,7 +132,7 @@
                 
                 if (scrollNeededX) {
                     $this.addClass('osa-horizontal-scrollbar-active');
-                    $sY.css('padding-bottom', settings.scrollHorizontalSize+'px');
+                    $sY.css('padding-bottom', settings.scrollHorizontalHeight+'px');
                     if ($sY && scrollNeededYPrevious!==scrollNeededY) {
                         $sY.OkiScrollBar('api').resize();
                     }
@@ -146,7 +145,7 @@
                 }
                 if (scrollNeededY) {
                     $this.addClass('osa-vertical-scrollbar-active');
-                    $sX.css('padding-right', settings.scrollVerticalSize+'px');
+                    $sX.css('padding-right', settings.scrollVerticalWidth+'px');
                     if ($sX && scrollNeededXPrevious!==scrollNeededX) {
                         $sX.OkiScrollBar('api').resize();
                     }
@@ -320,13 +319,20 @@
             }
 
             function init()
-            {
+            {   
                 $this.addClass('oki-scroll-area-base');
                 
+                $this.wrapInner('<div class="osa-padd"></div>');
+                $this.find('> div.osa-padd').wrap('<div class="osa-cont"></div>');
+                $content = $this.find('> div.osa-cont');
+                $content.width(settings.contentWidth);
+                $content.height(settings.contentHeight);
+                
+                                
                 if (settings.scrollHorizontal=="auto" || settings.scrollHorizontal=="scroll") {
                     $this.append('<div class="osa-scrollbar-horizontal"></div>');
                     $sX = $this.find('div.osa-scrollbar-horizontal');
-                    $sX.height(settings.scrollHorizontalSize+'px');
+                    $sX.height(settings.scrollHorizontalHeight+'px');
                     $sX.OkiScrollBar({
                         orientation   : 'horizontal',
                         onChange      : function(position) {
@@ -337,7 +343,7 @@
                 if (settings.scrollVertical=="auto" || settings.scrollVertical=="scroll") {
                     $this.append('<div class="osa-scrollbar-vertical"></div>');
                     $sY = $this.find('div.osa-scrollbar-vertical');
-                    $sY.width(settings.scrollVerticalSize+'px');
+                    $sY.width(settings.scrollVerticalWidth+'px');
                     $sY.OkiScrollBar({
                         onChange      : function(position) {
                                             setPositionY(position);
@@ -347,11 +353,7 @@
                 
                 $this.width(settings.viewportWidth);
                 $this.height(settings.viewportHeight);
-                
-                $content = $this.find('div.osa-cont');
-                $content.width(settings.contentSizeHorizontal);
-                $content.height(settings.contentSizeVertical);
-                
+                                
                 contentPositionX = 0.0;
                 contentPositionY = 0.0;
                 contentOffsetX = 0;
@@ -360,9 +362,8 @@
                 resize();
                 setupEvents();
                 
-                
                 if (settings.autoUpdateInterval>0) {
-                    autoUpdateInternalId = setInterval(resize, settings.autoUpdateInterval);
+                    setInterval(resize, settings.autoUpdateInterval);
                 }
             }
 
