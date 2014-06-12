@@ -1,3 +1,5 @@
+// TODO: build plugin from code below
+
 (function ($) {
     $.fn.OkiParalax = function(par) {
         

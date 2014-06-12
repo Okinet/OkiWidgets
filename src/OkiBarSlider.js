@@ -73,7 +73,7 @@
                 }
                 
                 $bar = $('<div></div>');
-                $this.append($bar);
+                $this.prepend($bar);
                 $this.find('> .'+settings.slideCssClass).each(function() {
                     $bar.append($(this));
                 });

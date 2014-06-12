@@ -43,7 +43,7 @@
                        '                <span>' +
                        '                    <span class="inp-ph"></span>' +
                        '                    <span class="inp-ph-mask">&nbsp;</span>' +
-                       //'                    <input type="text" spellcheck="false" value="" />' +
+                       '                    <input type="text" spellcheck="false" value="" />' +
                        '                </span>' +
                        '            </span>' +
                        '        </span>' +
