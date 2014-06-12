@@ -1,156 +1,278 @@
 <div class="text-formated">
     <p>
-        With OkiBarSlider you can build horizontal slider with any html that you want.
-        You use ul/li structure or divs with complex content from editor like TinyMCE.
+        With OkiBarSlider you can build slider with any html that you want.
+        You can use ul/li structure or divs with complex content from editor 
+        like TinyMCE - all is up to you!
     </p>
 </div>
 
-
 <!-- ----------------------------------------------------------------------- -->
-
 
 <h3>Basic usage</h3>
 
 <div class="text-formated">
-    <p>
-        If you have html structure as below:
-    </p>
-    <div class="code code-html code-copy" from=".demo-bar-slider-01">
+    <div class="code code-html code-copy" from=".slider-demo-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".slider-demo-01-js">
     </div>
     <p>
-        You can run widget by using:
-    </p>
-    <div class="code code-js code-copy" from=".demo-bar-slider-01-js">
-    </div>
-    <p>
-        Here is the result:
+        Note that OkiBarSlider is cloning slides at initialization for
+        continous effect. You can change this behaviour by <b>cloneAtFrontAndEnd</b>
+        settings field (if you see 'holes' just increase value).
     </p>
 </div>
 
-<script class="demo-bar-slider-01-js">
-    $(window).load(function() {
-        $('.demo-bar-slider-01').OkiBarSlider({
-            barObjSelector    : '> div.bar',
-            slideObjSelector  : '> div.bar > img.slide',
-            
-            prevObjSelector   : '> a.prev',                // or null
-            nextObjSelector   : '> a.next',                // or null
-            
-            naviObjSelector   : '> div.navi'               // or null
-        });
+<script class="slider-demo-01-js">
+$(document).ready(function() {
+    $('.basic-slider-01').OkiBarSlider({
+        prevObj           : $('.basic-slider-01-bottom > .prev'),   // or null
+        nextObj           : $('.basic-slider-01-bottom > .next'),   // or null
+        naviObj           : $('.basic-slider-01-bottom > .navi')    // or null
     });
+});
 </script>
 
 <div class="section">
+<div class="slider-demo-01-html">
+<style>
+    .basic-slider-01 { height: 140px; outline: 3px dashed #c45d00; }
+    .basic-slider-01 .slide { outline: 1px solid lightcoral; }
+    .basic-slider-01-bottom { height: 16px; padding: 10px; }
+    .basic-slider-01-bottom a { display: block; margin-right: 2px; background-color: lightsalmon; height: 16px; float: left; }
+    .basic-slider-01-bottom > a { padding: 0 10px; }
+    .basic-slider-01-bottom .navi { height: 16px; float: left; }
+    .basic-slider-01-bottom .navi a { width: 16px; background-color: gray; }
+    .basic-slider-01-bottom .navi a.active { background-color: lightgray; }
+</style>
 
-<div class="demo-bar-slider-01">
-    <div class="bar">
-        <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
-        <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
-    </div>
-    <a href="javascript:void(0)" class="prev">prev button</a>
-    <a href="javascript:void(0)" class="next">next button</a>
+<div class="basic-slider-01">
+    <div class="slide">Slide #01</div>
+    <div class="slide">Slide #02 - little longer</div>
+    <div class="slide">Slide #03 - very long text</div>
+    <div class="slide">Slide #04<br/>Lorem ipsum dolor...</div>
+</div>
+
+<div class="basic-slider-01-bottom">
+    <a href="javascript:void(0)" class="prev">&lt;&lt;</a>
+    <a href="javascript:void(0)" class="next">&gt;&gt;</a>
     <div class="navi"></div>
 </div>
-    
+
+</div>
 </div>
 
 
 <!-- ----------------------------------------------------------------------- -->
 
-
-<h3>Container resize</h3>
+<h3>Custom navigation</h3>
 
 <div class="text-formated">
     <p>
-        When your container has not fixes dimensions you can run resize() method from API. This recalculates position
-        of current slide. Below simple example (outline indicates container size):
+        You should use custom navigation when you already have buttons
+        for each slide. By default OkiBarSlider creates links automatically.
+        
     </p>
+    <div class="code code-html code-copy" from=".slider-demo-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".slider-demo-02-js">
+    </div>
 </div>
 
-<label>Width:</label> <input type="text" id="demo-bar-slider-02-width" value="100%" /><br/>
-<label>Height:</label> <input type="text" id="demo-bar-slider-02-height" value="120px" /><br/>
-<label>&nbsp;</label> <button onClick="demoOkiBarSlider02ContainerResize();">Resize container</button><br/>
-<label>&nbsp;</label> <button onClick="demoOkiBarSlider02ApiResize();">Call resize() in widget's API</button><br/>
-
-<script class="demo-bar-slider-02-js">
-    function demoOkiBarSlider02ContainerResize()
-    {
-        $('.demo-bar-slider-02').width($('#demo-bar-slider-02-width').val());
-        $('.demo-bar-slider-02').height($('#demo-bar-slider-02-height').val());
-    }
-    
-    function demoOkiBarSlider02ApiResize()
-    {
-        $('.demo-bar-slider-02').OkiBarSlider('api').resize();
-    }
-    
-    $(window).load(function() {
-        $('.demo-bar-slider-02').OkiBarSlider({
-            barObjSelector    : '> div.bar',
-            slideObjSelector  : '> div.bar > img.slide'
-        });
+<script class="slider-demo-02-js">
+$(document).ready(function() {
+    $('.custom-navi-slider-01').OkiBarSlider({
+        naviObj           : $('.custom-navi-slider-01-navi'),
+        naviLinkAlreadyTag: 'div',                           // add this field to dissable auto creating links and use button that already exists
+        cloneAtFrontAndEnd: 1                                // in this example we need only one cloned slides
     });
+});
 </script>
 
 <div class="section">
-    
-    <div class="demo-bar-slider-02">
-        <div class="bar">
-            <img src="src/images/cool-photo-01.jpg" alt="" class="slide" />
-            <img src="src/images/cool-photo-02.jpg" alt="" class="slide" />
-            <img src="src/images/cool-photo-03.jpg" alt="" class="slide" />
-            <img src="src/images/cool-photo-04.jpg" alt="" class="slide" />
-            <img src="src/images/cool-photo-05.jpg" alt="" class="slide" />
-        </div>
-    </div>
-    
+<div class="slider-demo-02-html">
+<style>
+    .custom-navi-slider-01 { width: 200px; height: 140px; outline: 3px dashed #c45d00; }
+    .custom-navi-slider-01 .slide { width: 200px !important; }
+    .custom-navi-slider-01-navi { padding: 10px 0; }
+    .custom-navi-slider-01-navi div { padding: 4px; margin-bottom: 4px; cursor: pointer; }
+    .custom-navi-slider-01-navi div.active { outline: 1px solid black; }
+</style>
+
+<div class="custom-navi-slider-01">
+    <div class="slide" style="background-color: lightsalmon;">Slide #01</div>
+    <div class="slide" style="background-color: lightskyblue;">Slide #02 - little longer</div>
+    <div class="slide" style="background-color: lightseagreen;">Slide #03 - very long text</div>
 </div>
 
-
-<div class="text-formated">
-    <p>
-        Code frm above example:
-    </p>
-    <div class="code code-js code-copy" from=".demo-bar-slider-02-js">
-        
-    </div>
+<div class="custom-navi-slider-01-navi">
+    <div style="background-color: lightsalmon;">button for first slide</div>
+    <div style="background-color: lightskyblue;">button for second slide</div>
+    <div style="background-color: lightseagreen;">button for third slide</div>
 </div>
 
+</div>
+</div>
 
 <!-- ----------------------------------------------------------------------- -->
 
+<h3>FadeIn and FadeOut version</h3>
+
+<div class="text-formated">
+    <p>
+        OkiBarSlider can work also as fade slider. If you set fadeInsteadSlide
+        setting field to true the cloneAtFrontAndEnd field will be internally
+        setted to 0.
+    </p>
+    <div class="code code-html code-copy" from=".slider-demo-02a-html">
+    </div>
+    <div class="code code-js code-copy" from=".slider-demo-02a-js">
+    </div>
+</div>
+
+<script class="slider-demo-02a-js">
+$(document).ready(function() {
+    $('.fade-slider-01').OkiBarSlider({
+        fadeInsteadSlide  : true,
+        transitionDuration: 1200
+    });
+});
+</script>
+
+<div class="section">
+<div class="slider-demo-02a-html">
+<style>
+    .fade-slider-01 { width: 200px; height: 140px; outline: 3px dashed #c45d00; }
+    .fade-slider-01 .obs-bar { left: 0px !important; }
+    .fade-slider-01 .slide { width: 200px !important; position: absolute; }
+</style>
+
+<div class="fade-slider-01">
+    <div class="slide" style="background-color: lightsalmon;">Slide #01</div>
+    <div class="slide" style="background-color: lightskyblue;">Slide #02 - little longer</div>
+    <div class="slide" style="background-color: lightseagreen;">Slide #03 - very long text</div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>API methods</h3>
+
+<div class="text-formated">
+    <p>
+        You can access couple of api methods. Below examples:
+    </p>
+    <div class="code code-html code-copy" from=".slider-demo-03-html">
+    </div>
+    <div class="code code-js code-copy" from=".slider-demo-03-js">
+    </div>
+</div>
+
+<script class="slider-demo-03-js">
+var apiSlider01_Api = null;
+
+function apiSlider01Resize(w, h)
+{
+    $('.api-slider-01').width(w);
+    $('.api-slider-01').height(h);
+    apiSlider01_Api.resize();
+}
+
+$(window).load(function() {
+    $('.api-slider-01').OkiBarSlider();
+    apiSlider01_Api = $('.api-slider-01').OkiBarSlider('api');
+});
+</script>
+
+<div class="section">
+<div class="slider-demo-03-html">
+<style>
+    .api-slider-01 { height: 140px; outline: 3px dashed #c45d00; margin-bottom: 30px; }
+    .api-slider-01 .slide { margin-right: 5px; }
+    
+    .barslider-row { padding: 10px 0 10px 0; border-bottom: 1px dashed #ddd; }
+    .barslider-row .col1 { float: left; width: 33%; }
+    .barslider-row .col2 { float: right; width: 66%; }
+    .clear { clear: both; width: 0px; height: 0px; overflow: hidden; }
+</style>
+
+<div class="api-slider-01">
+    <img src="../src/images/cool-photo-01.jpg" class="slide" />
+    <img src="../src/images/cool-photo-02.jpg" class="slide" />
+    <img src="../src/images/cool-photo-03.jpg" class="slide" />
+    <img src="../src/images/cool-photo-04.jpg" class="slide" />
+    <img src="../src/images/cool-photo-05.jpg" class="slide" />
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.moveTo</div>
+    <div class="col2">
+        <input type="input" value="2" /><button onClick="apiSlider01_Api.moveTo($(this).parent().find('input').val());">Move to some slide</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.resize</div>
+    <div class="col2">
+        Width: <input type="input" value="800" />, height <input type="input" value="70" /><button onClick="apiSlider01Resize($(this).parent().find('input:nth-child(1)').val(), $(this).parent().find('input:nth-child(2)').val())">Resize</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.start</div>
+    <div class="col2">
+        <button onClick="apiSlider01_Api.start()">Start</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.stop</div>
+    <div class="col2">
+        <button onClick="apiSlider01_Api.stop()">Stop</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+<div class="scrollarea-row">
+    <div class="col1">api.resetTimout</div>
+    <div class="col2">
+        <button onClick="apiSlider01_Api.resetTimout()">Reset Timout</button>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
 
 <h3>Settings reference</h3>
 
 <div class="text-formated">
     <p>
-        Below list of all possible configuration options of the widget. Values are
-        default is not specified.
+        Below list of all possible configuration options of the widget.
     </p>
-    <div class="code code-js code-copy" from=".demo-bar-slider-03-js">
-        
-    </div>
+    <div class="code code-js code-copy" from=".slider-demo-04-js"></div>
 </div>
 
-<script class="demo-bar-slider-03-js">
-    $('.my-class-selector').OkiBarSlider({
-        barObjSelector    : '> div.bar',                  // selector to bar - bar is big horizontal container for slides
-        slideObjSelector  : '> div.bar > div.slide',      // selector to slides
-        prevObjSelector   : null,                         // null or selector to prev button
-        nextObjSelector   : null,                         // null or selector to next button
-        naviObjSelector   : null,                         // null or selector to navigation container
-        step              : 1,                            // how much slides do next/prev move
-        naviLinkCssClass  : '',                           // you can put here class of autogenerated navi links (links will be 
-                                                          //     created in naviObjSelector)
-        naviLinkAlreadyTag: null,                         // in you already have links in naviObjSelector please put html tag 
-                                                          //     here for example: 'a.slide-thumb'
-        autoChangeTimeout : 4000,                         // time between auto move
-        transitionDuration: 250,                          // animation duration
-        cloneAtFrontAndEnd: 2                             // plugin generates circular bar with slides, if you have 2 slides 
-                                                          //     and very long bar put higher value here
+<script class="slider-demo-04-js">
+    $('.my-slider-selector').OkiBarSlider({
+        slideCssClass     : 'slide',      // css class (without dot) for selecting slides
+        prevObj           : null,         // jQuery object of prev button
+        nextObj           : null,         // jQuery object of next button
+        naviObj           : null,         // jQuery object of navi container
+        step              : 1,            // how much slides move at each slide event
+        naviLinkAlreadyTag: null,         // if you already have links in navi container put tag name here like: 'div.custom-button'
+        autoChangeTimeout : 4000,         // time between slide events
+        transitionDuration: 250,          // animation duration
+        blockOnMouseOver  : true,         // flag that controlls blocking of slide events while mouse is over the slider
+        cloneAtFrontAndEnd: 2,            // how many times slides will be cloned to avoid holes
+        onChange          : null          // callback after slide change
     });
 </script>
+
+</div>

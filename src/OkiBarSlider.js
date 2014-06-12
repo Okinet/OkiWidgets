@@ -44,17 +44,18 @@
                 cssNaviLink       : 'obs-navi-link'
             };
             var settings = {
-                barObjSelector    : '> div.bar',
-                slideObjSelector  : '> div.bar > div.slide',
-                prevObjSelector   : null,
-                nextObjSelector   : null,
-                naviObjSelector   : null,
+                slideCssClass     : 'slide',
+                prevObj           : null,
+                nextObj           : null,
+                naviObj           : null,
                 step              : 1,
-                naviLinkCssClass  : '',
                 naviLinkAlreadyTag: null,
                 autoChangeTimeout : 4000,
                 transitionDuration: 250,
-                cloneAtFrontAndEnd: 2
+                blockOnMouseOver  : true,
+                cloneAtFrontAndEnd: 2,
+                fadeInsteadSlide  : false,
+                onChange          : null
             };
             var timerId = null;
             var slidesSize = null;
@@ -63,24 +64,27 @@
             var isAnimating = false;
             var stopped = false;
             var firstRun = true;
+            var mouseInside = false;
             
             function init()
             {
-                $bar = $this.find(settings.barObjSelector);
-                $slides = $this.find(settings.slideObjSelector);
-                $navi = ($this.find(settings.naviObjSelector).size()!=1) ? null : $this.find(settings.naviObjSelector);
+                if (settings.fadeInsteadSlide) {
+                    settings.cloneAtFrontAndEnd = 0;
+                }
                 
-                if (settings.prevObjSelector) {
-                    $buttonPrev = $this.find(settings.prevObjSelector);
-                }
-                if (settings.nextObjSelector) {
-                    $buttonNext = $this.find(settings.nextObjSelector);
-                }
-                $this.addClass(baseCss.cssBase);
-                $bar.addClass(baseCss.cssBar);
+                $bar = $('<div></div>');
+                $this.append($bar);
+                $this.find('> .'+settings.slideCssClass).each(function() {
+                    $bar.append($(this));
+                });
+                $slides = $bar.find('> *');
                 $slides.addClass(baseCss.cssSlide);
-                
                 slidesSize = $slides.size();
+                                
+                $bar.addClass(baseCss.cssBar);
+                $this.addClass(baseCss.cssBase);
+                $slides.addClass(baseCss.cssSlide);
+
                 $slideZeroWidthBegin = $('<span class="'+baseCss.cssSlideZeroWidth+'">&nbsp;</span>');
                 $slideZeroWidthEnd = $('<span class="'+baseCss.cssSlideZeroWidth+'">&nbsp;</span>');
                 $slides.first().before($slideZeroWidthBegin);
@@ -90,11 +94,27 @@
                     cloneAtFrontAndEnd();
                 }
                 
+                findObjects();
                 buildNaviLinks();
                 setupEvents();
                 resetTimeout();
                 
                 moveTo(pos);
+            }
+            
+            function findObjects()
+            {
+                if (settings.naviObj && settings.naviObj.size()==1) {
+                    $navi = settings.naviObj;
+                }
+                
+                if (settings.prevObj && settings.prevObj.size()==1) {
+                    $buttonPrev = settings.prevObj;
+                }
+                
+                if (settings.nextObj && settings.nextObj.size()==1) {
+                    $buttonNext = settings.nextObj;
+                }
             }
             
             function resize()
@@ -110,17 +130,21 @@
                 if ($navi) {
                     if (settings.naviLinkAlreadyTag) {
                         for (i=0; i<slidesSize; i++) {
-                            $navi.find("> "+settings.naviLinkAlreadyTag+":nth-child("+(i+1)+")").attr("pos", i);
+                            $navi.find("> "+settings.naviLinkAlreadyTag+":nth-child("+(i+1)+")").attr("pos", i).addClass(baseCss.cssNaviLink);
                         }
+                        $navi.find('> .'+baseCss.cssNaviLink).click(function() {
+                            moveTo(parseInt($(this).attr('pos')));
+                        });
                     } else {
                         for (i=0; i<slidesSize; i++) {
-                            $navi.append('<a href="javascript:void(0)" class="'+settings.naviLinkCssClass+'" pos="'+i+'">&nbsp;</a>');
+                            $navi.append('<a href="javascript:void(0)" pos="'+i+'">&nbsp;</a>').addClass(baseCss.cssNaviLink);
                         }
+                        $navi.find('> a').click(function() {
+                            moveTo(parseInt($(this).attr('pos')));
+                        });
                     }
                     
-                    $navi.find('> a').click(function() {
-                        moveTo(parseInt($(this).attr('pos')));
-                    });
+                    $navi.addClass(baseCss.cssNavi);
                 }
             }
             
@@ -191,6 +215,14 @@
                         moveTo(newPos);
                     });
                 }
+                
+                $this.mouseover(function() {
+                    mouseInside = true;
+                });
+                
+                $this.mouseleave(function() {
+                    mouseInside = false;
+                });
             }
             
             function timeout()
@@ -199,6 +231,11 @@
                 
                 if (stopped)
                     return;
+                
+                if (settings.blockOnMouseOver && mouseInside) {
+                    resetTimeout();
+                    return;
+                }
                 
                 newPos = getNextPos(pos);
                 direction = 1;
@@ -215,16 +252,22 @@
                 }
             }
             
-            function moveTo(newPos)
+            function moveToFade(newPos)
+            {
+                var oldPos = pos;
+                
+                moveToSlide(newPos);        // use old 'slide' code
+                // TODO: implement it better way :) 
+                
+                $slides.eq(oldPos).fadeOut(settings.transitionDuration);
+                $slides.eq(newPos).fadeIn(settings.transitionDuration);
+            }
+            
+            function moveToSlide(newPos)
             {
                 var slidesWidth;
                 var currentSlideLeft;
                 var position;
-                
-                if (slidesSize==0)
-                    return;
-                
-                resetTimeout();
                 
                 if (!firstRun) {
                     if (isAnimating)
@@ -256,6 +299,24 @@
                 
                 firstRun = false;
                 
+                if (typeof settings.onChange === 'function') {
+                    settings.onChange(newPos);
+                }
+            }
+            
+            function moveTo(newPos)
+            {                
+                if (slidesSize==0)
+                    return;
+                
+                resetTimeout();
+
+                if (settings.fadeInsteadSlide) {
+                    moveToFade(newPos);
+                } else {
+                    moveToSlide(newPos);
+                }
+                
                 resetTimeout();
                 
                 // update dots
@@ -266,8 +327,8 @@
                         $navi.show();
                         
                         if (settings.naviLinkAlreadyTag) {
-                            $navi.find('> '+settings.dotsAlreadyTag).removeClass('active');
-                            $navi.find('> '+settings.dotsAlreadyTag+'[pos='+pos+']').addClass('active');                            
+                            $navi.find('> '+settings.naviLinkAlreadyTag).removeClass('active');
+                            $navi.find('> '+settings.naviLinkAlreadyTag+'[pos='+pos+']').addClass('active');
                         } else {
                             $navi.find('> a').removeClass('active');
                             $navi.find('> a[pos='+pos+']').addClass('active');

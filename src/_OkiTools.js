@@ -107,12 +107,10 @@ function OkiLoader()
 }
 
 
-function OkiTool()
-{ 
-    var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+var okiTool = { 
+    _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     
-    
-    this.cleanWebUrl = function(url)
+    cleanWebUrl: function(url)
     {
         if (!url)
             return '';
@@ -142,9 +140,9 @@ function OkiTool()
         }
         
         return s;
-    }
+    },
     
-    this.urlencode = function(str)
+    urlencode: function(str)
     {
         str = (str + '').toString();
 
@@ -152,19 +150,19 @@ function OkiTool()
         // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
         return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
                                        replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
-    }
+    },
     
-    this.urldecode = function(str)
+    urldecode: function(str)
     {
         return decodeURIComponent((str + '').replace(/\+/g, '%20'));
-    }
+    },
     
-    this.deg2rad = function(angle) 
+    deg2rad: function(angle) 
     {
         return angle * 0.017453292519943295;
-    }
+    },
     
-    this.distanceHaversine = function(lon1, lat1, lon2, lat2)
+    distanceHaversine: function(lon1, lat1, lon2, lat2)
     {
         var dLat = this.deg2rad(lat2-lat1);
         var dLon = this.deg2rad(lon2-lon1);
@@ -175,16 +173,16 @@ function OkiTool()
         var dist = 2.0 * 6371.0 * Math.atan2(sqrt(a), Math.sqrt(1.0-a));
         
         return Math.round(dist * 1000.0) / 1000.0;
-    }
+    },
     
-    this.distanceSphericalLawOfCosines = function(lon1, lat1, lon2, lat2)
+    distanceSphericalLawOfCosines: function(lon1, lat1, lon2, lat2)
     {
         var dist = Math.acos(Math.sin(this.deg2rad(lat1))*Math.sin(this.deg2rad(lat2)) + Math.cos(this.deg2rad(lat1))*Math.cos(this.deg2rad(lat2)) * Math.cos(this.deg2rad(lon2-lon1))) * 6371.0;
         
         return Math.round(dist * 1000.0) / 1000.0;
-    }
+    },
     
-    this.getLonLatAtGivenDistanceFromCenter = function(centerLon, centerLat, pointLon, pointLat, newDistance)
+    getLonLatAtGivenDistanceFromCenter: function(centerLon, centerLat, pointLon, pointLat, newDistance)
     {
         var dist = this.distanceSphericalLawOfCosines(centerLon, centerLat, pointLon, pointLat);
         var factor = newDistance / dist;
@@ -194,9 +192,9 @@ function OkiTool()
         return { lon: centerLon + lonDiff * factor,
                  lat: centerLat + latDiff * factor
                };
-    }
+    },
 
-    this.base64_encode = function(input) 
+    base64_encode: function(input) 
     {
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
@@ -222,16 +220,15 @@ function OkiTool()
             }
 
             output = output +
-            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
-            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
 
         }
 
         return output;
-    }
+    },
 
-
-    this.base64_decode = function(input) 
+    base64_decode: function(input) 
     {
         var output = "";
         var chr1, chr2, chr3;
@@ -242,10 +239,10 @@ function OkiTool()
 
         while (i < input.length) {
 
-            enc1 = _keyStr.indexOf(input.charAt(i++));
-            enc2 = _keyStr.indexOf(input.charAt(i++));
-            enc3 = _keyStr.indexOf(input.charAt(i++));
-            enc4 = _keyStr.indexOf(input.charAt(i++));
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
 
             chr1 = (enc1 << 2) | (enc2 >> 4);
             chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
@@ -265,10 +262,9 @@ function OkiTool()
         output = this._utf8_decode(output);
 
         return output;
+    },
 
-    }
-
-    this._utf8_encode = function(string) 
+    _utf8_encode: function(string) 
     {
         string = string.replace(/\r\n/g,"\n");
         var utftext = "";
@@ -293,9 +289,9 @@ function OkiTool()
         }
 
         return utftext;
-    }
+    },
 
-    this._utf8_decode = function(utftext) 
+    _utf8_decode: function(utftext) 
     {
         var string = "";
         var i = 0;
@@ -324,9 +320,9 @@ function OkiTool()
         }
 
         return string;
-    }
+    },
     
-    this.cookieCreate = function(name, value, min)
+    cookieCreate: function(name, value, min)
     {
         var expires;
     
@@ -338,9 +334,9 @@ function OkiTool()
             expires = "";
     
         document.cookie = name+"="+value+expires+"; path=/";
-    }
+    },
 
-    this.cookieRead = function(name)
+    cookieRead: function(name)
     {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -352,32 +348,89 @@ function OkiTool()
                 return c.substring(nameEQ.length, c.length);
         }
         return null;
-    }
+    },
 
-    this.cookieErase = function(name) 
+    cookieErase: function(name) 
     {
         this.cookieCreate(name, "", -1);
-    }
+    },
 
-    this.getRandomInt = function(min, max)
+    getRandomInt: function(min, max)
     {
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    },
 
-    this.getRandomFloat = function(min, max)
+    getRandomFloat: function(min, max)
     {
         return min + (max-min)*Math.random();
-    }
+    },
     
-    this.generateChars = function(len, what)
+    generateChars: function(len, what)
     {
         var ret = "";
         for (var i=0; i<len; i++)
             ret = ret + what;
         return ret;
-    }
+    },
     
-    this.inArray = function(needle, haystack, argStrict) 
+    htmlspecialchars: function(string, quote_style, charset, double_encode)
+    {
+        var optTemp = 0,
+        i = 0,
+        noquotes = false;
+        if (typeof quote_style === 'undefined' || quote_style === null) {
+            quote_style = 2;
+        }
+        string = string.toString();
+        if (double_encode !== false) {
+            // Put this first to avoid double-encoding
+            string = string.replace(/&/g, '&amp;');
+        }
+        string = string.replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+        var OPTS = {
+            'ENT_NOQUOTES': 0,
+            'ENT_HTML_QUOTE_SINGLE': 1,
+            'ENT_HTML_QUOTE_DOUBLE': 2,
+            'ENT_COMPAT': 2,
+            'ENT_QUOTES': 3,
+            'ENT_IGNORE': 4
+        };
+        if (quote_style === 0) {
+            noquotes = true;
+        }
+        if (typeof quote_style !== 'number') {
+            // Allow for a single string or an array of string flags
+            quote_style = [].concat(quote_style);
+            for (i = 0; i < quote_style.length; i++) {
+                // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
+                if (OPTS[quote_style[i]] === 0) {
+                    noquotes = true;
+                } else if (OPTS[quote_style[i]]) {
+                    optTemp = optTemp | OPTS[quote_style[i]];
+                }
+            }
+            quote_style = optTemp;
+        }
+        if (quote_style & OPTS.ENT_HTML_QUOTE_SINGLE) {
+            string = string.replace(/'/g, '&#039;');
+        }
+        if (!noquotes) {
+            string = string.replace(/"/g, '&quot;');
+        }
+
+        return string;
+    },
+    
+
+    animateToIn: function($selector, ms)
+    {
+        if ($selector.size()==1)
+            $('html, body').animate({scrollTop: $selector.offset().top}, ms);
+    },
+    
+    inArray: function(needle, haystack, argStrict) 
     {
         var key = '',
         strict = !! argStrict;
@@ -397,15 +450,15 @@ function OkiTool()
         }
 
         return false;
-    }
+    },
     
-    this.strpos = function(haystack, needle, offset) 
+    strpos: function(haystack, needle, offset) 
     {
         var i = (haystack + '').indexOf(needle, (offset || 0));
         return i === -1 ? false : i;
-    }
+    },
     
-    this.explode = function(delimiter, string, limit) 
+    explode: function(delimiter, string, limit) 
     {
         if ( arguments.length < 2 || typeof delimiter == 'undefined' || typeof string == 'undefined' ) return null;
         if ( delimiter === '' || delimiter === false || delimiter === null) return false;
@@ -438,9 +491,9 @@ function OkiTool()
   
         s.splice( s.length + limit );
         return s;
-    }
+    },
     
-    this.numberFormat = function(number, decimals, dec_point, thousands_sep) 
+    numberFormat: function(number, decimals, dec_point, thousands_sep) 
     {
         number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
         var n = !isFinite(+number) ? 0 : +number,
@@ -462,9 +515,9 @@ function OkiTool()
             s[1] += new Array(prec - s[1].length + 1).join('0');
         }
         return s.join(dec);
-    } 
+    },
     
-    this.str_replace = function(search, replace, subject, count)
+    str_replace: function(search, replace, subject, count)
     {
         var i = 0,
         j = 0,
@@ -496,17 +549,9 @@ function OkiTool()
             }
         }
         return sa ? s : s[0];
-    }
-    
-    this.getRandomInt = function(min, max)
-    {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }   
+    },
     
 }
 
 
-
-
-var okiTool = new OkiTool();
 var okiLoader = new OkiLoader();
