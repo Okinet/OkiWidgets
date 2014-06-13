@@ -1,0 +1,62 @@
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <p>
+        OkiButton isn't a jQuery plugin. It's only HTML structure that you can
+        paste on you website. This structure must have <b>"oki-button-base"</b>
+        class to proper work. Structure by default has icon tag. You can
+        delete it but it's better if you keep unified structure in all your buttons.
+    </p>
+    <div class="code code-html code-copy" from=".demo-button-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-button-01-js">
+    </div>
+</div>
+
+<script class="demo-button-01-js">
+    /* no JavaScript needed */
+</script>
+
+<div class="section">
+<div class="demo-button-01-html">
+<style>
+    .buttons-demo-container { height: 100px; }
+    .buttons-demo-container a { margin-right: 10px; float: left; }
+    
+    /* --- */
+    
+    .my-yellow-button {  }
+    
+    /* --- */
+    
+    .my-rounded-button { border-radius: 21px; }
+    
+    /* --- */
+    
+    .my-smaller-button { height: 22px; background-color: orange; }
+    .my-smaller-button > span { padding: 0 10px 0 0; }
+    .my-smaller-button > span > span { padding: 0 0 0 10px; }
+    .my-smaller-button > span > span > span { color: white; font-size: 10px; line-height: 10px; padding: 5px 0 0 0; }
+    .my-smaller-button:hover, .my-smaller-button.active { background-color: #eecf4c; }
+    
+    /* --- */
+    
+    .my-default-icon-button > span { padding: 0 40px 0 0; }
+    .my-default-icon-button > .ob-icon { display: block; }
+    
+</style>
+
+<div class="buttons-demo-container">
+    
+    <a href="#" class="oki-button-base my-yellow-button"><span><span><span>Default button</span></span></span><i class="ob-icon">&nbsp;</i></a>
+    <a href="#" class="oki-button-base my-rounded-button"><span><span><span>Rounded button</span></span></span><i class="ob-icon">&nbsp;</i></a>
+    <a href="#" class="oki-button-base my-smaller-button"><span><span><span>Smaller button</span></span></span><i class="ob-icon">&nbsp;</i></a>
+    <a href="#" class="oki-button-base my-default-icon-button"><span><span><span>Default icon button</span></span></span><i class="ob-icon">&nbsp;</i></a>
+    
+</div>
+
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
