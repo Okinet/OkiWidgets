@@ -1,0 +1,107 @@
+<div class="text-formated">
+    <p>
+        If you need to customize browser's input you can use OkiInput. It wraps
+        real browser's input with html structure that you can easly style to
+        get proper result. OkiInput supports also place holder builded
+        on span witch is much more flexible than just placeHolder attribute.
+    </p>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-input-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-input-01-js">
+    </div>
+    <p>
+        After initialization OkiInput adds class found in <b>"data-css-class"</b> attribute.
+        Remember - real input is wrapped by some structure. Class from <b>"data-css-class"</b> will be added
+        to <b>root</b> of that structure <b>not</b> the real input. That's why we need to
+        put it in <b>"data-css-class"</b> instead of <b>"class"</b> attribute.
+    </p>
+</div>
+
+<script class="demo-input-01-js">
+$(document).ready(function() {
+    $('input[name=basic-input-01]').OkiInput();
+});
+</script>
+
+<div class="section">
+<div class="demo-input-01-html">
+<style>
+    .basic-input-01 { width: 250px; }
+</style>
+
+<input type="text" name="basic-input-01" data-css-class="basic-input-01" placeHolder="Fill this field..." />
+
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Styling examples</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-input-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-input-02-js">
+    </div>
+    <p>
+        
+    </p>
+</div>
+
+<script class="demo-input-02-js">
+$(document).ready(function() {
+    $('input[name=nice-input-01]').OkiInput();
+    $('input[name=nice-input-02]').OkiInput();
+    $('input[name=nice-input-03]').OkiInput();
+    $('input[name=nice-input-04]').OkiInput();
+});
+</script>
+
+<div class="section">
+<div class="demo-input-02-html">
+<style>
+    .nice-input-01 { width: 250px; border-radius: 16px; background-color: lightgray; }
+    .nice-input-01:hover { background-color: lightgray; }
+    .nice-input-01 input { color: #333 !important; }
+    
+    .nice-input-02 { width: 300px; -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 1); -moz-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 1); box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 1); }
+    .nice-input-02:hover { -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 1); -moz-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 1); box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 1); }
+    .nice-input-02.custom-icon .oi-icon { /* search icon is build in */ }
+    .nice-input-02 > span > span { padding-left: 32px; }
+    
+    .nice-input-03 { width: 200px; border-radius: 16px; background-color: lightgray; }
+    .nice-input-03:hover { background-color: lightgray; }
+    .nice-input-03 input { color: #333 !important; }
+    .nice-input-03.custom-icon .oi-icon { background-image: url('demo-site/images/icon-question.png') !important; left: 10px !important; }
+    .nice-input-03 > span > span { padding-left: 32px; }
+    .nice-input-03 .oi-place-holder { color: #c17717 !important; }
+    
+    .nice-input-04 { height: 64px; }
+    .nice-input-04 > span > span > span > span { top: 12px; height: 40px; }
+    .nice-input-04 > span > span > span > span > span, .nice-input-04 > span > span > span > span > input { line-height: 40px; font-size: 26px; font-weight: bold; }
+</style>
+
+<input type="text" name="nice-input-01" data-css-class="nice-input-01" placeHolder="How you feel today?" />
+<br/><br/>
+
+<input type="text" name="nice-input-02" data-css-class="nice-input-02" data-css-icon="search" placeHolder="Search..." />
+<br/><br/>
+
+<input type="text" name="nice-input-03" data-css-class="nice-input-03" data-css-icon="custom-icon" placeHolder="Search..." />
+<br/><br/>
+
+<input type="text" name="nice-input-04" data-css-class="nice-input-04" />
+<br/><br/>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->

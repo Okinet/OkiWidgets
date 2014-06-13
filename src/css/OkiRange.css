@@ -1,3 +1,25 @@
 /**
  *  OkiRange
  */
+ 
+.oki-range { position: relative; top: 0px; left: 0px; padding: 5px 0 0 0; }
+.oki-range .r-barbg { height: 13px; }
+.oki-range .r-barbg div { height: 13px; background: url('../images/oki-range-bg-right.png') no-repeat right top; padding: 0 4px 0 0; }
+.oki-range .r-barbg div div { height: 13px; background: url('../images/oki-range-bg-left.png') no-repeat left top; padding: 0 0 0 4px; }
+
+.oki-range .r-area-cont { padding: 0 6px; position: relative; height: 25px; }
+.oki-range .r-area-cont .r-a { height: 38px; position: relative; top: -13px; left: 0px; }
+
+.oki-range .r-area-cont .r-a .r-scale { position: relative; top: 32px; left: 0px; color: #adb9c8; font-family: "ArchivoBlack"; font-size: 9px; line-height: 9px; }
+.oki-range .r-area-cont .r-a .r-scale > div { position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; }
+.oki-range .r-area-cont .r-a .r-scale > div > span { float: left; position: relative; top: 0px; left: 0px; display: block; }
+.oki-range .r-area-cont .r-a .r-scale > div > span > span { position: relative; top: 0%; left: -50%; display: block; }
+.oki-range .r-area-cont .r-a .r-scale > div > span > span > span { text-shadow: 1px 1px 1px #111; opacity: 0.8; display: block; }
+.oki-range .r-area-cont .r-a .r-scale > div > span > span > span.disabled { color: black; }
+
+.oki-range .r-area-cont .r-a .r-handle-pos { position: absolute; width: 27px; height: 0px; left: 20px; top: -7px; }
+.oki-range .r-area-cont .r-a .r-handle-pos a.r-handle { display: block; width: 27px; height: 27px; background: url('../images/oki-range-handle.png') no-repeat left top; position: relative; top: 0%; left: -50%; }
+.oki-range .r-area-cont .r-a .r-handle-pos a.r-handle .r-tooltip-pos { width: 0px; height: 0px; position: absolute; bottom: 0%; left: 50%; display: none; /*opacity: 0.01;*/ }
+.oki-range .r-area-cont .r-a .r-handle-pos a.r-handle:hover .r-tooltip-pos { /*opacity: 1.0*/display: block; }
+.oki-range .r-area-cont .r-a .r-handle-pos a.r-handle:hover .r-tooltip-pos { /*transition: all 250ms ease;*/ }
+.oki-range .r-area-cont .r-a .r-range-bar { height: 5px; background: url('../images/oki-range-selected-bar.png') repeat-x left top; width: 0px; position: absolute; top: 4px; left: 4px; }

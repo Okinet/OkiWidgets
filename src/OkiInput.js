@@ -28,7 +28,8 @@
             var settings = {
                 usePlaceHolder    : true,
                 dissableSpellCheck: true,
-                cssClass          : 'oki-input'
+                cssClass          : null,
+                cssIcon           : null
             };
             
             function buildHtml()
@@ -41,23 +42,35 @@
                        '        <span>' +
                        '            <span>' +
                        '                <span>' +
-                       '                    <span class="inp-ph"></span>' +
-                       '                    <span class="inp-ph-mask">&nbsp;</span>' +
-                       '                    <input type="text" spellcheck="false" value="" />' +
+                       '                    <span class="oi-place-holder"></span>' +
+                       '                    <span class="oi-place-holder-mask">&nbsp;</span>' +
                        '                </span>' +
                        '            </span>' +
                        '        </span>' +
                        '    </span>' +
+                       '    <i class="oi-icon"></i>' +
                        '</span>';
                    
                 $html = $(html);
                 
-                if (settings.cssClass!="") {
-                    $html.attr('class', settings.cssClass);
-                }
+                if ($this.data('cssClass') && $this.data('cssClass')!="") {
+                    $html.addClass($this.data('cssClass'));
+                } else 
+                    if (settings.cssClass!="") {
+                        $html.addClass(settings.cssClass);
+                    }
+                
+                if ($this.data('cssIcon') && $this.data('cssIcon')!="") {
+                    $html.addClass($this.data('cssIcon'));
+                    $html.addClass('oi-icon-visible');
+                } else 
+                    if (settings.cssIcon && settings.cssIcon!="") {
+                        $html.addClass(settings.cssIcon);
+                        $html.addClass('oi-icon-visible');
+                    }
                 
                 $this.after($html);
-                $html.find('span.inp-ph-mask').after($this);
+                $html.find('span.oi-place-holder-mask').after($this);
 
                 if (settings.dissableSpellCheck) {
                     $this.attr('spellcheck', false);
@@ -68,7 +81,7 @@
                     $this.removeAttr('placeHolder');
                     if (placeHolder && placeHolder.toString().length>0)
                         placeHolder = placeHolder.toString();
-                        $html.find('span.inp-ph').html(placeHolder);
+                        $html.find('span.oi-place-holder').html(placeHolder);
                 }
             }
 
@@ -77,6 +90,7 @@
                 buildHtml();
                 sync();
                 connectEvents();
+                $html.addClass('oki-input-base');
             }
             
             function connectEvents()
@@ -87,15 +101,21 @@
                 $this.keyup(function() {
                     sync();
                 });
+                $html.mouseover(function() {
+                    $html.addClass('oi-hover');
+                });
+                $html.mouseleave(function() {
+                    $html.removeClass('oi-hover');
+                });
             }
             
             function sync()
             {
                 if (settings.usePlaceHolder) {
                     if ($this.val().toString().length>0) {
-                        $html.removeClass('place-holder');
+                        $html.removeClass('oi-has-place-holder');
                     } else {
-                        $html.addClass('place-holder');
+                        $html.addClass('oi-has-place-holder');
                     }
                 }
             }
