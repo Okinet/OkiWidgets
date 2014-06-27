@@ -319,7 +319,7 @@
                 
                 resetTimeout();
                 
-                // update dots
+                // update dots and slides classes
                 if ($navi!==null) {
                     if (slidesSize<=1) {
                         $navi.hide();
@@ -332,7 +332,10 @@
                         } else {
                             $navi.find('> a').removeClass('active');
                             $navi.find('> a[pos='+pos+']').addClass('active');
-                        }   
+                        }
+                        
+                        $slides.removeClass('active');
+                        $slides.eq(pos).addClass('active');
                     }
                 }
             }

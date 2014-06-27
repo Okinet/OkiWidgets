@@ -1,236 +1,100 @@
-<script>
-    $(document).ready(function() {
-        /*
-        $('select').each(function() {
-            $(this).OkiSelect({
-                cloudWidth            : '350',
-                multipleNoneText      : 'Please select something',
-                multipleSelectedText  : '{items} filters selected'
-            });
-        });
-        */
-    });
+<div class="text-formated">
+    <p>
+        With OkiCheckbox you can customize browser's checkbox widget. OkiCheckbox by
+        default looks <b>after</b> real checkbox for two tags: A and SPAN<br/>
+        - A tag is custom checkbox icon<br/>
+        - SPAN tag is custom checkbox label<br/>
+        <br/>
+        <b>NOTE:</b> All classe names and css code can be changed! All is up to you!
+    </p>
+</div>
+
+<h3>Basic usage</h3>
+
+<div class="text-formated">
+    <div class="code code-html code-copy" from=".demo-select-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-select-01-js">
+    </div>
+    <p>
+        In this example checkboxes was wrapped by <b>div.basic-checkbox-row</b> with fixed height.
+        Instead of this you can of course add div with <b>clear: both</b>. Checkboxes
+        have build in default image (inside css's data:image/png;base64) so they are just ready to use!
+    </p>
+</div>
+
+<script class="demo-select-01-js">
+$(document).ready(function() {
+    $('select[name=my-select-01]').OkiSelect();
+    $('select[name=my-select-02]').OkiSelect();
+    $('select[name=my-select-03]').OkiSelect();
+});
 </script>
 
+<div class="section">
+<div class="demo-select-01-html">
+<style>
+    .basic-select { height: 20px; }
+    
+    .basic-select-demo { height: 50px; }
+    .basic-select-demo .basic-select-element { width: 200px; float: left; margin-right: 10px; }
+</style>
 
-<!-- field demo -->
-<div style="width: 500px; padding: 0 0 20px 0;">
-    <label style="width: 140px; padding: 5px 0 0 0; float: left;">Normal select #1:</label>
-    <div style="width: 350px; float: right;">
-        <select>
-            <option value="1">NBA 2K11 (PC)</option>
-            <option value="2" selected="selected">rFactor (PC) PL</option>
-            <option value="3">Darkness (X360)</option>
-            <option value="4" selected="selected">NHL 2K8 (X360)</option>
-            <option value="5" selected="selected">Fallout 3 (X360) PL</option>
-            <option value="6">The Last Remnant (X360)</option>
-            <option value="7">Street Fighter IV (X360)</option>
-            <option value="8">Koszulka Battlefield 3 Gun - L</option>
-            <option value="9">Tekken 6 (X360)</option>
-            <option value="10">NARUTO Shippuden: Ultimate Ninja Storm 2 (X360)</option>
-            <option value="11">Enslaved Odyssey to the West (X360)</option>
-            <option value="12">Legend of The Guardians: The Owl of Ga''Hoole (X360)</option>
-            <option value="13">NBA 2K11 (X360) </option>
-            <option value="14">Dragon Ball Raging Blast 2 Edycja Limitowana (X360)</option>
-            <option value="15">Lego Harry Potter: Lata 1-4 (X360)</option>
-            <option value="16">Civilization: Revolution (X360)</option>
-            <option value="17">Assassin''s Creed: Brotherhood (X360) PL</option>
-            <option value="18">Jumper: Griffin''s Story (X360)</option>
-            <option value="19">Star Wolves 2 Gwiezdne Wilki (PC) PL</option>
-            <option value="20">Dreamfall (PC) PL</option>
-            <option value="21">Just Cause (PC) PL</option>
-            <option value="22">King''s Bounty Wojownicza Księżniczka: Pakiet Dodatków (PC) PL</option>
-            <option value="23">Elder Scrolls IV: Knights of the Nine (PC) PL</option>
-            <option value="24">Mój wymarzony chłopak: Kocha nie kocha (PC) PL</option>
-            <option value="25">Championship Manager (PSP)</option>
-            <option value="26">Street Riders (PSP)</option>
-            <option value="27">[NPO] Civilization IV: Complete Edition (PC) PL</option>
-            <option value="28">Koszulka Battlefield 3 Sport - L</option>
-            <option value="29">The Warriors (PSP)</option>
-            <option value="30">Tom Clancy''s EndWar (PSP)</option>
-            <option value="31">Astro Boy (PSP)</option>
-            <option value="32">Prince of Persia Zapomniane Piaski (PSP)</option>
-            <option value="33">Petz My Baby Hamster Essentials (PSP)</option>
-            <option value="34">Beowulf: The Game (PS3)</option>
-            <option value="35">NHL 2K8 (PS3)</option>
-            <option value="36">Tom Clancy''s Ghost Recon: Advanced Warfighter 2 (PS3)</option>
-            <option value="37">F.E.A.R. 2: Project Origin (PS3)</option>
-            <option value="38">Watchmen: The End Is Nigh (PS3)</option>
-            <option value="39">Street Fighter IV (PS3)</option>
-            <option value="40">Fallout 3 Game of The Year Edition (PS3)</option>
-            <option value="41">Fallout 3 (PS3) PL</option>
-            <option value="42">Fallout 3: Dzióra + Operacja Anchorage (PC) PL</option>
-            <option value="43">Okami (PS2)</option>
-            <option value="44">Street Fighter Alpha Anthology (PS2)</option>
-            <option value="45">Prince of Persia Zapomniane Piaski Edycja Kolekcjonerska (PC) PL</option>
-            <option value="46">Assassin''s Creed: Brotherhood  (PC) PL</option>
-            <option value="47">Cities XL 2010 (PC) PL</option>
-            <option value="48">Soul Calibur IV (PS3)</option>
-            <option value="49">Resident Evil 5 (PS3) Platinum</option>
-            <option value="50">Devil May Cry 4 (PS3)</option>
-            <option value="51">Grand Theft Auto IV Complete (PS3)</option>
-            <option value="52">Devil May Cry 3 Special Edition (PS2)</option>
-            <option value="53">Devil May Cry (PS2)</option>
-            <option value="54">Faery Legends of Avalon (PC)</option>
-            <option value="55">Max Payne (PS2)</option>
-            <option value="56">Naruto Ultimate Ninja 3 (PS2)</option>
-            <option value="57">Grand Theft Auto: Vice City Stories (PS2)</option>
-            <option value="58">Dragon Ball: Raging Blast 2 (X360)</option>
-            <option value="59">Fallout 3 Broken Steel + Point Lookout (PC) PL </option>
-            <option value="60">Soul Calibur IV (X360)</option>
-            <option value="61">Assassin''s Creed (X360)</option>
-            <option value="62">Assassin''s Creed: Brotherhood Edycja Kolekcjonerska (X360) </option>
-            <option value="63">Assassin''s Creed 2 (X360)</option>
+<div class="basic-select-demo">
+    <div class="basic-select-element">
+        <select name="my-select-01">
+            <option value="1">Costam 1</option>
+            <option value="2">Costam 2</option>
+            <option value="3">Costam 3</option>
+            <option value="4">Costam 4</option>
+            <option value="5">Costam 5</option>
+            <option value="6">Costam 6</option>
+            <option value="7">Costam 7</option>
+            <option value="8">Costam 8</option>
+            <option value="9">Costam 9</option>
+            <option value="10">Costam 10</option>
+            <option value="11">Costam 11</option>
+            <option value="12">Costam 12</option>
+            <option value="13">Costam 13</option>
+            <option value="14">Costam 14</option>
+            <option value="15">Costam 15</option>
+            <option value="16">Costam 16</option>
+            <option value="17">Costam 17</option>
+            <option value="18">Costam 18</option>
+            <option value="19">Costam 19</option>
+            <option value="20">Costam 20</option>
         </select>
     </div>
-    <div style="clear: both; width: 0px; height: 0px; overflow: hidden;">&nbsp;</div>
-</div>
-<!-- field demo END -->
-
-<!-- field demo -->
-<div style="width: 500px; padding: 0 0 20px 0;">
-    <label style="width: 140px; padding: 5px 0 0 0; float: left;">Normal select #2:</label>
-    <div style="width: 350px; float: right;">
-        <select>
-            <option value="1">NBA 2K11 (PC)</option>
-            <option value="2" selected="selected">rFactor (PC) PL</option>
-            <option value="3">Darkness (X360)</option>
-            <option value="4" selected="selected">NHL 2K8 (X360)</option>
-            <option value="5" selected="selected">Fallout 3 (X360) PL</option>
-            <option value="6">The Last Remnant (X360)</option>
-            <option value="7">Street Fighter IV (X360)</option>
-            <option value="8">Koszulka Battlefield 3 Gun - L</option>
-            <option value="9">Tekken 6 (X360)</option>
-            <option value="10">NARUTO Shippuden: Ultimate Ninja Storm 2 (X360)</option>
-            <option value="11">Enslaved Odyssey to the West (X360)</option>
-            <option value="12">Legend of The Guardians: The Owl of Ga''Hoole (X360)</option>
-            <option value="13">NBA 2K11 (X360) </option>
-            <option value="14">Dragon Ball Raging Blast 2 Edycja Limitowana (X360)</option>
-            <option value="15">Lego Harry Potter: Lata 1-4 (X360)</option>
-            <option value="16">Civilization: Revolution (X360)</option>
-            <option value="17">Assassin''s Creed: Brotherhood (X360) PL</option>
-            <option value="18">Jumper: Griffin''s Story (X360)</option>
-            <option value="19">Star Wolves 2 Gwiezdne Wilki (PC) PL</option>
-            <option value="20">Dreamfall (PC) PL</option>
-            <option value="21">Just Cause (PC) PL</option>
-            <option value="22">King''s Bounty Wojownicza Księżniczka: Pakiet Dodatków (PC) PL</option>
-            <option value="23">Elder Scrolls IV: Knights of the Nine (PC) PL</option>
-            <option value="24">Mój wymarzony chłopak: Kocha nie kocha (PC) PL</option>
-            <option value="25">Championship Manager (PSP)</option>
-            <option value="26">Street Riders (PSP)</option>
+    <div class="basic-select-element">
+        <select name="my-select-02">
+            <option value="1">Costam 1</option>
+            <option value="2">Costam 2</option>
+            <option value="3">Costam 3</option>
+            <option value="4">Costam 4</option>
         </select>
     </div>
-    <div style="clear: both; width: 0px; height: 0px; overflow: hidden;">&nbsp;</div>
-</div>
-<!-- field demo END -->
-
-<!-- field demo -->
-<div style="width: 500px; padding: 0 0 20px 0;">
-    <label style="width: 140px; padding: 5px 0 0 0; float: left;">Multi select #1:</label>
-    <div style="width: 350px; float: right;">
-        <select multiple="multiple">
-            <option value="1">NBA 2K11 (PC)</option>
-            <option value="2" selected="selected">rFactor (PC) PL</option>
-            <option value="3">Darkness (X360)</option>
-            <option value="4" selected="selected">NHL 2K8 (X360)</option>
-            <option value="5" selected="selected">Fallout 3 (X360) PL</option>
-            <option value="6">The Last Remnant (X360)</option>
-            <option value="7">Street Fighter IV (X360)</option>
-            <option value="8">Koszulka Battlefield 3 Gun - L</option>
-            <option value="9">Tekken 6 (X360)</option>
-            <option value="10">NARUTO Shippuden: Ultimate Ninja Storm 2 (X360)</option>
-            <option value="11">Enslaved Odyssey to the West (X360)</option>
-            <option value="12">Legend of The Guardians: The Owl of Ga''Hoole (X360)</option>
-            <option value="13">NBA 2K11 (X360) </option>
-            <option value="14">Dragon Ball Raging Blast 2 Edycja Limitowana (X360)</option>
-            <option value="15">Lego Harry Potter: Lata 1-4 (X360)</option>
-            <option value="16">Civilization: Revolution (X360)</option>
-            <option value="17">Assassin''s Creed: Brotherhood (X360) PL</option>
-            <option value="18">Jumper: Griffin''s Story (X360)</option>
-            <option value="19">Star Wolves 2 Gwiezdne Wilki (PC) PL</option>
-            <option value="20">Dreamfall (PC) PL</option>
-            <option value="21">Just Cause (PC) PL</option>
-            <option value="22">King''s Bounty Wojownicza Księżniczka: Pakiet Dodatków (PC) PL</option>
-            <option value="23">Elder Scrolls IV: Knights of the Nine (PC) PL</option>
-            <option value="24">Mój wymarzony chłopak: Kocha nie kocha (PC) PL</option>
-            <option value="25">Championship Manager (PSP)</option>
-            <option value="26">Street Riders (PSP)</option>
-            <option value="27">[NPO] Civilization IV: Complete Edition (PC) PL</option>
-            <option value="28">Koszulka Battlefield 3 Sport - L</option>
-            <option value="29">The Warriors (PSP)</option>
-            <option value="30">Tom Clancy''s EndWar (PSP)</option>
-            <option value="31">Astro Boy (PSP)</option>
-            <option value="32">Prince of Persia Zapomniane Piaski (PSP)</option>
-            <option value="33">Petz My Baby Hamster Essentials (PSP)</option>
-            <option value="34">Beowulf: The Game (PS3)</option>
-            <option value="35">NHL 2K8 (PS3)</option>
-            <option value="36">Tom Clancy''s Ghost Recon: Advanced Warfighter 2 (PS3)</option>
-            <option value="37">F.E.A.R. 2: Project Origin (PS3)</option>
-            <option value="38">Watchmen: The End Is Nigh (PS3)</option>
-            <option value="39">Street Fighter IV (PS3)</option>
-            <option value="40">Fallout 3 Game of The Year Edition (PS3)</option>
-            <option value="41">Fallout 3 (PS3) PL</option>
-            <option value="42">Fallout 3: Dzióra + Operacja Anchorage (PC) PL</option>
-            <option value="43">Okami (PS2)</option>
-            <option value="44">Street Fighter Alpha Anthology (PS2)</option>
-            <option value="45">Prince of Persia Zapomniane Piaski Edycja Kolekcjonerska (PC) PL</option>
-            <option value="46">Assassin''s Creed: Brotherhood  (PC) PL</option>
-            <option value="47">Cities XL 2010 (PC) PL</option>
-            <option value="48">Soul Calibur IV (PS3)</option>
-            <option value="49">Resident Evil 5 (PS3) Platinum</option>
-            <option value="50">Devil May Cry 4 (PS3)</option>
-            <option value="51">Grand Theft Auto IV Complete (PS3)</option>
-            <option value="52">Devil May Cry 3 Special Edition (PS2)</option>
-            <option value="53">Devil May Cry (PS2)</option>
-            <option value="54">Faery Legends of Avalon (PC)</option>
-            <option value="55">Max Payne (PS2)</option>
-            <option value="56">Naruto Ultimate Ninja 3 (PS2)</option>
-            <option value="57">Grand Theft Auto: Vice City Stories (PS2)</option>
-            <option value="58">Dragon Ball: Raging Blast 2 (X360)</option>
-            <option value="59">Fallout 3 Broken Steel + Point Lookout (PC) PL </option>
-            <option value="60">Soul Calibur IV (X360)</option>
-            <option value="61">Assassin''s Creed (X360)</option>
-            <option value="62">Assassin''s Creed: Brotherhood Edycja Kolekcjonerska (X360) </option>
-            <option value="63">Assassin''s Creed 2 (X360)</option>
+    <div class="basic-select-element">
+        <select name="my-select-03">
+            <option value="1">Costam 1</option>
         </select>
     </div>
-    <div style="clear: both; width: 0px; height: 0px; overflow: hidden;">&nbsp;</div>
 </div>
-<!-- field demo END -->
 
-<!-- field demo -->
-<div style="width: 500px; padding: 0 0 20px 0;">
-    <label style="width: 140px; padding: 5px 0 0 0; float: left;">Multi select #2:</label>
-    <div style="width: 350px; float: right;">
-        <select multiple="multiple">
-            <option value="1">NBA 2K11 (PC)</option>
-            <option value="2" selected="selected">rFactor (PC) PL</option>
-            <option value="3">Darkness (X360)</option>
-            <option value="4" selected="selected">NHL 2K8 (X360)</option>
-            <option value="5" selected="selected">Fallout 3 (X360) PL</option>
-            <option value="6">The Last Remnant (X360)</option>
-            <option value="7">Street Fighter IV (X360)</option>
-            <option value="8">Koszulka Battlefield 3 Gun - L</option>
-            <option value="9">Tekken 6 (X360)</option>
-            <option value="10">NARUTO Shippuden: Ultimate Ninja Storm 2 (X360)</option>
-            <option value="11">Enslaved Odyssey to the West (X360)</option>
-            <option value="12">Legend of The Guardians: The Owl of Ga''Hoole (X360)</option>
-            <option value="13">NBA 2K11 (X360) </option>
-            <option value="14">Dragon Ball Raging Blast 2 Edycja Limitowana (X360)</option>
-            <option value="15">Lego Harry Potter: Lata 1-4 (X360)</option>
-            <option value="16">Civilization: Revolution (X360)</option>
-            <option value="17">Assassin''s Creed: Brotherhood (X360) PL</option>
-            <option value="18">Jumper: Griffin''s Story (X360)</option>
-            <option value="19">Star Wolves 2 Gwiezdne Wilki (PC) PL</option>
-            <option value="20">Dreamfall (PC) PL</option>
-            <option value="21">Just Cause (PC) PL</option>
-            <option value="22">King''s Bounty Wojownicza Księżniczka: Pakiet Dodatków (PC) PL</option>
-            <option value="23">Elder Scrolls IV: Knights of the Nine (PC) PL</option>
-            <option value="24">Mój wymarzony chłopak: Kocha nie kocha (PC) PL</option>
-            <option value="25">Championship Manager (PSP)</option>
-            <option value="26">Street Riders (PSP)</option>
-        </select>
-    </div>
-    <div style="clear: both; width: 0px; height: 0px; overflow: hidden;">&nbsp;</div>
 </div>
-<!-- field demo END -->
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-select-reference-js">
+    </div>
+</div>
+
+<script class="demo-select-reference-js">
+$(document).ready(function() {
+    $('.some-select').OkiCheckbox({
+    });
+});
+</script>

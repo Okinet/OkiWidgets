@@ -27,10 +27,10 @@
             // private:
             var $this = null;
             var settings = {
-                cssClass              : 'select-filter',
+                cssClass              : '',
                 cloudWidth            : 'auto',         // integer or 'auto'
                 cloudHeight           : 200,            // integer or 'auto'
-                cloudComplex          : true,
+                cloudComplex          : false,
                 onlyCloudExpanded     : false,
                 multipleNoneText      : 'Please choose something',
                 multipleSelectedText  : 'Selected items: {items}',
@@ -54,7 +54,7 @@
                 buildHtml();
                 connectDependencies();
                 sync();
-                $this.wrap('<div class="oki-select-v2-hidden"></div>');
+                $this.wrap('<div class="oki-select-base-hidden"></div>');
                 
                 if (settings.onlyCloudExpanded) {
                     $select.OkiCloud('api').show();
@@ -67,35 +67,28 @@
                 var cssClass = settings.cssClass;
                 
                 if (settings.cloudComplex) {
-                    html = '<div class="oki-select-base ' + cssClass + '">' +
+                    html = '<div class="oki-select-base">' +
                            '    <span><span><span></span></span></span>' +
-                           '    <div class="s-cloud">' +
-                           '        <div class="s-cloud-top"><div><div>&nbsp;</div></div></div>' +
-                           '        <div class="s-cloud-middle">' +
+                           '    <div class="os-cloud">' +
+                           '        <div class="os-cloud-top"><div><div>&nbsp;</div></div></div>' +
+                           '        <div class="os-cloud-middle">' +
                            '            <div>' +
                            '                <div>' +
-                           '                    <div class="s-padd">' +
-                           '                        <div class="scrollarea">' +
-                           '                            <div class="osa-cont">' +
-                           '                                <div class="osa-padd"></div>' +
-                           '                            </div>' + 
-                           '                        </div>' + 
+                           '                    <div class="os-padd">' +
+                           '                        <div class="scrollarea"></div>' +
                            '                    </div>' +
                            '                </div>' +
                            '            </div>' +
                            '        </div>' +
-                           '        <div class="s-cloud-bottom"><div><div>&nbsp;</div></div></div>' +
+                           '        <div class="os-cloud-bottom"><div><div>&nbsp;</div></div></div>' +
                            '    </div>' +
                            '</div>';
                 } else {
-                    html = '<div class="oki-select-base ' + cssClass + '">' +
+                    html = '<div class="oki-select-base">' +
                            '    <span><span><span></span></span></span>' +
-                           '    <div class="s-cloud">' +
-                           '        <div class="s-padd">' + 
-                           '            <div class="scrollarea">' +
-                           '                <div class="osa-cont">' +
-                           '                    <div class="osa-padd"></div>' +
-                           '                </div>' + 
+                           '    <div class="os-cloud">' +
+                           '        <div class="os-padd">' + 
+                           '            <div class="scrollarea"></div>' +
                            '            </div>' + 
                            '        </div>' +
                            '    </div>' +
@@ -103,12 +96,11 @@
                 }
                 
                 $select = $(html);
-                $selectCloud = $select.find("> .s-cloud");
-                $selectOption = $select.find('.osa-padd');
+                $selectCloud = $select.find("> .os-cloud");
                 $selectText = $select.find('> span > span > span');
                 $selectScroll = $select.find('.scrollarea');
                 if ($this.prop("multiple")) {
-                    $select.addClass('s-multiple');
+                    $select.addClass('os-multiple');
                 }
                 $this.after($select);
                 
@@ -117,8 +109,8 @@
                 }
                 
                 if (settings.cloudComplex) {
-                    $cloudComplexLeftPaddDiv = $select.find('.s-cloud-middle > div > div');
-                    $cloudComplexRightPaddDiv = $select.find('.s-cloud-middle > div');
+                    $cloudComplexLeftPaddDiv = $select.find('.os-cloud-middle > div > div');
+                    $cloudComplexRightPaddDiv = $select.find('.os-cloud-middle > div');
                 }
             }
             
@@ -182,7 +174,9 @@
                                     api.setViewportWidth(getCloundWidth());
                                     api.setViewportHeight(getCloundHeight());
                                     api.resize();
-                                    $this.focus();
+                                    if (!okiTool.isMobile()) {
+                                        $this.focus();
+                                    }
                                     
                                     updateOptionContent();
                                 }
@@ -191,8 +185,12 @@
                 $selectScroll.OkiScrollArea({
                     viewportWidth             : '100px',
                     viewportHeight            : '250px',
-                    shortenWhenSmallerHeight  : true
+                    shortenWhenSmallerHeight  : true,
+                    scrollHorizontalHeight    : 5,
+                    scrollVerticalWidth       : 5
                 });
+                
+                $selectOption = $select.find('.osa-padd');
                 
                 $this.OkiKeyboard({
                     mergeLeftAndRightAlt  : false,

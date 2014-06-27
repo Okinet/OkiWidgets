@@ -43,7 +43,8 @@
                 scrollVertical            : 'auto',         // auto / hidden / scroll
                 scrollHorizontalHeight    : 15,
                 scrollVerticalWidth       : 15,
-                scrollStep                : 20
+                scrollStep                : 20,
+                flipMouseScroll           : false
             };
             
             var $sX = null, $sY = null;
@@ -237,20 +238,33 @@
             {
                 $this.mousewheel(function(event, delta, deltaX, deltaY) {
                     event.preventDefault();
-                    if (deltaY<0)
-                        addOffsetY(settings.scrollStep);
-                    if (deltaY>0)
-                        addOffsetY(-settings.scrollStep);
-                    if (deltaX<0)
-                        addOffsetX(settings.scrollStep);
-                    if (deltaX>0)
-                        addOffsetX(-settings.scrollStep);
+                    
+                    if (settings.flipMouseScroll) {
+                        if (deltaY<0)
+                            addOffsetX(settings.scrollStep);
+                        if (deltaY>0)
+                            addOffsetX(-settings.scrollStep);
+                        if (deltaX<0)
+                            addOffsetY(settings.scrollStep);
+                        if (deltaX>0)
+                            addOffsetY(-settings.scrollStep);
+                    } else {
+                        if (deltaY<0)
+                            addOffsetY(settings.scrollStep);
+                        if (deltaY>0)
+                            addOffsetY(-settings.scrollStep);
+                        if (deltaX<0)
+                            addOffsetX(settings.scrollStep);
+                        if (deltaX>0)
+                            addOffsetX(-settings.scrollStep);
+                    }
                 });
                 
 
                 // touch
                 var touchStartX = 0;
                 var touchStartY = 0;
+                var windowScroll = 0;
                 var moved = false;
                 var moving = false;
 
@@ -263,6 +277,7 @@
                         touchStartY = touch.pageY;
                         moving = true;
                         moved = false;
+                        windowScroll= $(window).scrollTop();
                     }
                 ).bind(
                     'touchmove',
@@ -287,6 +302,12 @@
                         // ----------------
 
                         moved = moved || Math.abs(touchStartX - touch.pageX) > 5 || Math.abs(touchStartY - touch.pageY) > 5;
+                        ev.returnValue = false;
+                        ev.cancelBubble = true;
+                        if (ev.preventDefault) {
+                            ev.preventDefault();
+                        }
+                        $(window).scrollTop(windowScroll);
 
                         return false;  // ?? -> return true if there was no movement so rest of screen can scroll
                     }
