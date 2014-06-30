@@ -10,9 +10,10 @@
 " *"."\n".
 " *   Complete solution for UI on your website!"."\n".
 " *"."\n".
-" *                                                                Robert Rypula"."\n".
-" *                                                   robert.rypula{at}okinet.pl"."\n".
-" *                                                         http://www.okinet.pl"."\n".
+" *                                                                Robert Rypula "."\n".
+" *                                                   robert.rypula{at}okinet.pl "."\n".
+" *                                                         http://www.okinet.pl "."\n".
+" *                                                                    2010-2014 "."\n".
 " * -----------------------------------------------------------------------------"."\n".
 " */"."\n\n\n";
     

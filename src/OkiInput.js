@@ -107,6 +107,9 @@
                 $html.mouseleave(function() {
                     $html.removeClass('oi-hover');
                 });
+                $this.change(function() {
+                    sync();
+                });
             }
             
             function sync()

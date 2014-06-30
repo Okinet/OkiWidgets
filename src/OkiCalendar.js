@@ -32,7 +32,10 @@
                 year              : 'now',           // "now" or year number <1970, 2099>
                 mode              : 'table',         // "table" or "horizontal"
                 showYearInHeader  : true,
-                onChange          : null,            // callback with current state (year, month)
+                onChange          : null,            // callback after changed current state (year, month)
+                onClick           : null,            // callback after clicked
+                onMouseEnter      : null,            // callback after mouse enter
+                onMouseLeave      : null,            // callback after mouse leave
                 transDays         : new Array("PN", "WT", "\u015aR", "CZ", "PT", "SO", "N"),
                 transMonths       : new Array("Stycze\u0144", "Luty", "Marzec", "Kwiecie\u0144", "Maj", "Czerwiec", "Lipiec", "Sierpie\u0144", "Wrzesie\u0144", "Pa\u017adziernik", "Listopad", "Grudzie\u0144")
             };
@@ -173,18 +176,6 @@
                         break;
                     }
                 }
-                
-                
-                /*  days names:
-                    '        <div class="oc-tbl-c"><span class="oc-lbl">PT</span></div>' +
-                    '        <div class="oc-tbl-c oc-weekend"><span class="oc-lbl">SO</span></div>' +
-                    custom:
-                    '        <div class="oc-tbl-c oc-weekend"></div>' +
-                    day number:
-                    '        <div class="oc-tbl-c"><span class="oc-lbl">6</span></div>' +
-                    '        <div class="oc-tbl-c oc-weekend"><span class="oc-lbl">7</span></div>' +
-
-                */
             }
             
             function refreshCalendar()
@@ -203,6 +194,48 @@
                     };
                     settings.onChange(state);
                 }
+                
+                if (typeof settings.onClick === 'function') {
+                    $this.find('.oc-tbl-c, td').click(function() {
+                        settings.onClick(getStateFromDayObject($(this)));
+                    });
+                }
+                
+                if (typeof settings.onMouseEnter === 'function') {
+                    $this.find('.oc-tbl-c, td').mouseenter(function() {
+                        settings.onMouseEnter(getStateFromDayObject($(this)));
+                    });
+                }
+                
+                if (typeof settings.onMouseLeave === 'function') {
+                    $this.find('.oc-tbl-c, td').mouseleave(function() {
+                        settings.onMouseLeave(getStateFromDayObject($(this)));
+                    });
+                }
+            }
+            
+            function getStateFromDayObject($obj)
+            {
+                var state = {
+                    $obj      : $obj,
+                    $dayName  : null,
+                    $custom   : null,
+                    $dayNumber: null,
+                    year      : parseInt($obj.attr('year')),
+                    month     : parseInt($obj.attr('month')),
+                    day       : parseInt($obj.attr('day')),
+                    dayOfWeek : parseInt($obj.attr('dayOfWeek')),
+                    monthName : settings.transMonths[ parseInt($obj.attr('month')) - 1 ],
+                    dayName   : settings.transDays[ parseInt($obj.attr('dayOfWeek')) ]
+                }
+                
+                if (settings.mode=='horizontal') {
+                    state.$dayName = $this.find('.oc-day-name .oc-tbl-c[day='+state.day+'][month='+state.month+'][year='+state.year+']');
+                    state.$custom = $this.find('.oc-custom-content .oc-tbl-c[day='+state.day+'][month='+state.month+'][year='+state.year+']');
+                    state.$dayNumber = $this.find('.oc-day-number .oc-tbl-c[day='+state.day+'][month='+state.month+'][year='+state.year+']');
+                }
+                
+                return state;
             }
             
             function setupCurrentVars(y, m)
@@ -245,7 +278,7 @@
                             '</div>';
                     $this.append(html);
                     for (i=0; i<7; i++) {
-                        $this.find('table tr').append('<td>'+settings.transDays[i]+'</td>');
+                        $this.find('table tr').append('<th>'+settings.transDays[i]+'</th>');
                     }
                 } else
                     if (settings.mode=='horizontal') {

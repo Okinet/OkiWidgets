@@ -85,9 +85,18 @@ var calendarHor_API = null;
 $(document).ready(function() {
     
     $('.apievents-calendar-table').OkiCalendar({
-        onChange  : function(state) {
-                        $('.apievent-tbl-row .apievent-on-change').html(JSON.stringify(state, undefined, 2));
-                    }
+        onChange          : function(state) {
+                                $('.apievent-tbl-row .apievent-on-change').html(JSON.stringify(state, undefined, 2));
+                            },
+        onClick           : function(state) {
+                                $('.apievent-tbl-row .apievent-on-click').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
+                            },
+        onMouseEnter      : function(state) {
+                                $('.apievent-tbl-row .apievent-on-mouse-enter').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
+                            },
+        onMouseLeave      : function(state) {
+                                $('.apievent-tbl-row .apievent-on-mouse-leave').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
+                            }
     });
     calendarTbl_API = $('.apievents-calendar-table').OkiCalendar('api');
     
@@ -95,6 +104,15 @@ $(document).ready(function() {
         mode              : 'horizontal',
         onChange          : function(state) {
                                 $('.apievent-hor-row .apievent-on-change').html(JSON.stringify(state, undefined, 2));
+                            },
+        onClick           : function(state) {
+                                $('.apievent-hor-row .apievent-on-click').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
+                            },
+        onMouseEnter      : function(state) {
+                                $('.apievent-hor-row .apievent-on-mouse-enter').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
+                            },
+        onMouseLeave      : function(state) {
+                                $('.apievent-hor-row .apievent-on-mouse-leave').html(state.year + '-' + state.month + '-' + state.day + ', ' + state.dayName + ', ' + state.monthName);
                             }
     });
     calendarHor_API = $('.apievents-calendar-horizontal').OkiCalendar('api');
@@ -109,8 +127,8 @@ $(document).ready(function() {
     
     .apievent-tbl-row { height: 325px; position: relative; }
     .apievent-tbl-row .apievent-box { width: 400px; height: 325px; position: absolute; right: 0px; top: 0px; }
-    .apievent-hor-row { height: 250px; position: relative; }
-    .apievent-hor-row .apievent-box { height: 130px; position: absolute; top: 120px; left: 0px; right: 0px; width: 100%; }
+    .apievent-hor-row { height: 320px; position: relative; }
+    .apievent-hor-row .apievent-box { height: 200px; position: absolute; top: 120px; left: 0px; right: 0px; width: 100%; }
 </style>
 
 <div class="apievent-tbl-row">
@@ -124,7 +142,10 @@ $(document).ready(function() {
         Month number (1-12) <input name="month" value="7" /><br/>
         <button onClick="calendarTbl_API.moveToDate($(this).closest('.apievent-box').find('input[name=year]').val(), $(this).closest('.apievent-box').find('input[name=month]').val())">API - moveToDate</button>
         <br/><br/>
-        <strong>onChange: </strong><span class="apievent-on-change"></span>
+        <strong>onChange: </strong><span class="apievent-on-change"></span><br/>
+        <strong>onClick: </strong><span class="apievent-on-click"></span><br/>
+        <strong>onMouseEnter: </strong><span class="apievent-on-mouse-enter"></span><br/>
+        <strong>onMouseLeave: </strong><span class="apievent-on-mouse-leave"></span><br/>
     </div>
 </div>
 
@@ -138,7 +159,10 @@ $(document).ready(function() {
         Full Year <input name="year" value="2014" /> Month number (1-12) <input name="month" value="7" />
         <button onClick="calendarHor_API.moveToDate($(this).closest('.apievent-box').find('input[name=year]').val(), $(this).closest('.apievent-box').find('input[name=month]').val())">API - moveToDate</button>
         <br/><br/>
-        <strong>onChange: </strong><span class="apievent-on-change"></span>
+        <strong>onChange: </strong><span class="apievent-on-change"></span><br/>
+        <strong>onClick: </strong><span class="apievent-on-click"></span><br/>
+        <strong>onMouseEnter: </strong><span class="apievent-on-mouse-enter"></span><br/>
+        <strong>onMouseLeave: </strong><span class="apievent-on-mouse-leave"></span><br/>
     </div>
 </div>
 
@@ -161,7 +185,10 @@ $(document).ready(function() {
         year              : 'now',           // "now" or year number <1970, 2099>
         mode              : 'table',         // "table" or "horizontal"
         showYearInHeader  : true,
-        onChange          : null,            // callback with current state (year, month)
+        onChange          : null,            // callback after changed current state (year, month)
+        onClick           : null,            // callback after clicked
+        onMouseEnter      : null,            // callback after mouse enter
+        onMouseLeave      : null,            // callback after mouse leave
         transDays         : new Array("PN", "WT", "ŚR", "CZ", "PT", "SO", "N"),
         transMonths       : new Array("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień")
     });
