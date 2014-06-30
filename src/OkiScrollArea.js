@@ -277,7 +277,15 @@
                         touchStartY = touch.pageY;
                         moving = true;
                         moved = false;
-                        windowScroll= $(window).scrollTop();
+                        windowScroll = $(window).scrollTop();
+                        
+//                        ev.returnValue = false;
+//                        ev.cancelBubble = true;
+//                        if (ev.preventDefault) {
+//                            ev.preventDefault();
+//                        }
+                        
+//                        return true;
                     }
                 ).bind(
                     'touchmove',
@@ -285,10 +293,12 @@
                         var deltaX, deltaY;
                         var touch;
 
-                        if (!moving)
+                        if (!moving) {
                             return false;
-                        if (ev.originalEvent.touches.length > 1)
+                        }
+                        if (ev.originalEvent.touches.length > 1) {
                             return false;
+                        }
 
                         touch = ev.originalEvent.touches[0];
                         deltaX = (touch.pageX - touchStartX);
@@ -302,12 +312,15 @@
                         // ----------------
 
                         moved = moved || Math.abs(touchStartX - touch.pageX) > 5 || Math.abs(touchStartY - touch.pageY) > 5;
+                        
                         ev.returnValue = false;
                         ev.cancelBubble = true;
                         if (ev.preventDefault) {
                             ev.preventDefault();
+                            ev.stopPropagation();
                         }
                         $(window).scrollTop(windowScroll);
+                        
 
                         return false;  // ?? -> return true if there was no movement so rest of screen can scroll
                     }
