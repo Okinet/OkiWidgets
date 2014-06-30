@@ -33,8 +33,8 @@
                 mode              : 'table',         // "table" or "horizontal"
                 showYearInHeader  : true,
                 onChange          : null,            // callback with current state (year, month)
-                transDays         : new Array("PN", "WT", "ŚR", "CZ", "PT", "SO", "N"),
-                transMonths       : new Array("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień")
+                transDays         : new Array("PN", "WT", "\u015aR", "CZ", "PT", "SO", "N"),
+                transMonths       : new Array("Stycze\u0144", "Luty", "Marzec", "Kwiecie\u0144", "Maj", "Czerwiec", "Lipiec", "Sierpie\u0144", "Wrzesie\u0144", "Pa\u017adziernik", "Listopad", "Grudzie\u0144")
             };
             var currentTableStartDay;
             var currentMonth;
