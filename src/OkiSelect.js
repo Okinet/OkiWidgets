@@ -96,6 +96,14 @@
                 }
                 
                 $select = $(html);
+                
+                if ($this.data('cssClass') && $this.data('cssClass')!="") {
+                    $select.addClass($this.data('cssClass'));
+                } else 
+                    if (settings.cssClass!="") {
+                        $select.addClass(settings.cssClass);
+                    }
+                
                 $selectCloud = $select.find("> .os-cloud");
                 $selectText = $select.find('> span > span > span');
                 $selectScroll = $select.find('.scrollarea');

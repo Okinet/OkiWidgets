@@ -190,7 +190,8 @@
                 if (typeof settings.onChange === 'function') {
                     var state = {
                         year: currentYear,
-                        month: currentMonth
+                        month: currentMonth,
+                        monthName : settings.transMonths[ currentMonth - 1 ]
                     };
                     settings.onChange(state);
                 }
