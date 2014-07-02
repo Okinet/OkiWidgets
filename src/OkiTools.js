@@ -1,6 +1,39 @@
 var okiTool = {
     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     
+    dateRangesDetails: function(dateStart, dateEnd, dateRangeStart, dateRangeEnd)
+    {
+        var todayPrecise = new Date();
+        var today = new Date(todayPrecise.getFullYear(), todayPrecise.getMonth(), todayPrecise.getDate(), 0, 0, 0, 0);
+        var ret = new Array();
+        var loopDay;
+
+        loopDay = new Date(dateStart);
+        while (true) {
+            ret.push({
+                inRange       : (dateRangeStart<=loopDay  && loopDay<=dateRangeEnd),
+                beforeRange   : (loopDay<dateRangeStart && loopDay<dateRangeEnd),
+                afterRange    : (dateRangeStart<loopDay && dateRangeEnd<loopDay),
+                atRangeStart  : (dateRangeStart.getFullYear()==loopDay.getFullYear() && dateRangeStart.getMonth()==loopDay.getMonth() && dateRangeStart.getDate()==loopDay.getDate()),
+                atRangeEnd    : (dateRangeEnd.getFullYear()==loopDay.getFullYear() && dateRangeEnd.getMonth()==loopDay.getMonth() && dateRangeEnd.getDate()==loopDay.getDate()),
+                isToday       : (today.getFullYear()==loopDay.getFullYear() && today.getMonth()==loopDay.getMonth() && today.getDate()==loopDay.getDate()),
+                beforeToday   : loopDay<today,
+                afterToday    : today<loopDay,
+                dateJsObj     : new Date(loopDay),
+                year          : loopDay.getFullYear(),
+                month         : loopDay.getMonth() + 1,
+                day           : loopDay.getDate()
+            });
+
+            loopDay.setDate(loopDay.getDate() + 1);  // next day
+            if (loopDay>dateEnd) {
+                break;
+            }
+        }
+
+        return ret;
+    },
+    
     isMobile: function()
     {
         var isMobile = {

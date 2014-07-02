@@ -15,6 +15,7 @@
 .oki-calendar-base .oc-body table td.oc-ia { background-color: #f1f1f1; color: #c5c5c5; }
 .oki-calendar-base .oc-body table td.oc-today { background-color: #d4e8f3; color: #0171a9; border-color: #b3ceda; }
 .oki-calendar-base .oc-body table td.oc-se { background-color: #3b97ca; color: #ffffff; border-color: #0f8ac3; }
+.oki-calendar-base .oc-body table td.oc-disabled { cursor: default !important; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; filter: alpha(opacity=20); -moz-opacity: 0.2; -khtml-opacity: 0.2; opacity: 0.2; }
 .oki-calendar-base .oc-body table td:hover { background-color: #66bbf0; color: #ffffff; }
 .oki-calendar-base .oc-tbl { width: 100%; height: 100%; display: table; border-collapse: collapse; table-layout: fixed; }
 .oki-calendar-base .oc-tbl .oc-tbl-r { display: table-row; }

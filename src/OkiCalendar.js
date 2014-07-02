@@ -188,12 +188,7 @@
                     }
                 
                 if (typeof settings.onChange === 'function') {
-                    var state = {
-                        year: currentYear,
-                        month: currentMonth,
-                        monthName : settings.transMonths[ currentMonth - 1 ]
-                    };
-                    settings.onChange(state);
+                    settings.onChange(getStateAfterChange());
                 }
                 
                 if (typeof settings.onClick === 'function') {
@@ -213,6 +208,33 @@
                         settings.onMouseLeave(getStateFromDayObject($(this)));
                     });
                 }
+            }
+            
+            function getStateAfterChange()
+            {
+                var $first, $last;
+                var state = {
+                    year              : currentYear,
+                    month             : currentMonth,
+                    monthName         : settings.transMonths[ currentMonth - 1 ],
+                    visibleDateFirst  : null,
+                    visibleDateLast   : null
+                };
+                
+                if (settings.mode=='table') {
+                    $first = $this.find('td:first');
+                    $last = $this.find('td:last');
+                } else
+                    if (settings.mode=='horizontal') {
+                        $first = $this.find('.oc-day-name > .oc-tbl-c:first');
+                        $last = $this.find('.oc-day-name > .oc-tbl-c:last');
+                    }
+                if ($first && $last) {
+                    state.visibleDateFirst = new Date(parseInt($first.attr('year')), parseInt($first.attr('month'))-1, parseInt($first.attr('day')));
+                    state.visibleDateLast = new Date(parseInt($last.attr('year')), parseInt($last.attr('month'))-1, parseInt($last.attr('day')));
+                }
+                
+                return state;
             }
             
             function getStateFromDayObject($obj)
