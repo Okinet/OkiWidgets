@@ -1,0 +1,132 @@
+<div class="text-formated">
+    <p>
+        OkiLoader is good solution when you need to mannage multiple
+        ajax requests. It keeps <b>only one</b> connection active and <b>aborts</b>
+        it when new will come. Also it manages ajax icon indicator as <b>PNG sprite</b>
+        so nice transparency can be used.
+    </p>
+</div>
+
+<h3>Usage</h3>
+
+<div class="text-formated">
+    <p>
+        OkiLoader needs form tag that is used to pass variables to the server.
+        It can be hidden form tag.<br/>
+        <b>IMPORTANT</b> - all content inside form tag is <b>deleted</b> after ajax call!
+    </p>
+    <div class="code code-html code-copy" from=".demo-loader-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-loader-01-js">
+    </div>
+</div>
+
+<script class="demo-loader-01-js">
+    
+function basicLoaderSubmitRequest()
+{
+    var url = '/okiLoaderAjax.php';
+    var method = $('.basic-loader-demo-container > input[name=method]:checked').val();
+    
+    $('.basic-loader-demo-response').html('');
+    $('.basic-loader-demo').OkiLoader('api').submitRequest(
+        url,
+        method,
+        {
+            fakeDelayMs           : parseInt($('.basic-loader-demo-container > input[name=fake-delay-ms]').val()),
+            generateServerError   : $('.basic-loader-demo-container > input[name=generateServerError]').is(':checked') ? 1 : 0,
+            jsObject              : { something: 123, str: "test" },
+            normalString          : 'test'
+        },
+        basicLoaderSuccessCallback,
+        basicLoaderErrorCallback
+    );
+}
+
+function basicLoaderSuccessCallback(data, requestedUrl)
+{
+    var $tmp;
+    
+    $tmp = $('<div>Success: '+requestedUrl+'</div>');
+    setTimeout(function() {
+        $tmp.fadeOut(300, function() {
+            $(this).remove();
+        })
+    }, 2000);
+    
+    $('.basic-loader-demo-response').html(data);
+    $('.basic-loader-demo-success').prepend($tmp);
+}
+
+function basicLoaderErrorCallback(jqXHR, requestedUrl)
+{
+    var $tmp;
+    
+    $tmp = $('<div>Error: '+requestedUrl+', '+jqXHR.statusText+'</div>');
+    setTimeout(function() {
+        $tmp.fadeOut(300, function() {
+            $(this).remove();
+        })
+    }, 2000);
+    
+    $('.basic-loader-demo-error').prepend($tmp);
+}
+    
+$(document).ready(function() {
+    $('.basic-loader-demo').OkiLoader({
+        indicatorObj  : $('.basic-loader-demo-indicator')
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-loader-01-html">
+<style>
+   .basic-loader-demo { display: none; }
+   .basic-loader-demo-indicator { position: absolute; top: 0px; right: 0px; z-index: 99; }
+   
+   .basic-loader-demo-container { height: 260px; position: relative; }
+   .basic-loader-demo-response { width: 50%; height: 100%; position: absolute; top: 0px; right: 0px; background-color: lightgray; white-space: pre-wrap; }
+</style>
+
+<div class="basic-loader-demo-container">
+    <form class="basic-loader-demo" action="" method="GET"></form>
+    <div class="basic-loader-demo-indicator"></div>
+
+    Fake server response delay: <input type="text" name="fake-delay-ms" value="1200" />ms<br/>
+    <input type="radio" name="method" value="POST" checked="checked" /> POST method<br/>
+    <input type="radio" name="method" value="GET" /> GET method<br/>
+    <input type="checkbox" name="generateServerError" value="1" /> generate server error<br/>
+    <button onClick="basicLoaderSubmitRequest()">Submit request</button><br/>
+    <br/>
+    <strong>Error events:</strong>
+    <div class="basic-loader-demo-error"></div>
+    <strong>Success events:</strong>
+    <div class="basic-loader-demo-success"></div>
+    
+    <div class="basic-loader-demo-response"></div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-loader-reference-js">
+    </div>
+</div>
+
+<script class="demo-loader-reference-js">
+$(document).ready(function() {
+    $('.some-loader').OkiLoader({
+        indicatorObj      : null,      // selector to ajax indicator
+        indicatorFrames   : 12,        // if you have PNG sprite put here number of frames
+        indicatorFps      : 25         // animation fps of PNG sprite
+    });
+});
+</script>
+
+<!-- ----------------------------------------------------------------------- -->

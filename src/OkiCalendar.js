@@ -7,9 +7,11 @@
             // -----------------------------------------------------------------
             // public:
             this.api = {
+                refresh : function() { refresh(); return this.api; },
                 moveToDate : function(year, month) { moveToDate(year, month); return this.api; },
                 movePrevMonth : function() { movePrevMonth(); return this.api; },
-                moveNextMonth : function() { moveNextMonth(); return this.api; }
+                moveNextMonth : function() { moveNextMonth(); return this.api; },
+                getCurrent : function() { return getCurrent(); } 
             }
 
             this.init = function(o, param)
@@ -85,6 +87,16 @@
             {
                 setupCurrentVars(year, month);
                 refreshCalendar();
+            }
+            
+            function refresh()
+            {
+                moveToDate(currentYear, currentMonth);
+            }
+            
+            function getCurrent()
+            {
+                return getStateAfterChange();
             }
             
             function refreshCalendarTable()

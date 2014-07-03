@@ -135,6 +135,8 @@ $(document).ready(function() {
     <div class="apievents-calendar-table"></div>
 
     <div class="apievent-box">
+        <button onClick="alert(calendarTbl_API.getCurrent())">API - getCurrent</button>
+        <button onClick="calendarTbl_API.refresh()">API - refresh</button>
         <button onClick="calendarTbl_API.movePrevMonth()">API - movePrevMonth</button>
         <button onClick="calendarTbl_API.moveNextMonth()">API - moveNextMonth</button>
         <br/>
@@ -153,6 +155,8 @@ $(document).ready(function() {
     <div class="apievents-calendar-horizontal"></div>
     
     <div class="apievent-box">
+        <button onClick="alert(calendarHor_API.getCurrent())">API - getCurrent</button>
+        <button onClick="calendarHor_API.refresh()">API - refresh</button>
         <button onClick="calendarHor_API.movePrevMonth()">API - movePrevMonth</button>
         <button onClick="calendarHor_API.moveNextMonth()">API - moveNextMonth</button>
         <br/>
