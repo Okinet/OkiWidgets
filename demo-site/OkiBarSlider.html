@@ -142,8 +142,8 @@ $(document).ready(function() {
 <div class="slider-demo-02a-html">
 <style>
     .fade-slider-01 { width: 200px; height: 140px; outline: 3px dashed #c45d00; }
-    .fade-slider-01 .obs-bar { left: 0px !important; }
-    .fade-slider-01 .slide { width: 200px !important; position: absolute; }
+    .fade-slider-01 > .obs-bar { left: 0px !important; }
+    .fade-slider-01 > .obs-bar > .obs-slide { width: 200px !important; position: absolute; }
 </style>
 
 <div class="fade-slider-01">
@@ -151,6 +151,55 @@ $(document).ready(function() {
     <div class="slide" style="background-color: lightskyblue;">Slide #02 - little longer</div>
     <div class="slide" style="background-color: lightseagreen;">Slide #03 - very long text</div>
 </div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Paginator version</h3>
+
+<div class="text-formated">
+    <p>
+        OkiBarSlider can work also as paginator. You need to overwrite
+        some default css. This mode is usefull then you don't know
+        what dimension will content have.
+    </p>
+    <div class="code code-html code-copy" from=".slider-demo-02b-html">
+    </div>
+    <div class="code code-js code-copy" from=".slider-demo-02b-js">
+    </div>
+</div>
+
+<script class="slider-demo-02b-js">
+$(document).ready(function() {
+    $('.paginator-slider-01').OkiBarSlider({
+        fadeInsteadSlide  : true,
+        transitionDuration: 0,
+        naviLinkWithNumber: true,
+        naviObj           : $('.paginator-slider-01-navi')
+    });
+});
+</script>
+
+<div class="section">
+<div class="slider-demo-02b-html">
+<style>
+    .paginator-slider-01 { width: 100%; outline: 3px dashed #c45d00; }
+    .paginator-slider-01 > .obs-bar { left: 0px; width: 100%; height: auto; position: static; }
+    .paginator-slider-01 > .obs-bar > .obs-slide { width: 100%; height: auto; position: static; float: none; display: none; }
+    
+    .paginator-slider-01-navi { height: 32px; padding: 10px 0; }
+    .paginator-slider-01-navi a { display: block; width: 32px; height: 32px; line-height: 32px; font-size: 14px; color: black; background-color: lightblue; text-align: center; margin: 0 4px 0 0; float: left; }
+    .paginator-slider-01-navi a.active { background-color: lightgreen; }
+</style>
+
+<div class="paginator-slider-01">
+    <div class="slide" style="background-color: lightsalmon;">I'm the page one content<br/><br/><br/><br/>bla</div>
+    <div class="slide" style="background-color: lightskyblue;">I'm the page two content<br/><br/><br/><br/><br/><br/><br/><br/>blabla</div>
+    <div class="slide" style="background-color: lightseagreen;">I'm the page three content<br/><br/><br/>blablabla</div>
+</div>
+<div class="paginator-slider-01-navi"></div>
 
 </div>
 </div>
@@ -266,6 +315,7 @@ $(window).load(function() {
         nextObj           : null,         // jQuery object of next button
         naviObj           : null,         // jQuery object of navi container
         step              : 1,            // how much slides move at each slide event
+        naviLinkWithNumber: false,        // if true, slide number will be added to navi link
         naviLinkAlreadyTag: null,         // if you already have links in navi container put tag name here like: 'div.custom-button'
         autoChangeTimeout : 4000,         // time between slide events
         transitionDuration: 250,          // animation duration

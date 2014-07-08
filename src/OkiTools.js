@@ -591,11 +591,11 @@ var okiTool = {
             icon           : markerIconTransparent,
             labelContent   : markerHtml,
             labelAnchor    : new google.maps.Point(anchorX, anchorY),
-			labelClass	   : cssClosed,
-			isActive	   : false
+            labelClass     : cssClosed,
+            isActive       : false
         });
-		
-		markerArray.push({
+        
+        markerArray.push({
             lat           : lat,
             lon           : lon,
             latLonObj     : myLatLng,
@@ -607,25 +607,25 @@ var okiTool = {
         });
         
         google.maps.event.addListener(markerGmapObj, 'click', function() {
-			for (var i=0; i<markerArray.length; i++) {
-				if (markerGmapObj==markerArray[i].markerGmapObj && markerArray[i].markerGmapObj.labelClass==cssClosed) {
+            for (var i=0; i<markerArray.length; i++) {
+                if (markerGmapObj==markerArray[i].markerGmapObj && markerArray[i].markerGmapObj.labelClass==cssClosed) {
                     markerArray[i].markerGmapObj.labelClass = cssOpened;
                     markerArray[i].markerGmapObj.isActive = true;
                     markerArray[i].markerGmapObj.labelAnchor = new google.maps.Point(markerArray[i].anchorOpenedX, markerArray[i].anchorOpenedY);
                     markerArray[i].markerGmapObj.setZIndex(1000 + markerArray.length);
-				} else {
-					markerArray[i].markerGmapObj.labelClass = cssClosed;
-					markerArray[i].markerGmapObj.isActive = false;
+                } else {
+                    markerArray[i].markerGmapObj.labelClass = cssClosed;
+                    markerArray[i].markerGmapObj.isActive = false;
                     markerArray[i].markerGmapObj.labelAnchor = new google.maps.Point(markerArray[i].anchorX, markerArray[i].anchorY);
                     markerArray[i].markerGmapObj.setZIndex(1000 + i);
-				}
-				markerArray[i].markerGmapObj.label.setStyles();  // force label to redraw (first method)
+                }
+                markerArray[i].markerGmapObj.label.setStyles();  // force label to redraw (first method)
                 markerArray[i].markerGmapObj.label.draw();       // force label to redraw (second method)
                 
                 if (markerGmapObj==markerArray[i].markerGmapObj && (typeof clickCallback==='function')) {
                     clickCallback(i);
                 }
-			};
-		});
-	}
+            };
+        });
+    }
 }

@@ -45,7 +45,8 @@ $(document).ready(function() {
                 cloudSelector : '> *:last',
                 onShow        : null,
                 onHide        : null,
-                realHide      : true
+                realHide      : true,
+                showOnlyViaApi: false
             };
             var cloudTimerId;
             var hideBlockFlag = false;
@@ -63,9 +64,11 @@ $(document).ready(function() {
                 $cloud.mouseleave(function() {
                     $(this).removeClass('oc-mouseover');
                 });
-                $this.click(function() {
-                    show();
-                });
+                if (!settings.showOnlyViaApi) {
+                    $this.click(function() {
+                        show();
+                    });
+                }
                 
                 $this.addClass('oc-inited');
             }

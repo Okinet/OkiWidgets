@@ -48,6 +48,7 @@
                 prevObj           : null,
                 nextObj           : null,
                 naviObj           : null,
+                naviLinkWithNumber: false,
                 step              : 1,
                 naviLinkAlreadyTag: null,
                 autoChangeTimeout : 4000,
@@ -137,7 +138,7 @@
                         });
                     } else {
                         for (i=0; i<slidesSize; i++) {
-                            $navi.append('<a href="javascript:void(0)" pos="'+i+'">&nbsp;</a>').addClass(baseCss.cssNaviLink);
+                            $navi.append('<a href="javascript:void(0)" pos="'+i+'">'+ (!settings.naviLinkWithNumber ? '&nbsp;' : (i+1)) +'</a>').addClass(baseCss.cssNaviLink);
                         }
                         $navi.find('> a').click(function() {
                             moveTo(parseInt($(this).attr('pos')));
