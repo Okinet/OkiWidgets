@@ -3,8 +3,8 @@
         
         function OkiSplitterClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 resize : function(parentWidth, parentHeight) { resize(parentWidth, parentHeight); return this.api; },
                 changeSize : function(colIndex, newValue) { changeSize(colIndex, newValue); return this.api; }
@@ -22,8 +22,8 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 orientation                      : "horizontal",
@@ -125,7 +125,7 @@
                         $this.height(parentHeight);
 
 
-                    // set non auto sizes
+                    /* set non auto sizes */
                     countAuto = 0;
                     countContent = 0;
                     sizeSum = 0;
@@ -155,12 +155,12 @@
                         $this.hide();
                     }
 
-                    // update width if size is content based
+                    /* update width if size is content based */
                     if (countContent>0) {
                         $this.width(sizeSum);
                     }
 
-                    // setup auto values and top offset
+                    /* setup auto values and top offset */
                     sizeOffset = 0;
                     $this.find('> '+settings.tag).each(function(i) {
                         switch (settings.cells[i].size) {
@@ -179,7 +179,7 @@
                         sizeOffset += size;
                     });
 
-                    // find max height
+                    /* find max height */
                     sizeMax = -1;
                     if (settings.secondOrientationSizeFromContent) {
                         $this.find('> '+settings.tag).each(function() {
@@ -203,7 +203,7 @@
                             $this.width(parentWidth);
                         
 
-                        // set non auto sizes
+                        /* set non auto sizes */
                         countAuto = 0;
                         countContent = 0;
                         sizeSum = 0;
@@ -233,12 +233,12 @@
                             $this.hide();
                         }
                         
-                        // update height if size is content based
+                        /* update height if size is content based */
                         if (countContent>0) {
                             $this.height(sizeSum);
                         }
 
-                        // setup auto values and left offset
+                        /* setup auto values and left offset */
                         sizeOffset = 0;
                         $this.find('> '+settings.tag).each(function(i) {
                             switch (settings.cells[i].size) {
@@ -257,7 +257,7 @@
                             sizeOffset += size;
                         });
                         
-                        // find max width
+                        /* find max width */
                         sizeMax = -1;
                         if (settings.secondOrientationSizeFromContent) {
                             $this.find('> '+settings.tag).each(function() {
@@ -275,7 +275,7 @@
 
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiSplitter';

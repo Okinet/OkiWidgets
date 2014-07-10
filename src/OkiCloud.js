@@ -19,8 +19,8 @@ $(document).ready(function() {
         
         function OkiCloudClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 hide : function() { hide(); return this.api; },
                 show : function() { show(); return this.api; }
@@ -38,8 +38,8 @@ $(document).ready(function() {
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 cloudSelector : '> *:last',
@@ -103,7 +103,7 @@ $(document).ready(function() {
                 if (hideBlockFlag) {
                     return;
                 }
-                // hide on next iteration of JS event loop - this code should run AFTER any bubbled show event!
+                /* hide on next iteration of JS event loop - this code should run AFTER any bubbled show event! */
                 setTimeout(function() {
                     $cloud.removeClass('oc-showed');
                     if (settings.realHide) {
@@ -116,7 +116,7 @@ $(document).ready(function() {
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiCloud';

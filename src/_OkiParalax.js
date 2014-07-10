@@ -1,4 +1,4 @@
-// TODO: build plugin from code below
+/* TODO: build plugin from code below */
 
 (function ($) {
     $.fn.OkiParalax = function(par) {
@@ -123,7 +123,7 @@
         s_y = dataContainer.paralaxMouseDiffY;
         s_zoom = dataContainer.paralaxZoom;
 
-        // physics engine
+        /* physics engine */
         delta_x = dataContainer.easeTo_paralaxMouseDiffX - dataContainer.paralaxMouseDiffX;
         delta_y = dataContainer.easeTo_paralaxMouseDiffY - dataContainer.paralaxMouseDiffY;
         delta_zoom = dataContainer.easeTo_zoom - dataContainer.paralaxZoom;
@@ -148,7 +148,7 @@
         V0_x = V0_x + a_x*dt;
         V0_y = V0_y + a_y*dt;
         V0_zoom = V0_zoom + a_zoom*dt;
-        // physics engine end
+        /* physics engine end */
 
         dataContainer.curr_velX = V0_x;
         dataContainer.curr_velY = V0_y;

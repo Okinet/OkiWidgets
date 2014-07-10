@@ -4,8 +4,8 @@
         
         function OkiRadioClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 sync : function() { sync(false); return this.api; }
             }
@@ -22,8 +22,8 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 radioSelector     : 'a',
@@ -48,7 +48,7 @@
 
                 sync(false);
                 connectEvents();
-                $this.hide();      // hide real select
+                $this.hide();      /* hide real select */
             }
             
             function connectEvents()
@@ -114,11 +114,11 @@
             
             function fieldClick()
             {                
-                //if ($this.is(':checked')) {
-                //    $this.prop('checked', false);
-                //} else {
+                /*if ($this.is(':checked')) { */
+                /*    $this.prop('checked', false); */
+                /*} else { */
                     $this.prop('checked', true);
-                //}
+                /*} */
                 
                 sync(true);
                 
@@ -129,7 +129,7 @@
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiRadio';

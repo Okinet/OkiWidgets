@@ -4,8 +4,8 @@
         
         function OkiScrollAreaClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 setPositionX : function(newPosition) { setPositionX(newPosition); return this.api; },
                 setPositionY : function(newPosition) { setPositionY(newPosition); return this.api; },
@@ -28,19 +28,19 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
-                viewportHeight            : '100%',         // percent / px / auto
-                viewportWidth             : '100%',         // percent / px / auto
-                contentHeight             : 'auto',         // percent / px / auto
-                contentWidth              : '100%',         // percent / px / auto
+                viewportHeight            : '100%',         /* percent / px / auto */
+                viewportWidth             : '100%',         /* percent / px / auto */
+                contentHeight             : 'auto',         /* percent / px / auto */
+                contentWidth              : '100%',         /* percent / px / auto */
                 shortenWhenSmallerWidth   : false,
                 shortenWhenSmallerHeight  : false,
-                autoUpdateInterval        : 0,              // in ms
-                scrollHorizontal          : 'auto',         // auto / hidden / scroll
-                scrollVertical            : 'auto',         // auto / hidden / scroll
+                autoUpdateInterval        : 0,              /* in ms */
+                scrollHorizontal          : 'auto',         /* auto / hidden / scroll */
+                scrollVertical            : 'auto',         /* auto / hidden / scroll */
                 scrollHorizontalHeight    : 15,
                 scrollVerticalWidth       : 15,
                 scrollStep                : 20,
@@ -55,8 +55,8 @@
             var viewportSizeY;
             var contentPositionX;
             var contentPositionY;
-            var contentPositionXSaved = null; // for restoring position after resize
-            var contentPositionYSaved = null; // for restoring position after resize
+            var contentPositionXSaved = null; /* for restoring position after resize */
+            var contentPositionYSaved = null; /* for restoring position after resize */
             var contentOffsetX;
             var contentOffsetY;
             var viewportDividedByContentX;
@@ -65,8 +65,8 @@
             var contentOffsetMaxY;
             var scrollNeededX;
             var scrollNeededY;
-            var scrollNeededXPrevious = null;         // for scrollBar widget resize
-            var scrollNeededYPrevious = null;         // for scrollBar widget resize
+            var scrollNeededXPrevious = null;         /* for scrollBar widget resize */
+            var scrollNeededYPrevious = null;         /* for scrollBar widget resize */
             
             function setPositionX(newPosition)
             {
@@ -104,7 +104,7 @@
                 viewportSizeX = $this.width();
                 viewportSizeY = $this.height();
                 
-                // check if content is smaller than viewport - if true shorten viewport
+                /* check if content is smaller than viewport - if true shorten viewport */
                 if (settings.shortenWhenSmallerHeight && strpos(settings.viewportHeight, 'px')!==false) {
                     viewportHeightInteger = parseInt( settings.viewportHeight.replace('px', '') );
                     if (contentSizeY<viewportHeightInteger) {
@@ -116,7 +116,7 @@
                     }
                 }
                 
-                // check if content is smaller than viewport - if true shorten viewport
+                /* check if content is smaller than viewport - if true shorten viewport */
                 if (settings.shortenWhenSmallerWidth && strpos(settings.viewportWidth, 'px')!==false) {
                     viewportWidthInteger = parseInt( settings.viewportWidth.replace('px', '') );
                     if (contentSizeX<viewportWidthInteger) {
@@ -261,7 +261,7 @@
                 });
                 
 
-                // touch
+                /* touch */
                 var touchStartX = 0;
                 var touchStartY = 0;
                 var windowScroll = 0;
@@ -279,13 +279,14 @@
                         moved = false;
                         windowScroll = $(window).scrollTop();
                         
-//                        ev.returnValue = false;
-//                        ev.cancelBubble = true;
-//                        if (ev.preventDefault) {
-//                            ev.preventDefault();
-//                        }
-                        
-//                        return true;
+                        /*
+                        ev.returnValue = false;
+                        ev.cancelBubble = true;
+                        if (ev.preventDefault) {
+                            ev.preventDefault();
+                        }
+                        return true;
+                        */
                     }
                 ).bind(
                     'touchmove',
@@ -306,10 +307,10 @@
                         touchStartX = touch.pageX;
                         touchStartY = touch.pageY;
 
-                        // ----------------
+                        /* ---------------- */
                         addOffsetY(-deltaY);
                         addOffsetX(-deltaX);
-                        // ----------------
+                        /* ---------------- */
 
                         moved = moved || Math.abs(touchStartX - touch.pageX) > 5 || Math.abs(touchStartY - touch.pageY) > 5;
                         
@@ -322,7 +323,7 @@
                         $(window).scrollTop(windowScroll);
                         
 
-                        return false;  // ?? -> return true if there was no movement so rest of screen can scroll
+                        return false;  /* ?? -> return true if there was no movement so rest of screen can scroll */
                     }
                 ).bind(
                     'touchend',
@@ -403,7 +404,7 @@
 
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiScrollArea';

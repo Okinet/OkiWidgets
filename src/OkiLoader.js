@@ -4,8 +4,8 @@
         
         function OkiLoaderClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 submitRequest : function(url, method, parameters, successCallback, errorCallback) { submitRequest(url, method, parameters, successCallback, errorCallback); return this.api; }
             }
@@ -22,13 +22,13 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
-                indicatorObj      : null,      // selector to ajax indicator
-                indicatorFrames   : 12,        // if you have PNG sprite put here number of frames
-                indicatorFps      : 25         // animation fps of PNG sprite
+                indicatorObj      : null,      /* selector to ajax indicator */
+                indicatorFrames   : 12,        /* if you have PNG sprite put here number of frames */
+                indicatorFps      : 25         /* animation fps of PNG sprite */
             };
             var AJAX_INC = 1;
             var AJAX_DEC = -1;
@@ -107,7 +107,7 @@
                 var ajaxUrl = findAjaxUrl(url);
                 var $tmpInput, key;
 
-                // create new or stop previous ajax on URL from parameter
+                /* create new or stop previous ajax on URL from parameter */
                 if (!ajaxUrl) {
                     ajaxUrl = addAjaxUrl(url);
                 } else
@@ -152,7 +152,7 @@
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiLoader';

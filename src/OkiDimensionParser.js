@@ -4,8 +4,8 @@
         
         function OkiDimensionParserClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 getActiveElementIndex: function() { return getActiveElementIndex(); },
                 setActiveElementIndex: function(v) { setActiveElementIndex(v); return this.api; },
@@ -25,8 +25,8 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 elementsFindSelector : '> *',
@@ -104,7 +104,7 @@
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiDimensionParser';

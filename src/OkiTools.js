@@ -25,7 +25,7 @@ var okiTool = {
                 day           : loopDay.getDate()
             });
 
-            loopDay.setDate(loopDay.getDate() + 1);  // next day
+            loopDay.setDate(loopDay.getDate() + 1);  /* next day */
             if (loopDay>dateEnd) {
                 break;
             }
@@ -129,8 +129,8 @@ var okiTool = {
     {
         str = (str + '').toString();
 
-        // Tilde should be allowed unescaped in future versions of PHP (as reflected below), but if you want to reflect current
-        // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
+        /* Tilde should be allowed unescaped in future versions of PHP (as reflected below), but if you want to reflect current */
+        /* PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following. */
         return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
                                        replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
     },
@@ -366,7 +366,7 @@ var okiTool = {
         }
         string = string.toString();
         if (double_encode !== false) {
-            // Put this first to avoid double-encoding
+            /* Put this first to avoid double-encoding */
             string = string.replace(/&/g, '&amp;');
         }
         string = string.replace(/</g, '&lt;')
@@ -384,10 +384,10 @@ var okiTool = {
             noquotes = true;
         }
         if (typeof quote_style !== 'number') {
-            // Allow for a single string or an array of string flags
+            /* Allow for a single string or an array of string flags */
             quote_style = [].concat(quote_style);
             for (i = 0; i < quote_style.length; i++) {
-                // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
+                /* Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4 */
                 if (OPTS[quote_style[i]] === 0) {
                     noquotes = true;
                 } else if (OPTS[quote_style[i]]) {
@@ -452,7 +452,7 @@ var okiTool = {
         }
         if ( delimiter === true ) delimiter = '1';
   
-        // Here we go...
+        /* Here we go... */
         delimiter += '';
         string += '';
   
@@ -460,16 +460,16 @@ var okiTool = {
   
         if ( typeof limit === 'undefined' ) return s;
   
-        // Support for limit
+        /* Support for limit */
         if ( limit === 0 ) limit = 1;
   
-        // Positive limit
+        /* Positive limit */
         if ( limit > 0 ){
             if ( limit >= s.length ) return s;
             return s.slice( 0, limit - 1 ).concat( [ s.slice( limit - 1 ).join( delimiter ) ] );
         }
 
-        // Negative limit
+        /* Negative limit */
         if ( -limit >= s.length ) return [];
   
         s.splice( s.length + limit );
@@ -488,7 +488,7 @@ var okiTool = {
             var k = Math.pow(10, prec);
             return '' + Math.round(n * k) / k;
         };
-        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        /* Fix for IE parseFloat(0.55).toFixed(0) = 0; */
         s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
         if (s[0].length > 3) {
             s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
@@ -537,11 +537,11 @@ var okiTool = {
     
     gmapOffsetCenter: function(latlng, offsetx, offsety)
     {
-        // latlng is the apparent centre-point
-        // offsetx is the distance you want that point to move to the right, in pixels
-        // offsety is the distance you want that point to move downwards, in pixels
-        // offset can be negative
-        // offsetx and offsety are both optional
+        /* latlng is the apparent centre-point */
+        /* offsetx is the distance you want that point to move to the right, in pixels */
+        /* offsety is the distance you want that point to move downwards, in pixels */
+        /* offset can be negative */
+        /* offsetx and offsety are both optional */
 
         var scale = Math.pow(2, map.getZoom());
         var nw = new google.maps.LatLng(
@@ -619,8 +619,8 @@ var okiTool = {
                     markerArray[i].markerGmapObj.labelAnchor = new google.maps.Point(markerArray[i].anchorX, markerArray[i].anchorY);
                     markerArray[i].markerGmapObj.setZIndex(1000 + i);
                 }
-                markerArray[i].markerGmapObj.label.setStyles();  // force label to redraw (first method)
-                markerArray[i].markerGmapObj.label.draw();       // force label to redraw (second method)
+                markerArray[i].markerGmapObj.label.setStyles();  /* force label to redraw (first method) */
+                markerArray[i].markerGmapObj.label.draw();       /* force label to redraw (second method) */
                 
                 if (markerGmapObj==markerArray[i].markerGmapObj && (typeof clickCallback==='function')) {
                     clickCallback(i);

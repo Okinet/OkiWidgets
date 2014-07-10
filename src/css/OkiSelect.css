@@ -16,7 +16,7 @@
 .oki-select-base .osa-padd a.active { color: #fff; background-color: #f5851f; }
 .oki-select-base .os-cloud  {  }
 .oki-select-base .os-cloud { transition: all 200ms ease; }
-.oki-select-base.os-multiple .osa-padd a { background: url('../images/oki-select-checked.png') no-repeat 12px 9px; }
+.oki-select-base.os-multiple .osa-padd a { background: /*url('../images/oki-select-checked.png')*/ no-repeat 12px 9px; }
 .oki-select-base.os-multiple .osa-padd a span { padding-left: 42px; }
 .oki-select-base.os-multiple .osa-padd a:hover { background-image: /*url('../images/oki-select-checked-act.png')*/ none; background-color: #f0a35d; }
 .oki-select-base.os-multiple .osa-padd a.active { background-image: /*url('../images/oki-select-checked-act.png')*/ none; background-color: #f5851f; } 

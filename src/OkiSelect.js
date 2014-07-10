@@ -4,8 +4,8 @@
         
         function OkiSelectClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 sync : function() { sync(); return this.api; },
                 getScrollApi : function() { return getScrollApi(); }
@@ -23,13 +23,13 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 cssClass              : '',
-                cloudWidth            : 'auto',         // integer or 'auto'
-                cloudHeight           : 200,            // integer or 'auto'
+                cloudWidth            : 'auto',         /* integer or 'auto' */
+                cloudHeight           : 200,            /* integer or 'auto' */
                 cloudComplex          : false,
                 onlyCloudExpanded     : false,
                 multipleNoneText      : 'Please choose something',
@@ -377,7 +377,7 @@
                 
                 if ($this.prop("multiple")) {
                     selectedOld = $this.find('option[value=' + value + ']').is(':selected');
-                    selectedNew = selectedOld ? false : true; // toggle
+                    selectedNew = selectedOld ? false : true; /* toggle */
                     
                     if (selectedNew) {
                         $selectOption.find('> *[data-value='+value+']').addClass('active');
@@ -404,7 +404,7 @@
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiSelect';

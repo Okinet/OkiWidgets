@@ -4,8 +4,8 @@
         
         function OkiCalendarClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 refresh : function() { refresh(); return this.api; },
                 moveToDate : function(year, month) { moveToDate(year, month); return this.api; },
@@ -26,18 +26,18 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
-                month             : 'now',           // "now" or month number <1, 12>
-                year              : 'now',           // "now" or year number <1970, 2099>
-                mode              : 'table',         // "table" or "horizontal"
+                month             : 'now',           /* "now" or month number <1, 12> */
+                year              : 'now',           /* "now" or year number <1970, 2099> */
+                mode              : 'table',         /* "table" or "horizontal" */
                 showYearInHeader  : true,
-                onChange          : null,            // callback after changed current state (year, month)
-                onClick           : null,            // callback after clicked
-                onMouseEnter      : null,            // callback after mouse enter
-                onMouseLeave      : null,            // callback after mouse leave
+                onChange          : null,            /* callback after changed current state (year, month) */
+                onClick           : null,            /* callback after clicked */
+                onMouseEnter      : null,            /* callback after mouse enter */
+                onMouseLeave      : null,            /*  callback after mouse leave */
                 transDays         : new Array("PN", "WT", "\u015aR", "CZ", "PT", "SO", "N"),
                 transMonths       : new Array("Stycze\u0144", "Luty", "Marzec", "Kwiecie\u0144", "Maj", "Czerwiec", "Lipiec", "Sierpie\u0144", "Wrzesie\u0144", "Pa\u017adziernik", "Listopad", "Grudzie\u0144")
             };
@@ -327,7 +327,7 @@
             }
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiCalendar';

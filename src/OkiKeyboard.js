@@ -61,8 +61,8 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
         
         function OkiKeyboardClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 hide : function() { hide(); return this.api; },
                 show : function() { show(); return this.api; },
@@ -85,8 +85,8 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 keyboardCanvas       : null, 
@@ -99,8 +99,8 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
             
 
             var inited = false;
-            var GS = 9;            // grid unit size
-            var BS = 8;            // button unit size
+            var GS = 9;            /* grid unit size */
+            var BS = 8;            /* button unit size */
             var CTRL_MAX_DELTA = 20;
             var PRINT_SCREEN_FAKE_HOLD_TIME = 100;
             var objToListenEvents;
@@ -276,7 +276,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
 
                 kc.addClass('oki-keyboard-canvas');
 
-                // reset keyboard boundaries
+                /* reset keyboard boundaries */
                 keyboardBoundaries.top = 1999111;
                 keyboardBoundaries.right = -1999111;
                 keyboardBoundaries.bottom = -1999111;
@@ -294,10 +294,10 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     t = kD.gridPosY * GS * zoom;
 
                     if (kD.squareGrid) {
-                        // normal grid
+                        /* normal grid */
                         l = kD.gridPosX * GS * zoom;
                     } else {
-                        // keyboard grid
+                        /* keyboard grid */
                         switch (kD.gridPosY % 4) {
                             case 0: gridPosOffset = 0; break;
                             case 1: gridPosOffset = 4; break;
@@ -319,14 +319,14 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     lh = 3.0 * zoom;
                     pr = kD.pressed ? ' pressed ' : '';
 
-                    // fill buttons
+                    /* fill buttons */
                     w = w + (buttonFill * (GS - BS)) * zoom;
                     h = h + (buttonFill * (GS - BS)) * zoom;
 
-                    // create place for hover flag
+                    /* create place for hover flag */
                     kD.hovered = false;
 
-                    // save key boundaries
+                    /* save key boundaries */
                     kD.boundaries = {
                         top    : t,
                         right  : l + w,
@@ -334,7 +334,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                         left   : l
                     };
 
-                    // save keyboard boundaries
+                    /* save keyboard boundaries */
                     keyboardBoundaries.top = kD.boundaries.top < keyboardBoundaries.top ? kD.boundaries.top : keyboardBoundaries.top;
                     keyboardBoundaries.right = kD.boundaries.right > keyboardBoundaries.right ? kD.boundaries.right : keyboardBoundaries.right;
                     keyboardBoundaries.bottom = kD.boundaries.bottom > keyboardBoundaries.bottom ? kD.boundaries.bottom : keyboardBoundaries.bottom;
@@ -352,11 +352,11 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 }
 
 
-                // add mouse overlay
+                /* add mouse overlay */
                 kOv = $('<div class="overlay"></div>');
                 kc.append(kOv);
 
-                // set dimensions
+                /* set dimensions */
                 kc.width(keyboardBoundaries.right);
                 kc.height(keyboardBoundaries.bottom);
                 kOv.width( keyboardBoundaries.right );
@@ -379,25 +379,25 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 var found = true;
                 var isRightAlt;
 
-                // numeric 0-9
+                /* numeric 0-9 */
                 if (keyJSCode>=48 && keyJSCode<=57) {
                     keyPressedUpdate((keyJSCode-48) + OkiKb.KEY_0, pressed, false, eventJS);
                     return;
                 }
 
-                // letters A-Z
+                /* letters A-Z */
                 if (keyJSCode>=65 && keyJSCode<=90) {
                     keyPressedUpdate((keyJSCode-65) + OkiKb.KEY_A, pressed, false, eventJS);
                     return;
                 }
 
-                // letters F1-F12
+                /* letters F1-F12 */
                 if (keyJSCode>=112 && keyJSCode<=123) {
                     keyPressedUpdate((keyJSCode-112) + OkiKb.KEY_F01, pressed, false, eventJS);
                     return;
                 }
 
-                // normal keys with cross browser codes
+                /* normal keys with cross browser codes */
                 switch (keyJSCode) {
                     case   8: keyPressedUpdate(OkiKb.KEY_BACKSPACE, pressed, false, eventJS); break;
                     case   9: keyPressedUpdate(OkiKb.KEY_TAB, pressed, false, eventJS); break;
@@ -479,7 +479,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     return;
                 found = true;
 
-                // ;:   =+   -_
+                /* ;:   =+   -_ */
                 if ($.browser.msie || $.browser.webkit || $.browser.opera) {
                     switch (keyJSCode) {
                         case 186: keyPressedUpdate(OkiKb.KEY_SEMICOLON, pressed, eventJS); break;
@@ -502,7 +502,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     return;
                 found = true;
 
-                // numeric block
+                /* numeric block */
                 switch (keyJSCode) {
                     case  96: keyPressedUpdate(OkiKb.KEY_NUM_0, pressed, eventJS); break;
                     case  97: keyPressedUpdate(OkiKb.KEY_NUM_1, pressed, eventJS); break;
@@ -569,7 +569,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 mK.onlyShift = mK.shift && !(mK.alt || mK.ctrl);
 
 
-                // TODO polish chars using:   modKeys.altR && !(modKeys.Ctrl || !modKeys.altL);
+                /* TODO polish chars using:   modKeys.altR && !(modKeys.Ctrl || !modKeys.altL); */
 
                 keyEventCallback({ keyName      : kD.keyName, 
                                    keyCode      : kD.keyCode, 
@@ -599,7 +599,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
 
                 forcedByMouseMode = (typeof forcedByMouseMode === 'undefined') ? false : (forcedByMouseMode ? true : false);
                 if (!forcedByMouseMode && kD.pressedForcedByMouse) 
-                    return;                 // prevent 'unpress' key when no in forcedByMouseMode
+                    return;                 /* prevent 'unpress' key when no in forcedByMouseMode */
 
                 if ((kD.pressed != pressed) || forcedByMouseMode) {
 
@@ -817,7 +817,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 }
                 lastKeyCodeInUse = usedKeys - 1;
 
-                // correct keys layout if needed
+                /* correct keys layout if needed */
                 /*
                 switch (keyboardLayout) {
                     case 'Layout1' : keyOrigin.KEY_ORIGIN_ALPNUM = { x: 0, y: 0 };
@@ -835,7 +835,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                                      keyOrigin.KEY_ORIGIN_ARROWS = { x: 107, y: 39 };
                                      keyOrigin.KEY_ORIGIN_INS    = { x:  80, y:  0 };
 
-                                     mergeLeftAndRightAlt = true; // force merge because there is only one Alt
+                                     mergeLeftAndRightAlt = true;
                                      break;
                 }
                 */
@@ -845,25 +845,25 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
             {
                 var par = settings;
                 
-                // keyboardCanvas
+                /* keyboardCanvas */
                 keyboardCanvas = (typeof par.keyboardCanvas === 'undefined') ? null : par.keyboardCanvas;
                 if (keyboardCanvas && keyboardCanvas.size()!=1)
                     keyboardCanvas = null;
 
-                // zoom
+                /* zoom */
                 zoom = (typeof par.zoom === 'undefined') ? 4.0 : parseFloat(par.zoom);
                 zoom = (zoom>10.0) ? 10.0 : zoom;
                 zoom = (zoom<1.0) ? 1.0 : zoom;
 
-                // buttonFill
+                /* buttonFill */
                 buttonFill = (typeof par.buttonFill === 'undefined') ? 0 : parseInt(par.buttonFill);
                 buttonFill = (buttonFill<0 || buttonFill>2) ? 0 : buttonFill;
                 buttonFill = buttonFill / 2.0;
 
-                // mergeLeftAndRightAlt
+                /* mergeLeftAndRightAlt */
                 mergeLeftAndRightAlt = (typeof par.mergeLeftAndRightAlt === 'undefined') ? true : (par.mergeLeftAndRightAlt ? true : false);
 
-                // keyboardLayout
+                /* keyboardLayout */
                 keyboardLayout = (typeof par.keyboardLayout === 'undefined') ? '' : par.keyboardLayout;
                 /*
                 switch (keyboardLayout) {
@@ -881,7 +881,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 }
                 */
 
-                // keyAutoRepeat
+                /* keyAutoRepeat */
                 if ((typeof par.keyAutoRepeat === 'undefined') || !par.keyAutoRepeat) {
                     keyAutoRepeat = null;
                 } else {    
@@ -893,7 +893,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     keyAutoRepeat.repeatTime = (keyAutoRepeat.repeatTime>500) ? 500 : keyAutoRepeat.repeatTime;
                 }
 
-                // keyEventCallback
+                /* keyEventCallback */
                 keyEventCallback = (typeof par.keyEventCallback !== 'function') ? null : par.keyEventCallback;
             }
 
@@ -908,42 +908,42 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                 objToListenEvents = $this;
                 initFetchParamaters();
 
-                // assign keyCode to keyName and add some extra fields to keyData
+                /* assign keyCode to keyName and add some extra fields to keyData */
                 for (k=0; k<keyData.length; k++) {
                     kD = keyData[k];
                     OkiKb[kD.keyName] = k;
                     kD.keyCode = k;
 
-                    // create place for key stuff
+                    /* create place for key stuff */
                     kD.hovered = false;
                     kD.pressed = false;
-                    kD.pressedForcedByMouse = false;  // by right click, this can be unpressed only by mouse or keyboard keyup
+                    kD.pressedForcedByMouse = false;  /* by right click, this can be unpressed only by mouse or keyboard keyup */
                     kD.boundaries = {
                         top    : null,
                         right  : null,
                         bottom : null,
                         left   : null
                     };
-                    kD.inUse = false; // configureChoosenLayout() set inUse to true for only required keys
+                    kD.inUse = false; /* configureChoosenLayout() set inUse to true for only required keys */
                 }
 
-                // setup layout
+                /* setup layout */
                 configureChoosenLayout();
 
-                // catch browser keydown event
+                /* catch browser keydown event */
                 objToListenEvents.keydown(function (e) {
                     var now = (new Date()).getTime();
                     mapJSKeyCode(parseInt(e.keyCode), now - nowOnStart, true, e);
                 });
 
-                // catch browser keyup event
+                /* catch browser keyup event */
                 objToListenEvents.keyup(function (e) {
                     var now = (new Date()).getTime();
 
                     mapJSKeyCode(parseInt(e.keyCode), now - nowOnStart, false, e);
                 });
 
-                // draw virtual keyboard
+                /* draw virtual keyboard */
                 if (keyboardCanvas) {
                     buildHtml();
                     assingMouseEvents();        
@@ -1037,7 +1037,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     return null;
 
 
-                // keys data
+                /* keys data */
                 details.keys = new Array();
                 details.keysCount = 0;
                 for (i=0; i<=lastKeyCodeInUse; i++) {
@@ -1058,7 +1058,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
                     details.keysCount++;
                 }
 
-                // other current keyboard data
+                /* other current keyboard data */
                 details.boundaries = {
                     top    : keyboardBoundaries.top,
                     right  : keyboardBoundaries.right,
@@ -1096,7 +1096,7 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
             
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiKeyboard';

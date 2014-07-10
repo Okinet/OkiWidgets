@@ -10,15 +10,15 @@
 .autocomplete-default .sa-padd .elem { display: block; color: #c4c4c4; font-size: 12px; line-height: 15px; border-top: 1px solid #545454; padding: 3px 5px 7px 5px; cursor: pointer; }
 .autocomplete-default .sa-padd .elem span { display: block; }
 .autocomplete-default .sa-padd .elem:first-child { border-top-width: 0px; }
-.autocomplete-default .sa-padd .elem:hover, .autocomplete-default .sa-padd .elem.active {color: #f2c700; background: url('../images/bg-ffffff-op-01.png') repeat left top; }
+.autocomplete-default .sa-padd .elem:hover, .autocomplete-default .sa-padd .elem.active {color: #f2c700; background: /*url('../images/bg-ffffff-op-01.png')*/ repeat left top; }
 .autocomplete-default .s-cloud .s-cloud-top { height: 16px; }
-.autocomplete-default .s-cloud .s-cloud-top > div { background: url('../images/select-filter-cloud-tr.png') no-repeat right top; margin: 0; padding: 0 16px 0 0; height: 16px; }
-.autocomplete-default .s-cloud .s-cloud-top > div > div { background: url('../images/select-filter-cloud-tl.png') no-repeat left top; margin: 0; padding: 0 0 0 16px; height: 16px; overflow: hidden; }
+.autocomplete-default .s-cloud .s-cloud-top > div { background: /*url('../images/select-filter-cloud-tr.png')*/ no-repeat right top; margin: 0; padding: 0 16px 0 0; height: 16px; }
+.autocomplete-default .s-cloud .s-cloud-top > div > div { background: /*url('../images/select-filter-cloud-tl.png')*/ no-repeat left top; margin: 0; padding: 0 0 0 16px; height: 16px; overflow: hidden; }
 .autocomplete-default .s-cloud .s-cloud-middle {  }
-.autocomplete-default .s-cloud .s-cloud-middle > div { background: url('../images/select-filter-cloud-mr.png') repeat-y right top; margin: 0; padding: 0 10px 0 0; }
-.autocomplete-default .s-cloud .s-cloud-middle > div > div { background: url('../images/select-filter-cloud-ml.png') repeat-y left top; margin: 0; padding: 0 0 0 10px; overflow: hidden; }
+.autocomplete-default .s-cloud .s-cloud-middle > div { background: /*url('../images/select-filter-cloud-mr.png')*/ repeat-y right top; margin: 0; padding: 0 10px 0 0; }
+.autocomplete-default .s-cloud .s-cloud-middle > div > div { background: /*url('../images/select-filter-cloud-ml.png')*/ repeat-y left top; margin: 0; padding: 0 0 0 10px; overflow: hidden; }
 .autocomplete-default .s-cloud .s-cloud-bottom { height: 16px; }
-.autocomplete-default .s-cloud .s-cloud-bottom > div { background: url('../images/select-filter-cloud-br.png') no-repeat right top; margin: 0; padding: 0 16px 0 0; height: 16px; }
-.autocomplete-default .s-cloud .s-cloud-bottom > div > div { background: url('../images/select-filter-cloud-bl.png') no-repeat left top; margin: 0; padding: 0 0 0 16px; height: 16px; overflow: hidden; }
+.autocomplete-default .s-cloud .s-cloud-bottom > div { background: /*url('../images/select-filter-cloud-br.png')*/ no-repeat right top; margin: 0; padding: 0 16px 0 0; height: 16px; }
+.autocomplete-default .s-cloud .s-cloud-bottom > div > div { background: /*url('../images/select-filter-cloud-bl.png')*/ no-repeat left top; margin: 0; padding: 0 0 0 16px; height: 16px; overflow: hidden; }
 .autocomplete-default .s-cloud  {  }
 .autocomplete-default .s-cloud { transition: all 200ms ease; }

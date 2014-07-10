@@ -3,8 +3,8 @@
         
         function OkiBarSliderClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 moveTo : function(index) { moveTo(index); return this.api; },
                 resize : function(index) { resize(); return this.api; },
@@ -25,8 +25,8 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var $bar = null;
             var $slides = null;
@@ -60,7 +60,7 @@
             };
             var timerId = null;
             var slidesSize = null;
-            var direction = 1;          // 0 - left, 1 - right
+            var direction = 1;          /* 0 - left, 1 - right */
             var pos = 0;
             var isAnimating = false;
             var stopped = false;
@@ -171,12 +171,12 @@
                 var slidesArr = new Array();
                 var i, j;
                 
-                // copy
+                /* copy */
                 $slides.each(function() {
                     slidesArr.push($(this).clone());
                 });
                 
-                // put 
+                /* put */
                 for (i=0; i<settings.cloneAtFrontAndEnd; i++) {
                     for (j=slidesArr.length-1; j>=0; j--) {
                         $bar.prepend( slidesArr[j].clone() );
@@ -257,8 +257,8 @@
             {
                 var oldPos = pos;
                 
-                moveToSlide(newPos);        // use old 'slide' code
-                // TODO: implement it better way :) 
+                moveToSlide(newPos);        /* use old 'slide' code */
+                /* TODO: implement it better way :)  */
                 
                 $slides.eq(oldPos).fadeOut(settings.transitionDuration);
                 $slides.eq(newPos).fadeIn(settings.transitionDuration);
@@ -320,7 +320,7 @@
                 
                 resetTimeout();
                 
-                // update dots and slides classes
+                /* update dots and slides classes */
                 if ($navi!==null) {
                     if (slidesSize<=1) {
                         $navi.hide();
@@ -343,7 +343,7 @@
             
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiBarSlider';

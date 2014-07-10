@@ -4,8 +4,8 @@
         
         function OkiAutoCompleteClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 sync : function() { sync(); return this.api; }
             }
@@ -22,14 +22,14 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 cssClass              : 'autocomplete-default',
                 cloudComplex          : false,
-                cloudWidth            : 'auto',         // integer or 'auto'
-                cloudHeight           : 200,            // integer or 'auto'
+                cloudWidth            : 'auto',         /* integer or 'auto' */
+                cloudHeight           : 200,            /* integer or 'auto' */
                 onChangeCallback      : null,
                 onClearCallback       : null,
                 elementRenderCallback : null,
@@ -175,10 +175,10 @@
                 var dataSource = new Array();
                 
                 if (typeof settings.dataSource === 'string') {
-                    // TODO: ajax here
+                    /* TODO: ajax here */
 
                 } else if (settings.dataSource.size()==1 && settings.dataSource.find('> option').size()>0) {
-                    // select/option here
+                    /* select/option here */
                     settings.dataSource.find('> option').each(function() {
                         var element = {
                             value : $(this).val(),
@@ -346,7 +346,7 @@
             
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiAutoComplete';

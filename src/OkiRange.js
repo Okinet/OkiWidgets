@@ -4,8 +4,8 @@
         
         function OkiRangeClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 resize : function() { resize(); return this.api; },
                 sync : function() { sync(); return this.api; },
@@ -25,14 +25,14 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 secondHandleInputObj    : null,
                 dataArray               : null,
-                dataRange               : null,       // example:  [0, 500, 0.01]    <--- min, max, step
-                scaleShowPointEvery     : 1,          // example:  0.5 or null
+                dataRange               : null,       /* example:  [0, 500, 0.01]    <--- min, max, step */
+                scaleShowPointEvery     : 1,          /* example:  0.5 or null */
                 scaleFormatCallback     : null,
                 onChange                : null
             };
@@ -87,7 +87,7 @@
                 connectEvents();
                 resize();
 
-                // hide real inputs
+                /* hide real inputs */
                 $inputFirst.hide();      
                 if (secondHandle) {
                     $inputSecond.hide();
@@ -364,7 +364,7 @@
                 var mouseSavedX = null;
                 var clickedHandle = null;
                 
-                // mouse
+                /* mouse */
                 $handlerFirst.mousedown(function(e) {
                     if (e.button==0) {
                         mouseSavedX = e.clientX;
@@ -377,7 +377,7 @@
                         if (e.button==0) {
                             mouseSavedX = e.clientX;
                             if (handlerFirstPos==1.0 && handlerSecondPos==1.0) {
-                                // prevent locking when all are moved to right
+                                /* prevent locking when all are moved to right */
                                 clickedHandle = 1;
                             } else {
                                 clickedHandle = 2;
@@ -405,7 +405,7 @@
                 });
                 
 
-                // touch
+                /* touch */
                 var touchStartX = 0;
                 var moved = false;
                 var moving = false;
@@ -434,7 +434,7 @@
                         deltaX = (touch.pageX - touchStartX);
                         touchStartX = touch.pageX;
 
-                        // ----------------
+                        /* ---------------- */
                         if (secondHandle) {
                             var distToFirst = touch.pageX - $handlerFirst.offset().left;
                             var distToSecond = touch.pageX - $handlerSecond.offset().left;
@@ -449,11 +449,11 @@
                         } else {
                             addFirstValPosOffset(deltaX);
                         }
-                        // ----------------
+                        /* ---------------- */
 
                         moved = moved || Math.abs(touchStartX - touch.pageX) > 5;
 
-                        return false;  // ?? -> return true if there was no movement so rest of screen can scroll
+                        return false;  /* ?? -> return true if there was no movement so rest of screen can scroll */
                     }
                 ).bind(
                     'touchend',
@@ -498,7 +498,7 @@
             
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiRange';

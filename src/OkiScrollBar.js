@@ -3,8 +3,8 @@
         
         function OkiScrollBarClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 changePosition : function(newPosition) { changePosition(newPosition); return this.api; },
                 changeSize : function(newSize) { changeSize(newSize); return this.api; },
@@ -26,8 +26,8 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var settings = {
                 orientation       : 'vertical',
@@ -193,7 +193,7 @@
 
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiScrollBar';

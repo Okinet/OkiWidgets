@@ -4,8 +4,8 @@
         
         function OkiCropClass()
         {
-            // -----------------------------------------------------------------
-            // public:
+            /* -------------------------------------------------------------- */
+            /* public: */
             this.api = {
                 sync : function() { sync(); return this.api; },
                 resize : function() { resize(); return this.api; },
@@ -29,44 +29,44 @@
                 init();
             }
 
-            // -----------------------------------------------------------------
-            // private:
+            /* -------------------------------------------------------------- */
+            /* private: */
             var $this = null;
             var $viewport = null;
             var zeroDimensionFlag = false;
             var settings = {
-                scrollZoomSpeed   : 0.01,               // Zoom step on one mouse scroll tick
-                cropDataLocation  : null,               // If null/'' plugin will look for cropData in $this element. You can put selector to any other tag. If You specify input[type=text] plugin will look in value attribute.
-                cropDataAtribute  : 'data-crop',        // If cropDataLocation isn't input tag here you can specify in what attribute cropData is stored
-                orygImgAtribute   : 'data-oryg-img',    // This is path to oryginal file before cropping
-                autoFitSize       : true,               // Apply auto fit size if plugin can't find cropData
-                wrapWithParentTag : 'div',              // Put here tag name for wraping $this or null if required parent already exists before plugin init
-                viewportWidth     : null,          // ??
-                viewportHeight    : null,          // ??
+                scrollZoomSpeed   : 0.01,               /* Zoom step on one mouse scroll tick */
+                cropDataLocation  : null,               /* If null/'' plugin will look for cropData in $this element. You can put selector to any other tag. If You specify input[type=text] plugin will look in value attribute. */
+                cropDataAtribute  : 'data-crop',        /* If cropDataLocation isn't input tag here you can specify in what attribute cropData is stored */
+                orygImgAtribute   : 'data-oryg-img',    /* This is path to oryginal file before cropping */
+                autoFitSize       : true,               /* Apply auto fit size if plugin can't find cropData */
+                wrapWithParentTag : 'div',              /* Put here tag name for wraping $this or null if required parent already exists before plugin init */
+                viewportWidth     : null,               /* ?? */
+                viewportHeight    : null,               /* ?? */
                 onChange          : null,
-                precision         : 1000000,            // presition of storing float values as integers in packed cropData state
+                precision         : 1000000,            /* presition of storing float values as integers in packed cropData state */
                 serverCropped     : false
             };
-            // cropState (in unit float variables)
+            /* cropState (in unit float variables) */
             var unitZoomFactor;
             var unitPosX, unitPosY;
-            // edit state range
+            /* edit state range */
             var rangeZoomFactorMin = null, rangeZoomFactorMax = null;
             var rangePosMinX = null, rangePosMaxX = null;
             var rangePosMinY = null, rangePosMaxY = null;
-            // viewport params
+            /* viewport params */
             var viewportWidth;
             var viewportHeight;
             var viewportRatio;
             var viewportMinDimension;
             var viewportMaxDimension;
-            // image params
+            /* image params */
             var imgMaxDimension;
             var imgMinDimension;
             var imgWidth;
             var imgHeight;
             var imgRatio;
-            // data for css
+            /* data for css */
             var cssLeft;
             var cssTop;
             var cssWidth;
@@ -83,7 +83,7 @@
             {
                 var factorOfMinZoom;
                 
-                // find zoom factor that fit entire image into viewport
+                /* find zoom factor that fit entire image into viewport */
                 if (viewportRatio>1.0) {
                     if (imgRatio>viewportWidth) {
                         rangeZoomFactorMin = viewportWidth / imgWidth;
@@ -97,22 +97,7 @@
                         rangeZoomFactorMin = viewportHeight / imgHeight;
                     }
                 }
-                    
-                    
-//                if (viewportMinDimension==viewportHeight) {
-//                    factorOfMinZoom = viewportMinDimension / imgHeight;
-//                    console.log('viewport has min dim at Height');
-//                } else {
-//                    factorOfMinZoom = viewportMinDimension / imgWidth;
-//                    console.log('viewport has min dim at Width');
-//                }
-//                
-//               
-//                
-//                console.log('factorOfMinZoom: ' + factorOfMinZoom);
-//                
-//                rangeZoomFactorMin = ;
-//                rangeZoomFactorMax = imgMinDimension * 100;
+  
                 rangePosMinX = viewportWidth/2;
                 rangePosMaxX = 0;
                 rangePosMinY = 0;
@@ -121,7 +106,7 @@
             
             function resize()
             {
-                // image
+                /* image */
                 $this.css('width', 'auto');
                 $this.css('height', 'auto');
                 imgWidth = $this.width();
@@ -134,7 +119,7 @@
                 }
                 imgRatio = imgWidth / imgHeight;
                 
-                // viewport
+                /* viewport */
                 if (!settings.viewportWidth || !settings.viewportHeight) {
                     viewportWidth = $viewport.width();
                     viewportHeight = $viewport.height();
@@ -159,7 +144,7 @@
                 viewportMinDimension = viewportWidth<=viewportHeight ? viewportWidth : viewportHeight;
                 viewportMaxDimension = viewportWidth>viewportHeight ? viewportWidth : viewportHeight;
                 
-                // update ranges
+                /* update ranges */
                 updateRanges();
             }
             
@@ -219,7 +204,7 @@
                 }
                 
                 if (unitZoomFactor<0.0 || unitZoomFactor>1.0 || unitPosX<0.0 || unitPosX>1.0 || unitPosY<0.0 || unitPosY>1.0) {
-                    // default values
+                    /* default values */
                     unitZoomFactor = 0.0;
                     unitPosX = 0.5;
                     unitPosY = 0.5;
@@ -246,8 +231,6 @@
                 console.log(viewportHeight);
                 console.log(imgWidth);
                 console.log(imgHeight);
-//                offsetX += diffX;
-//                offsetY += diffY;                
                 updateCrop();
             }
             
@@ -327,10 +310,10 @@
             
             function explode(delimiter, string, limit)
             {
-                //  discuss at: http://phpjs.org/functions/explode/
-                // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-                //   example 1: explode(' ', 'Kevin van Zonneveld');
-                //   returns 1: {0: 'Kevin', 1: 'van', 2: 'Zonneveld'}
+                /*  discuss at: http://phpjs.org/functions/explode/ */
+                /* original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net) */
+                /*   example 1: explode(' ', 'Kevin van Zonneveld'); */
+                /*   returns 1: {0: 'Kevin', 1: 'van', 2: 'Zonneveld'} */
                 
                 if (arguments.length < 2 || typeof delimiter === 'undefined' || typeof string === 'undefined') return null;
                 if (delimiter === '' || delimiter === false || delimiter === null) return false;
@@ -342,7 +325,7 @@
                 }
                 if (delimiter === true) delimiter = '1';
                 
-                // Here we go...
+                /* Here we go... */
                 delimiter += '';
                 string += '';
                 
@@ -350,10 +333,10 @@
                 
                 if (typeof limit === 'undefined') return s;
                 
-                // Support for limit
+                /* Support for limit */
                 if (limit === 0) limit = 1;
                 
-                // Positive limit
+                /* Positive limit */
                 if (limit > 0) {
                     if (limit >= s.length) return s;
                     return s.slice(0, limit - 1)
@@ -362,7 +345,7 @@
                     ]);
                 }
                 
-                // Negative limit
+                /* Negative limit */
                 if (-limit >= s.length) return [];
                 
                 s.splice(s.length + limit);
@@ -371,7 +354,7 @@
             
         }
         
-        // ---------------------------------------------------------------------
+        /* ------------------------------------------------------------------ */
         
         var pluginData;
         var pluginDataName = 'OkiCrop';
