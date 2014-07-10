@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(document).on('click', function() { // touchstart
+    $(document).on('click', function() { /* touchstart */
         $('.oki-cloud-base').each(function() {
             try {
                 var api = $(this).OkiCloud('api');
