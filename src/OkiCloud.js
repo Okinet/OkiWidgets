@@ -4,7 +4,7 @@ $(document).ready(function() {
             try {
                 var api = $(this).OkiCloud('api');
 
-                if (api && !$(this).find('> .oc-cloud-content').hasClass('oc-block-hide')) {
+                if (api && !$(this).find('> .oc-cloud-content').hasClass('oc-prevent-hide')) {
                     api.hide();
                 }
             } catch(e) {
@@ -59,13 +59,13 @@ $(document).ready(function() {
                 $cloud.addClass('oc-cloud-content');
                 
                 /*$cloud.click(function() {
-                    $(this).addClass('oc-block-hide');
+                    $(this).addClass('oc-prevent-hide');
                 });*/
                 $cloud.mouseover(function() {
-                    $(this).addClass('oc-block-hide');
+                    $(this).addClass('oc-prevent-hide');
                 });
                 $cloud.mouseleave(function() {
-                    $(this).removeClass('oc-block-hide');
+                    $(this).removeClass('oc-prevent-hide');
                 });
                 if (!settings.showOnlyViaApi) {
                     $this.click(function() {
