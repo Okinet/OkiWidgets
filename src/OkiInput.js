@@ -110,6 +110,9 @@
                 $this.change(function() {
                     sync();
                 });
+                $html.click(function() {
+                    $this.focus();
+                });
             }
             
             function sync()

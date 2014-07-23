@@ -188,6 +188,10 @@
                                     
                                     updateOptionContent();
                                 }
+                                $select.addClass('os-expanded');
+                            },
+                    onHide: function() {
+                                $select.removeClass('os-expanded');
                             }
                 });
                 $selectScroll.OkiScrollArea({

@@ -2,4 +2,5 @@
  *  OkiCloud
  */
 
-.oki-cloud-base > .oc-cloud-content.oc-smarthide { display: block; opacity: 0.0; height: 0px; overflow: hidden; z-index: 1; position: relative; }
+.oki-cloud-base > .oc-cloud-content { z-index: 1; }
+.oki-cloud-base > .oc-cloud-content.oc-smarthide { display: block; opacity: 0.0; height: 0px; overflow: hidden; position: relative; }
