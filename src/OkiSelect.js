@@ -380,28 +380,28 @@
                 var selectedOld, selectedNew;
                 
                 if ($this.prop("multiple")) {
-                    selectedOld = $this.find('option[value=' + value + ']').is(':selected');
+                    selectedOld = $this.find("option[value=" + "'"+value+"'" + "]").is(':selected');
                     selectedNew = selectedOld ? false : true; /* toggle */
                     
                     if (selectedNew) {
-                        $selectOption.find('> *[data-value='+value+']').addClass('active');
-                        $this.find('option[value=' + value + ']').attr('selected', 'selected');
+                        $selectOption.find("> *[data-value=" + "'"+value+"'" + "]").addClass('active');
+                        $this.find("option[value=" + "'"+value+"'" + "]").attr('selected', 'selected');
                     } else {
-                        $selectOption.find('> *[data-value='+value+']').removeClass('active');
-                        $this.find('option[value=' + value + ']').removeAttr('selected', 'selected');
+                        $selectOption.find("> *[data-value=" + "'"+value+"'" + "]").removeClass('active');
+                        $this.find("option[value=" + "'"+value+"'" + "]").removeAttr('selected', 'selected');
                     }
-                    $this.find('option[value=' + value + ']').prop('selected', selectedNew);
+                    $this.find("option[value=" + "'"+value+"'" + "]").prop('selected', selectedNew);
                     setSelectedText('');
                 
                 } else {
                     $this.find('option').removeAttr('selected');
-                    $this.find('option[value=' + value + ']').attr('selected', 'selected');
+                    $this.find("option[value=" + "'"+value+"'" + "]").attr('selected', 'selected');
                     $selectOption.find('> *').removeClass('active');
-                    $selectOption.find('> *[data-value='+value+']').addClass('active');
+                    $selectOption.find("> *[data-value=" + "'"+value+"'" + "]").addClass('active');
                     if (typeof dontHideCloud === 'undefined' || dontHideCloud==false) {
                         $select.OkiCloud('api').hide();
                     }
-                    setSelectedText( $this.find('option[value=' + value + ']').html() );
+                    setSelectedText( $this.find("option[value=" + "'"+value+"'" + "]").html() );
                 }
                 
                 $this.trigger("change");

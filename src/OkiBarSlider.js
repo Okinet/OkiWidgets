@@ -257,11 +257,18 @@
             {
                 var oldPos = pos;
                 
-                moveToSlide(newPos);        /* use old 'slide' code */
-                /* TODO: implement it better way :)  */
-                
-                $slides.eq(oldPos).fadeOut(settings.transitionDuration);
-                $slides.eq(newPos).fadeIn(settings.transitionDuration);
+                if (moveToSlide(newPos)) {        /* use old 'slide' code */
+                    /* TODO: implement it better way :)  */
+                    if (oldPos==newPos && oldPos==0) {
+                        $slides.hide();
+                        $slides.eq(0).show();
+                    } else {
+                        $slides.hide();
+                        $slides.eq(oldPos).show();
+                        $slides.eq(oldPos).fadeOut(settings.transitionDuration);
+                        $slides.eq(newPos).fadeIn(settings.transitionDuration);    
+                    }             
+                }
             }
             
             function moveToSlide(newPos)
@@ -271,11 +278,13 @@
                 var position;
                 
                 if (!firstRun) {
-                    if (isAnimating)
-                        return;
+                    if (isAnimating) {
+                        return false;
+                    }
 
-                    if (pos==newPos)
-                        return;
+                    if (pos==newPos) {
+                        return false;
+                    }
 
                     $bar.stop(true, false);
                     if (direction==1 && newPos<pos) {
@@ -303,6 +312,8 @@
                 if (typeof settings.onChange === 'function') {
                     settings.onChange(newPos);
                 }
+                
+                return true;
             }
             
             function moveTo(newPos)
