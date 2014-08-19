@@ -259,9 +259,9 @@
                 
                 if (moveToSlide(newPos)) {        /* use old 'slide' code */
                     /* TODO: implement it better way :)  */
-                    if (oldPos==newPos && oldPos==0) {
+                    if (oldPos==newPos) {
                         $slides.hide();
-                        $slides.eq(0).show();
+                        $slides.eq(newPos).show();
                     } else {
                         $slides.hide();
                         $slides.eq(oldPos).show();
