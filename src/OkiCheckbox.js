@@ -106,6 +106,7 @@
                 sync();
                 
                 $this.trigger("change");
+                $this.trigger("input");    /* for angular ng-model */
                 if (typeof settings.onChange === 'function') {
                     settings.onChange();
                 }

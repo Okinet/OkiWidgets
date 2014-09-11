@@ -79,7 +79,7 @@
                         $radioCollection = $form.find('input[type=radio][name]');
                     } else {
                         $radioCollection = $('input[type=radio][name]');
-                    }                    
+                    }
                     $radioCollection.each(function() {
                         var api = null;
                         try {
@@ -123,6 +123,7 @@
                 sync(true);
                 
                 $this.trigger("change");
+                $this.trigger("input");    /* for angular ng-model */
                 if (typeof settings.onChange === 'function') {
                     settings.onChange();
                 }

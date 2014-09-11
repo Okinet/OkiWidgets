@@ -173,16 +173,16 @@
                 
                 /* copy */
                 $slides.each(function() {
-                    slidesArr.push($(this).clone());
+                    slidesArr.push($(this).clone(true, true));
                 });
                 
                 /* put */
                 for (i=0; i<settings.cloneAtFrontAndEnd; i++) {
                     for (j=slidesArr.length-1; j>=0; j--) {
-                        $bar.prepend( slidesArr[j].clone() );
+                        $bar.prepend( slidesArr[j].clone(true, true) );
                     }
                     for (j=0; j<slidesArr.length; j++) {
-                        $bar.append( slidesArr[j].clone() );
+                        $bar.append( slidesArr[j].clone(true, true) );
                     }
                 }
             }

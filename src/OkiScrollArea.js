@@ -13,7 +13,9 @@
                 addOffsetY : function(offset) { addOffsetY(offset); return this.api; },
                 setViewportHeight : function(h) { setViewportHeight(h); return this.api; },
                 setViewportWidth : function(h) { setViewportWidth(h); return this.api; },
-                resize : function() { resize(); return this.api; }
+                resize : function() { resize(); return this.api; },
+                softDetachOn : function() { softDetachOn(); },
+                softDetachOff : function() { softDetachOff(); }
             }
 
             this.init = function(o, param)
@@ -67,6 +69,17 @@
             var scrollNeededY;
             var scrollNeededXPrevious = null;         /* for scrollBar widget resize */
             var scrollNeededYPrevious = null;         /* for scrollBar widget resize */
+            var softDetachActive = false;
+            
+            function softDetachOn()
+            {
+                softDetachActive = true;
+            }
+            
+            function softDetachOff()
+            {
+                softDetachActive = false;
+            }
             
             function setPositionX(newPosition)
             {
@@ -237,6 +250,9 @@
             function setupEvents()
             {
                 $this.mousewheel(function(event, delta, deltaX, deltaY) {
+                    if (softDetachActive) {
+                        return;
+                    }
                     event.preventDefault();
                     
                     if (settings.flipMouseScroll) {
@@ -272,6 +288,10 @@
                 ).bind(
                     'touchstart',
                     function (ev) {
+                        if (softDetachActive) {
+                            return;
+                        }
+                        
                         var touch = ev.originalEvent.touches[0];
                         touchStartX = touch.pageX;
                         touchStartY = touch.pageY;
@@ -291,6 +311,10 @@
                 ).bind(
                     'touchmove',
                     function (ev) {
+                        if (softDetachActive) {
+                            return;
+                        }
+                        
                         var deltaX, deltaY;
                         var touch;
 
@@ -328,6 +352,10 @@
                 ).bind(
                     'touchend',
                     function (ev) {
+                        if (softDetachActive) {
+                            return;
+                        }
+                        
                         moving = false;
                     }
                 );
