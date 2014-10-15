@@ -7,6 +7,7 @@
             /* -------------------------------------------------------------- */
             /* public: */
             this.api = {
+                sync : function() { sync(); return this.api; }
             }
 
             this.init = function(o, param)

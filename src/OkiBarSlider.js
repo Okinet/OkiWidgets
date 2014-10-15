@@ -1,6 +1,12 @@
 (function ($) {
     $.fn.OkiBarSlider = function(param) {
         
+        /*
+         * TODO:
+         *  - add option for 100% viewport slides
+         */
+        
+        
         function OkiBarSliderClass()
         {
             /* -------------------------------------------------------------- */
@@ -94,6 +100,7 @@
                 if (settings.cloneAtFrontAndEnd>0) {
                     cloneAtFrontAndEnd();
                 }
+                $bar.find('> *').addClass('obs-visibility-hidden');
                 
                 findObjects();
                 buildNaviLinks();
@@ -271,6 +278,29 @@
                 }
             }
             
+            function updateVisibility()
+            {
+                var barLeft = parseInt($bar.css('left'), 10);
+                var vpWidth = $this.width();
+                var left, right;
+                
+                $bar.find('> *').each(function(i) {
+                    left = $(this).position().left + barLeft;
+                    right = left + $(this).width();
+                    if ( (left>=0 && left<=vpWidth) || (right>=0 && right<=vpWidth) || (left<0 && right>vpWidth) ) {
+                        $(this).removeClass('obs-visibility-hidden');
+                        
+                        /*
+                        if ($this.hasClass('api-slider-01')) {
+                            console.log( $(this), 'pos='+i, 'left='+left, 'right='+right, 'vpWidth='+vpWidth );
+                        }
+                        */
+                    } else {
+                        $(this).addClass('obs-visibility-hidden');
+                    }
+                });
+            }
+            
             function moveToSlide(newPos)
             {
                 var slidesWidth;
@@ -303,8 +333,10 @@
                 position = $slides.eq(pos).position();
                 isAnimating = true;
                 $bar.stop(true, false);
+                updateVisibility();
                 $bar.animate({left: (-1*(position.left))+'px'}, firstRun ? 0 : settings.transitionDuration, function() {
                     isAnimating = false;
+                    updateVisibility();
                 });
                 
                 firstRun = false;
@@ -318,6 +350,8 @@
             
             function moveTo(newPos)
             {                
+                updateVisibility();
+                
                 if (slidesSize==0)
                     return;
                 
