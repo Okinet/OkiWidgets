@@ -342,7 +342,7 @@
                 firstRun = false;
                 
                 if (typeof settings.onChange === 'function') {
-                    settings.onChange(newPos);
+                    settings.onChange(newPos, slidesSize);
                 }
                 
                 return true;
@@ -352,8 +352,9 @@
             {                
                 updateVisibility();
                 
-                if (slidesSize==0)
+                if (slidesSize==0) {
                     return;
+                }
                 
                 resetTimeout();
 

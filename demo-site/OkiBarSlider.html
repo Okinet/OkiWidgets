@@ -177,7 +177,10 @@ $(document).ready(function() {
         fadeInsteadSlide  : true,
         transitionDuration: 0,
         naviLinkWithNumber: true,
-        naviObj           : $('.paginator-slider-01-navi')
+        naviObj           : $('.paginator-slider-01-navi'),
+        onChange          : function(newPos, allSlides) {
+                                $('.paginator-slider-01-position').html( (newPos+1)+'/'+allSlides );
+                            }
     });
 });
 </script>
@@ -201,6 +204,8 @@ $(document).ready(function() {
         <div class="slide" style="background-color: lightseagreen;">I'm the page three content<br/><br/><br/>blablabla</div>
     </div>
     <div class="paginator-slider-01-navi"></div>
+    
+    <div class="paginator-slider-01-position"></div>
 </div>
 
 </div>

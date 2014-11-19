@@ -7,8 +7,8 @@
             /* -------------------------------------------------------------- */
             /* public: */
             this.api = {
-                sync : function() { sync(); return this.api; },
-                getScrollApi : function() { return getScrollApi(); }
+                sync : function() { sync(); return this.api; },                 /* synchronize with real select */
+                getScrollApi : function() { return getScrollApi(); }            /* alias for OkiScrollArea api */
             }
 
             this.init = function(o, param)
@@ -27,14 +27,14 @@
             /* private: */
             var $this = null;
             var settings = {
-                cssClass              : '',
-                cloudWidth            : 'auto',         /* integer or 'auto' */
-                cloudHeight           : 200,            /* integer or 'auto' */
-                cloudComplex          : false,
-                onlyCloudExpanded     : false,
-                multipleNoneText      : 'Please choose something',
-                multipleSelectedText  : 'Selected items: {items}',
-                handleKeyResetTime    : 1000
+                cssClass              : '',                             /* css class that will be attached to OkiSelect structure root */
+                cloudWidth            : 'auto',                         /* integer or 'auto' */
+                cloudHeight           : 200,                            /* integer or 'auto' */
+                cloudComplex          : false,                          /* creates cloud with much more html tags for complex styling  */
+                onlyCloudExpanded     : false,                          /* set to true to get always visible select options */
+                multipleNoneText      : 'Please choose something',      /* multiple text when no option is selected */
+                multipleSelectedText  : 'Selected items: {items}',      /* multiple text after at least one item is selected */
+                handleKeyResetTime    : 1000                            /* max time beetwen each key when searching option */
             };
             var $select;
             var $selectCloud;

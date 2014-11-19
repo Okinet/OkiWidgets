@@ -21,6 +21,8 @@ function readDirAndFiles($dirPath, $filePrefix, $fileSuffix, $excludeArray = arr
         closedir($handle);
     }
     
+    sort($files);
+    
     return $files;
 }
 

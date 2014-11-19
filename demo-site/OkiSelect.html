@@ -1,27 +1,24 @@
-<div class="text-formated">
-    <p>
-        
-    </p>
-</div>
-
 <h3>Basic usage</h3>
 
 <div class="text-formated">
+    <p>
+        OkiSelect replaces real browser's select. Single and multiple version is supported. You can also
+        use keyboard for searching option inside list.
+    </p>
+    <p>
+        Below basic usage with default template.
+    </p>
     <div class="code code-html code-copy" from=".demo-select-01-html">
     </div>
     <div class="code code-js code-copy" from=".demo-select-01-js">
     </div>
-    <p>
-        
-    </p>
 </div>
 
 <script class="demo-select-01-js">
 $(document).ready(function() {
     $('select[name=my-select-01]').OkiSelect();
     $('select[name=my-select-02]').OkiSelect();
-    $('select[name=my-select-03]').OkiSelect();
-    $('select[name=my-select-04]').OkiSelect();
+    $('select[name=my-select-03]').OkiSelect();   /* multiple list works just by adding multiple="multiple" attribute to the select */
 });
 </script>
 
@@ -34,29 +31,31 @@ $(document).ready(function() {
     .basic-select-demo .basic-select-element { width: 200px; float: left; margin-right: 10px; margin-bottom: 10px; }
 </style>
 
+<div class="text-formated">
+    <p>
+        Try searching using keyboard and navigation by arrows:
+    </p>
+</div>
+
 <div class="basic-select-demo">
     <div class="basic-select-element">
         <select name="my-select-01">
-            <option value="1">Big list 1</option>
-            <option value="2">Big list 2</option>
-            <option value="3">Big list 3</option>
-            <option value="4">Big list 4</option>
-            <option value="5">Big list 5</option>
-            <option value="6">Big list 6</option>
-            <option value="7">Big list 7</option>
-            <option value="8">Big list 8</option>
-            <option value="9">Big list 9</option>
-            <option value="10">Big list 10</option>
-            <option value="11">Big list 11</option>
-            <option value="12">Big list 12</option>
-            <option value="13">Big list 13</option>
-            <option value="14">Big list 14</option>
-            <option value="15">Big list 15</option>
-            <option value="16">Big list 16</option>
-            <option value="17">Big list 17</option>
-            <option value="18">Big list 18</option>
-            <option value="19">Big list 19</option>
-            <option value="20">Big list 20</option>
+            <option value="1">Wroclaw</option>
+            <option value="2">Klodzko</option>
+            <option value="3">Opole</option>
+            <option value="4">Poznan</option>
+            <option value="5">Kracov</option>
+            <option value="6">Szczecin</option>
+            <option value="7">Warsow</option>
+            <option value="8">Gdansk</option>
+            <option value="9">Zakopane</option>
+            <option value="10">Swidnica</option>
+            <option value="11">Olesnica</option>
+            <option value="12">Bardo</option>
+            <option value="13">Trzebnica</option>
+            <option value="14">Olawa</option>
+            <option value="15">Lodz</option>
+            <option value="16">Legnica</option>
         </select>
     </div>
     <div class="basic-select-element">
@@ -67,13 +66,8 @@ $(document).ready(function() {
             <option value="4">Small list 4</option>
         </select>
     </div>
-    <div class="basic-select-element">
-        <select name="my-select-03">
-            <option value="1">Multilist 1</option>
-        </select>
-    </div>
     <div class="basic-select-element" style="width: 410px;">
-        <select name="my-select-04" multiple="multiple">
+        <select name="my-select-03" multiple="multiple">
             <option value="1">Multilist 1</option>
             <option value="2">Multilist 2</option>
             <option value="3">Multilist 3</option>
@@ -103,6 +97,263 @@ $(document).ready(function() {
 
 <!-- ----------------------------------------------------------------------- -->
 
+<h3>Synchronize with real select</h3>
+
+<div class="text-formated">
+    <p>
+        If option selection was changed inside real select you need to call <b>sync</b> method. In
+        below example real select was forced to be visible. OkiSelect hides it inside
+        div with zero height and overflow hidden - &lt;select&gt; itself remains visible. It is 
+        important because some browsers don't fire key events on hidden form widget. OkiSelect uses 
+        that event for searching.
+    </p>
+    <div class="code code-html code-copy" from=".demo-select-02-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-select-02-js">
+    </div>
+</div>
+
+<script class="demo-select-02-js">
+$(document).ready(function() {
+    $('select[name=demo-select-sync-1]').OkiSelect();
+});
+</script>
+
+<div class="section">
+<div class="demo-select-02-html">
+<style>
+    .demo-select-02-html .oki-select-base-hidden { height: auto; overflow: visible; padding: 20px; } /* force select to be visible */
+</style>
+
+Try to change real select value:
+<select name="demo-select-sync-1" style="display: block !important;">
+    <option value="0">Wroclaw</option>
+    <option value="1">Warsaw</option>
+    <option value="2">Kracov</option>
+    <option value="3">Poznan</option>
+</select>
+
+<br/>
+If real select changed just call sync method from API: 
+<a href="javascript:void(0)" onClick="$('select[name=demo-select-sync-1]').OkiSelect('api').sync()" class="button">.sync()</a>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Styling - basic</h3>
+
+<div class="text-formated">
+    <p>
+        If you need to change apperance of the OkiSelect just add you own css class and override default rules.
+        Class can be added by two ways:
+    </p>
+    <ul>
+        <li>in options passed at OkiSelect initializations</li>
+        <li>in data attribute at html &lt;select&gt; tag</li>
+    </ul>
+    <div class="code code-html code-copy" from=".demo-select-03-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-select-03-js">
+    </div>
+</div>
+
+<script class="demo-select-03-js">
+$(document).ready(function() {
+    // css class passed by options
+    $('select[name=select-custom-style-01]').OkiSelect({
+        cssClass: 'my-custom-white-select'
+    });
+    
+    // css class fetched from data attribute
+    $('select[name=select-custom-style-02]').OkiSelect();
+    
+    // bigger cloud
+    $('select[name=select-custom-style-03]').OkiSelect({
+        cloudWidth : 500,
+        cloudHeight : 500
+    });
+    
+    // cloud is always visible
+    $('select[name=select-custom-style-04]').OkiSelect({
+        onlyCloudExpanded: true
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-select-03-html">
+<style>
+    .select-custom-style-container { padding: 0 0 20px 0; width: 40%; }
+    
+    .my-custom-white-select { background-color: white; border: 1px solid #50504f; height: 38px; }
+    .my-custom-white-select > span { height: 38px; }
+    .my-custom-white-select > span > span { height: 38px; }
+    .my-custom-white-select > span > span > span { font-family: "Tahoma"; font-weight: normal; font-size: 14px; line-height: 1em; color: #1d1d1d; padding: 12px 0 0 0; }
+
+    .my-custom-white-select .os-cloud { background-color: white; border: 1px solid #50504f; left: -1px; }
+    .my-custom-white-select .osa-padd a { font-family: "Tahoma"; font-weight: normal; font-size: 14px; line-height: 1em; color: #1d1d1d; }
+    .my-custom-white-select .osa-padd a:hover { background-color: #eaeaea; color: #1d1d1d; }
+    .my-custom-white-select .osa-padd a.active { background-color: #7a7a7a; color: white; }
+    .my-custom-white-select .oki-scroll-bar-base .osb-vertical .osb-int .osb-handler { background-color: black; }
+</style>
+
+<div class="select-custom-style-container">
+    Custom class by init options:
+    <select name="select-custom-style-01">
+        <option value="1">Wroclaw</option>
+        <option value="2">Klodzko</option>
+        <option value="3">Opole</option>
+        <option value="4">Poznan</option>
+        <option value="5">Kracov</option>
+        <option value="6">Szczecin</option>
+        <option value="7">Warsow</option>
+        <option value="8">Gdansk</option>
+        <option value="9">Zakopane</option>
+        <option value="10">Swidnica</option>
+    </select>
+</div>
+
+<div class="select-custom-style-container">
+    Custom class by attribute:
+    <select name="select-custom-style-02" data-css-class="my-custom-white-select">
+        <option value="1">Wroclaw</option>
+        <option value="2">Klodzko</option>
+        <option value="3">Opole</option>
+        <option value="4">Poznan</option>
+        <option value="5">Kracov</option>
+        <option value="6">Szczecin</option>
+        <option value="7">Warsow</option>
+        <option value="8">Gdansk</option>
+        <option value="9">Zakopane</option>
+        <option value="10">Swidnica</option>
+    </select>
+</div>
+
+<div class="select-custom-style-container">
+    Bigger cloud:
+    <select name="select-custom-style-03">
+        <option value="1">Wroclaw</option>
+        <option value="2">Klodzko</option>
+        <option value="3">Opole</option>
+        <option value="4">Poznan</option>
+        <option value="5">Kracov</option>
+        <option value="6">Szczecin</option>
+        <option value="7">Warsow</option>
+        <option value="8">Gdansk</option>
+        <option value="9">Zakopane</option>
+        <option value="10">Swidnica</option>
+    </select>
+</div>
+
+<div class="select-custom-style-container">
+    Cloud always visible:
+    <select name="select-custom-style-04" multiple="multiple">
+        <option value="1">Wroclaw</option>
+        <option value="2">Klodzko</option>
+        <option value="3">Opole</option>
+        <option value="4">Poznan</option>
+        <option value="5">Kracov</option>
+        <option value="6">Szczecin</option>
+        <option value="7">Warsow</option>
+        <option value="8">Gdansk</option>
+        <option value="9">Zakopane</option>
+        <option value="10">Swidnica</option>
+    </select>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Styling - complex</h3>
+
+<div class="text-formated">
+    <p>
+        Complex mode is helpfull when your select's graphic project cannot be represented by only css.
+        Cloud have more html tags for placing images inside
+    </p>
+    <div class="code code-html code-copy" from=".demo-select-04-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-select-04-js">
+    </div>
+</div>
+
+<script class="demo-select-04-js">
+$(document).ready(function() {
+    $('select[name=select-complex-style-01]').OkiSelect({
+        cloudComplex: true
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-select-04-html">
+<style>
+    
+/* select box styles */
+.select-complex { height: 31px; background-color: transparent; }
+.select-complex > span { background-image: url('demo-site/images/select-complex-right.png'); padding: 0 31px 0 0; height: 31px; }
+.select-complex > span > span { background-image: url('demo-site/images/select-complex-left.png'); padding: 0 0 0 15px; height: 31px; }
+.select-complex > span > span > span { padding: 9px 0 0 0; color: #a3a3a3; font-weight: normal; font-size: 12px; line-height: 1em; font-family: "Tahoma"; text-shadow: 1px 1px 1px #444; }
+.select-complex:after { background-image: url('demo-site/images/select-complex-icon.png'); background-position: left top; width: 23px; height: 23px; top: 4px; right: 5px; }
+.select-complex:hover:after { background-position: left top; }
+.select-complex.os-expanded:after { background-position: left bottom; }
+
+/* select could styles */
+.select-complex .os-cloud { background-color: transparent; top: 31px; left: 0px; }
+.select-complex .os-cloud .os-padd { padding: 0; }
+.select-complex .os-cloud .os-cloud-top { height: 16px; }
+.select-complex .os-cloud .os-cloud-top > div { background-image: url('demo-site/images/select-complex-cloud-tr.png'); padding-right: 16px; height: 16px; }
+.select-complex .os-cloud .os-cloud-top > div > div { background-image: url('demo-site/images/select-complex-cloud-tl.png'); padding-left: 16px; height: 16px; }
+.select-complex .os-cloud .os-cloud-middle > div { background-image: url('demo-site/images/select-complex-cloud-mr.png'); padding-right: 10px; }
+.select-complex .os-cloud .os-cloud-middle > div > div { background-image: url('demo-site/images/select-complex-cloud-ml.png'); padding-left: 10px; }
+.select-complex .os-cloud .os-cloud-bottom { height: 16px; }
+.select-complex .os-cloud .os-cloud-bottom > div { background-image: url('demo-site/images/select-complex-cloud-br.png'); padding-right: 16px; height: 16px; }
+.select-complex .os-cloud .os-cloud-bottom > div > div { background-image: url('demo-site/images/select-complex-cloud-bl.png'); padding-left: 16px; height: 16px; }
+
+.select-complex .oki-scroll-bar-base .osb-vertical { background-color: black; }
+.select-complex .oki-scroll-bar-base .osb-vertical .osb-int .osb-handler { background-color: #cf6903; }
+
+/* select cloud options styles */
+.select-complex .osa-padd a { display: block; color: #c4c4c4; font-size: 12px; line-height: 15px; border-top: 1px solid #545454; padding: 7px 5px 7px 5px; min-height: 0px; }
+.select-complex .osa-padd a span { display: block; padding: 0 }
+.select-complex .osa-padd a:first-child { border-top-width: 0px; }
+.select-complex .osa-padd a:hover, .select-complex .osa-padd a.active { color: #f2c700; background-color: rgba(255, 255, 255, 0.1); }
+
+</style>
+
+<div style="padding: 20px 20px 100px 20px; background-color: #191d23">
+    <div style="width: 300px; margin: 0 auto;">
+    
+        <select name="select-complex-style-01" data-css-class="select-complex">
+            <option value="1">Wroclaw</option>
+            <option value="2">Klodzko</option>
+            <option value="3">Opole</option>
+            <option value="4">Poznan</option>
+            <option value="5">Kracov</option>
+            <option value="6">Szczecin</option>
+            <option value="7">Warsow</option>
+            <option value="8">Gdansk</option>
+            <option value="9">Zakopane</option>
+            <option value="10">Swidnica</option>
+        </select>
+        
+    </div>
+    <div style="padding: 20px 0 0 0; color: #dadada;">
+        Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. 
+        Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. 
+        Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. Lorem ipsum dolor samet. 
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
 <h3>Settings refference</h3>
 
 <div class="text-formated">
@@ -113,6 +364,14 @@ $(document).ready(function() {
 <script class="demo-select-reference-js">
 $(document).ready(function() {
     $('.some-select').OkiSelect({
+        cssClass              : '',                             /* css class that will be attached to OkiSelect structure root */
+        cloudWidth            : 'auto',                         /* integer or 'auto' */
+        cloudHeight           : 200,                            /* integer or 'auto' */
+        cloudComplex          : false,                          /* creates cloud with much more html tags for complex styling  */
+        onlyCloudExpanded     : false,                          /* set to true to get always visible select options */
+        multipleNoneText      : 'Please choose something',      /* multiple text when no option is selected */
+        multipleSelectedText  : 'Selected items: {items}',      /* multiple text after at least one item is selected */
+        handleKeyResetTime    : 1000                            /* max time beetwen each key when searching option */
     });
 });
 </script>

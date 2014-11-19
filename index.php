@@ -42,7 +42,7 @@
                         <div class="text-formated">
                             <p>
                                 This page contains new version of OkiWidgets. Library was fully rewritten and has many improvements.
-                                Each widget if separate jQuery plugin and can be use standalone. To use OkiWidget on you website
+                                Each widget is separate jQuery plugin and can be use standalone. To use OkiWidget on you website
                                 please follow the four steps below:
                             </p>
                         </div>
