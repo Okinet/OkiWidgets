@@ -1,0 +1,100 @@
+<h3>Usage</h3>
+
+<div class="text-formated">
+    <p>
+        Some of JavaScript keycodes differs across browsers. OkiKeyboard is solution
+        if you need to have cross browsers support to all keyboard keys.
+        If you pass keyboardCanvas in initialization you can also get
+        keyboard visualization in US layout.
+    </p>
+    <div class="code code-html code-copy" from=".demo-keyboard-01-html">
+    </div>
+    <div class="code code-js code-copy" from=".demo-keyboard-01-js">
+    </div>
+</div>
+
+<script class="demo-keyboard-01-js">
+$(document).ready(function() {
+    var keyEventsSourceObject = $('.keyboard-demo-01-inp');      // could be $(document) if you need to catch all key events 
+    
+    keyEventsSourceObject.OkiKeyboard({
+        keyboardCanvas    : $('.keyboard-demo-01-canvas'), 
+        zoom              : 4.0,
+        keyEventCallback  : function(e) {
+                                var keyTpl = '<a href="javascript:void(0)" title="{keyName}" class="key key-32x32 {keyLightFade} {keySize}"><span>{keyHtml}</span></a>';
+                                
+                                keyTpl = keyTpl.replace('{keyName}', e.keyName);
+                                keyTpl = keyTpl.replace('{keyHtml}', e.html);
+                                keyTpl = keyTpl.replace('{keySize}', e.longerWidth ? 'key-longer-width' : '');
+                                
+                                if (e.pressed) {
+                                    keyTpl = keyTpl.replace('{keyLightFade}', e.repeated ? 'key-active-dark-strong' : '');
+                                    $('.keyboard-demo-01-pressed').prepend($(keyTpl));
+                                } else {
+                                    keyTpl = keyTpl.replace('{keyLightFade}', 'key-active-dark');
+                                    $('.keyboard-demo-01-released').prepend($(keyTpl));
+                                }
+                                
+                                // prevent all default browers behaviour
+                                if (e.eventJS) {
+                                    if (e.eventJS.preventDefault){
+                                        e.eventJS.preventDefault();
+                                    } else {
+                                        e.eventJS.returnValue = false;
+                                    }
+                                }
+                            }
+    });
+});
+</script>
+
+<div class="section">
+<div class="demo-keyboard-01-html">
+    
+<style>
+    .keyboard-demo-01-pressed, .keyboard-demo-01-released { padding: 20px; border: 1px solid #8a8a8a; margin-bottom: 20px; height: 100px; overflow-y: scroll; overflow-x: visible; }
+    .keyboard-demo-01-pressed a , .keyboard-demo-01-released a { float: left; margin: 0 10px 10px 0; }
+</style>
+
+<div class="keyboard-demo-01-canvas"></div>
+<div style="padding: 40px;">
+    Mouse move just hovers keys.<br/>
+    Left mouse click <b>holds</b> key.<br/>
+    Right mouse click <b>switches</b> key state.<br/>
+    <b style="color: red;">IMPORTANT!</b> Click on input to catch key events: &nbsp;&nbsp;&nbsp;
+    <input type="text" class="keyboard-demo-01-inp" value="click me to test" style="border: 2px solid red;" /> All default browser behaviour is prevented then input is focused!
+</div>
+
+Pressed keys:
+<div class="keyboard-demo-01-pressed">
+    
+</div>
+
+Released keys:
+<div class="keyboard-demo-01-released">
+
+</div>
+
+</div>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<h3>Settings refference</h3>
+
+<div class="text-formated">
+    <div class="code code-js code-copy" from=".demo-keyboard-reference-js">
+    </div>
+</div>
+
+<script class="demo-keyboard-reference-js">
+$(document).ready(function() {
+    $('.some-keyboard').OkiKeyboard({
+        keyboardCanvas       : null,                                    /* selector to div where keyboard will be created */
+        zoom                 : 4.0,                                     /* how big keyboard should be created inside keyboardCanvas */
+        keyboardLayout       : '104',                                   /* number of keys (104 max) */
+        mergeLeftAndRightAlt : false,                                   /* set to true if right and left Alt should treated as single key */
+        keyAutoRepeat        : { delayTime: 1000, repeatTime: 50 },     /* object with auto repeat configuration */
+        keyEventCallback     : null                                     /* callback function after key event */
+    });
+});
+</script>

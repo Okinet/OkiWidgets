@@ -15,8 +15,8 @@ a.key span { display: block; padding: 1px 0 0 1px; font-size: 2px; line-height: 
 a.key { background: rgb(250, 250, 250); background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255)); background: -webkit-gradient(linear, left top, left bottom, from(rgb(210, 210, 210)), to(rgb(255, 255, 255))); -moz-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9); -webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9); box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9); }
 a.key span { color:  rgb(50, 50, 50); text-shadow: 0 0 2px rgb(255, 255, 255); }
 a.key.key-fade { opacity: 0.1; }
-a.key.key-active-light { background: rgb(230, 230, 230); background: -moz-linear-gradient(top, rgb(190, 190, 190), rgb(235, 235, 235)); background: -webkit-gradient(linear, left top, left bottom, from(rgb(190, 190, 190)), to(rgb(235, 235, 235))); }
-a.key.key-active-strong { background: rgb(190, 190, 190); background: -moz-linear-gradient(top, rgb(185, 185, 185), rgb(150, 150, 150)); background: -webkit-gradient(linear, left top, left bottom, from(rgb(185, 185, 185)), to(rgb(150, 150, 150))); }
+a.key.key-active-dark { background: rgb(230, 230, 230); background: -moz-linear-gradient(top, rgb(190, 190, 190), rgb(235, 235, 235)); background: -webkit-gradient(linear, left top, left bottom, from(rgb(190, 190, 190)), to(rgb(235, 235, 235))); }
+a.key.key-active-dark-strong { background: rgb(190, 190, 190); background: -moz-linear-gradient(top, rgb(185, 185, 185), rgb(150, 150, 150)); background: -webkit-gradient(linear, left top, left bottom, from(rgb(185, 185, 185)), to(rgb(150, 150, 150))); }
 a.key-8x8 { border-radius: 1px; width: 8px; height: 8px; }
 a.key-8x8.key-longer-width { width: 16px; }
 a.key-8x8 span { padding: 1px 0 0 1px; font-size: 2px; line-height: 3px; }

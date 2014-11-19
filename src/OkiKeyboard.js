@@ -126,12 +126,12 @@ OkiKb.KEY_SCROLL_LOCK = null; OkiKb.KEY_PAUSE_BREAK = null; OkiKb.KEY_WIN_LEFT =
             /* private: */
             var $this = null;
             var settings = {
-                keyboardCanvas       : null, 
-                zoom                 : 4.0, 
-                keyboardLayout       : '104',
-                mergeLeftAndRightAlt : false,
-                keyAutoRepeat        : { delayTime: 1000, repeatTime: 50 },
-                keyEventCallback     : null
+                keyboardCanvas       : null,                                    /* selector to div where keyboard will be created */
+                zoom                 : 4.0,                                     /* how big keyboard should be created inside keyboardCanvas */
+                keyboardLayout       : '104',                                   /* number of keys (104 max) */
+                mergeLeftAndRightAlt : false,                                   /* set to true if right and left Alt should treated as single key */
+                keyAutoRepeat        : { delayTime: 1000, repeatTime: 50 },     /* object with auto repeat configuration */
+                keyEventCallback     : null                                     /* callback function after key event */
             };
             
 
