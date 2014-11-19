@@ -17,6 +17,10 @@
 $(document).ready(function() {
     var keyEventsSourceObject = $('.keyboard-demo-01-inp');      // could be $(document) if you need to catch all key events 
     
+    keyEventsSourceObject.bind('keydown keyup', function() {
+        $(this).val('');        // clear input just to be clean
+    });
+    
     keyEventsSourceObject.OkiKeyboard({
         keyboardCanvas    : $('.keyboard-demo-01-canvas'), 
         zoom              : 4.0,
@@ -66,14 +70,14 @@ $(document).ready(function() {
 </div>
 
 Pressed keys:
-<div class="keyboard-demo-01-pressed">
-    
-</div>
+<div class="keyboard-demo-01-pressed"></div>
+<a href="javascript:void(0)" onClick="$('.keyboard-demo-01-pressed').html('')" class="button">Clear log</a>
+<br/><br/>
 
 Released keys:
-<div class="keyboard-demo-01-released">
-
-</div>
+<div class="keyboard-demo-01-released"></div>
+<a href="javascript:void(0)" onClick="$('.keyboard-demo-01-released').html('')" class="button">Clear log</a>
+<br/><br/>
 
 </div>
 
